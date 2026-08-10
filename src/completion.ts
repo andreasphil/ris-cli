@@ -18,6 +18,13 @@ export interface FlagSpec {
   description: string;
   takesValue: boolean;
   options?: string[];
+  valueHint?: string;
+}
+
+export interface PositionalSpec {
+  name: string;
+  description: string;
+  required: boolean;
 }
 
 export interface CommandNode {
@@ -26,6 +33,7 @@ export interface CommandNode {
   description: string;
   subCommands: CommandNode[];
   flags: FlagSpec[];
+  positionals: PositionalSpec[];
 }
 
 async function resolve<T>(value: T | (() => T | Promise<T>) | undefined): Promise<T | undefined> {
@@ -37,6 +45,39 @@ function toArray(value: string | string[] | undefined): string[] {
   return Array.isArray(value) ? value : [value];
 }
 
+/**
+ * Splits an args definition into flags and positionals. Flags are sorted by name;
+ * positionals keep their declaration order, which is the order they are passed in.
+ */
+export function describeArgs(args: ArgsDef): {
+  flags: FlagSpec[];
+  positionals: PositionalSpec[];
+} {
+  const flags: FlagSpec[] = [];
+  const positionals: PositionalSpec[] = [];
+
+  for (const [name, definition] of Object.entries(args)) {
+    if (definition.type === "positional") {
+      positionals.push({
+        name,
+        description: definition.description ?? "",
+        required: (definition as { required?: boolean }).required !== false,
+      });
+      continue;
+    }
+    flags.push({
+      name,
+      shortAliases: toArray((definition as { alias?: string | string[] }).alias),
+      description: definition.description ?? "",
+      takesValue: definition.type !== "boolean",
+      options: (definition as { options?: string[] }).options,
+      valueHint: (definition as { valueHint?: string }).valueHint,
+    });
+  }
+
+  return { flags: flags.sort((a, b) => a.name.localeCompare(b.name)), positionals };
+}
+
 /** Walks a citty command definition into a shell-agnostic description. */
 export async function describeCommand(
   command: CommandDef,
@@ -44,18 +85,7 @@ export async function describeCommand(
 ): Promise<CommandNode> {
   const meta = await resolve(command.meta);
   const args = ((await resolve(command.args)) ?? {}) as ArgsDef;
-
-  const flags: FlagSpec[] = [];
-  for (const [name, definition] of Object.entries(args)) {
-    if (definition.type === "positional") continue;
-    flags.push({
-      name,
-      shortAliases: toArray((definition as { alias?: string | string[] }).alias),
-      description: definition.description ?? "",
-      takesValue: definition.type !== "boolean",
-      options: (definition as { options?: string[] }).options,
-    });
-  }
+  const { flags, positionals } = describeArgs(args);
 
   const subCommands: CommandNode[] = [];
   const subDefs = ((await resolve(command.subCommands)) ?? {}) as Record<string, CommandDef>;
@@ -73,7 +103,8 @@ export async function describeCommand(
     aliases: toArray(meta?.alias),
     description: meta?.description ?? "",
     subCommands,
-    flags: flags.sort((a, b) => a.name.localeCompare(b.name)),
+    flags,
+    positionals,
   };
 }
 
