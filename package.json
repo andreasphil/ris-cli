@@ -2,6 +2,7 @@
   "name": "ris-cli",
   "version": "0.1.0",
   "description": "Command line client for the RIS API (rechtsinformationen.bund.de)",
+  "license": "MIT",
   "bin": {
     "ris": "./bin/ris.mjs"
   },
