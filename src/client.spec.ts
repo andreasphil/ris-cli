@@ -4,14 +4,14 @@ import { ApiError, buildUrl, toCurl } from "./client.ts";
 describe("client", () => {
   describe("buildUrl", () => {
     it("joins the base URL and path", () => {
-      expect(buildUrl("http://localhost:8090", "/v1/case-law")).toBe(
-        "http://localhost:8090/v1/case-law",
+      expect(buildUrl("http://localhost:8080", "/v1/case-law")).toBe(
+        "http://localhost:8080/v1/case-law",
       );
     });
 
     it("tolerates a path without a leading slash", () => {
-      expect(buildUrl("http://localhost:8090", "v1/case-law")).toBe(
-        "http://localhost:8090/v1/case-law",
+      expect(buildUrl("http://localhost:8080", "v1/case-law")).toBe(
+        "http://localhost:8080/v1/case-law",
       );
     });
 

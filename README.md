@@ -125,7 +125,7 @@ Which API a command talks to is resolved in this order, highest first:
 2. `--profile <name>`
 3. `$RIS_API_URL`
 4. the config file's default profile
-5. `http://localhost:8090`
+5. `http://localhost:8080`
 
 Three profiles are built in — `local`, `staging`, `testphase` — and you can add your
 own. Config lives at `$XDG_CONFIG_HOME/ris-cli/config.json`
@@ -222,7 +222,7 @@ pnpm build            # compile to dist/, which bin/ris.mjs loads
 pnpm sync-spec        # refresh spec/openapi.json and regenerate API types
 ```
 
-`pnpm sync-spec` prefers a backend running on `localhost:8090` and falls back to the
+`pnpm sync-spec` prefers a backend running on `localhost:8080` and falls back to the
 published spec. Note that neither source includes the backend's `@Hidden` endpoints
 (`work-example`, `translatedLegislation`), which this CLI uses anyway.
 

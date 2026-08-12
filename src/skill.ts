@@ -151,7 +151,7 @@ change legal data — the only commands that write anything are \`ris config set
   from the environment, or via \`--password-stdin\`. Do not echo credentials into
   your answer, and do not write them to a file.
 - **Diagnose connection failures, do not work around them.** The fallback target is
-  \`http://localhost:8090\`, so "connection refused" usually means no default profile
+  \`http://localhost:8080\`, so "connection refused" usually means no default profile
   is set and no local backend is running. Report that and suggest
   \`--profile testphase\` for a public instance — do not change the default.
 - **Ask before \`--all\`.** It follows every page and can pull up to 10,000 documents.
@@ -180,7 +180,7 @@ path: \`ris leg toc IVSG --profile testphase\`, **not**
 ### Which API gets queried
 
 Resolution order, highest first: \`--api-url\` → \`--profile\` → \`$RIS_API_URL\` →
-the config file's default profile → \`http://localhost:8090\`. Built-in profiles are
+the config file's default profile → \`http://localhost:8080\`. Built-in profiles are
 \`local\`, \`staging\` and \`testphase\`. \`ris config list\` shows what is configured
 and which is the default; \`ris config check\` verifies that a profile's URL and
 credentials actually work.

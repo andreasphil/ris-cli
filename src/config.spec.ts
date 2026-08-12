@@ -4,7 +4,7 @@ import { DEFAULT_API_URL, configPath, resolveTarget, type Config } from "./confi
 const CONFIG: Config = {
   defaultProfile: "local",
   profiles: {
-    local: { url: "http://localhost:8090" },
+    local: { url: "http://localhost:8080" },
     staging: {
       url: "https://staging.example.org",
       basic: { username: "sam", password: "secret" },
@@ -65,7 +65,7 @@ describe("config", () => {
 
     it("falls back to the default profile", async () => {
       const target = await resolveTarget(CONFIG, {}, NO_ENV);
-      expect(target.url).toBe("http://localhost:8090");
+      expect(target.url).toBe("http://localhost:8080");
       expect(target.profileName).toBe("local");
     });
 

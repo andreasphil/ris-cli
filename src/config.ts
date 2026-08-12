@@ -6,7 +6,7 @@ import { promisify } from "node:util";
 
 const execFileAsync = promisify(execFile);
 
-export const DEFAULT_API_URL = "http://localhost:8090";
+export const DEFAULT_API_URL = "http://localhost:8080";
 
 /**
  * A secret is never stored in this file. It holds either a 1Password secret

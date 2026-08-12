@@ -13,7 +13,7 @@ import { promisify } from "node:util";
 const execFileAsync = promisify(execFile);
 
 const SOURCES = [
-  "http://localhost:8090/v3/api-docs",
+  "http://localhost:8080/v3/api-docs",
   "https://testphase.rechtsinformationen.bund.de/v3/api-docs",
 ];
 
@@ -45,7 +45,7 @@ for (const url of candidates) {
 
 if (!spec) {
   process.stderr.write(
-    `\nCould not fetch the spec from any source. Start the backend on :8090, or pass a URL:\n` +
+    `\nCould not fetch the spec from any source. Start the backend on :8080, or pass a URL:\n` +
       `  pnpm sync-spec https://host/v3/api-docs\n`,
   );
   process.exit(1);
