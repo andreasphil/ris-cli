@@ -87,55 +87,34 @@ export async function resolveSecret(value: SecretRef): Promise<string> {
     if ((error as NodeJS.ErrnoException).code === "ENOENT") {
       throw new Error(
         `Cannot resolve ${value}: the 1Password CLI (op) is not installed.\n` +
-          `  Install it with \`brew install 1password-cli\`, or pass credentials via ` +
-          `RIS_BASIC_PASSWORD / RIS_API_KEY instead.`,
+          `  Install it with \`brew install 1password-cli\`.`,
       );
     }
     throw new Error(`Cannot resolve ${value} via 1Password: ${stderr || (error as Error).message}`);
   }
 }
 
-export interface AuthFlags {
-  user?: string;
-  passwordStdin?: boolean;
-  apiKey?: string;
-  noAuth?: boolean;
-}
-
-export interface TargetFlags extends AuthFlags {
-  apiUrl?: string;
+export interface TargetFlags {
   profile?: string;
 }
 
 export interface Target {
   url: string;
-  /** Which profile the URL came from, for error messages. Absent when --api-url won. */
+  /** Which profile the URL came from, for error messages. */
   profileName?: string;
   headers: Record<string, string>;
 }
 
-async function readStdin(): Promise<string> {
-  const chunks: Buffer[] = [];
-  for await (const chunk of process.stdin) chunks.push(chunk as Buffer);
-  return Buffer.concat(chunks)
-    .toString("utf8")
-    .replace(/\r?\n$/, "");
-}
-
 /**
- * Resolves base URL and auth headers.
+ * Resolves base URL and auth headers from a profile — the only place either comes
+ * from. `--profile` picks one; otherwise the config file's default profile applies,
+ * falling back to localhost when none is set.
  *
- * URL precedence: --api-url > --profile > $RIS_API_URL > default profile > localhost.
- * Auth precedence: flags > environment > profile. Basic and API key compose, because
- * they are enforced at different layers (ingress vs. application).
+ * Basic and API key compose, because they are enforced at different layers
+ * (ingress vs. application).
  */
-export async function resolveTarget(
-  config: Config,
-  flags: TargetFlags,
-  env: NodeJS.ProcessEnv = process.env,
-): Promise<Target> {
-  let url: string | undefined;
-  let profileName: string | undefined;
+export async function resolveTarget(config: Config, flags: TargetFlags): Promise<Target> {
+  const name = flags.profile ?? config.defaultProfile;
   let profile: Profile | undefined;
 
   if (flags.profile) {
@@ -146,44 +125,25 @@ export async function resolveTarget(
           `  Add one with: ris config set ${flags.profile} --url <url>`,
       );
     }
-    profileName = flags.profile;
-    url = profile.url;
-  } else if (!flags.apiUrl && !env.RIS_API_URL && config.defaultProfile) {
+  } else if (config.defaultProfile) {
     profile = resolveProfile(config, config.defaultProfile);
     if (!profile) {
       throw new Error(
         `Config sets defaultProfile "${config.defaultProfile}", but no such profile exists.`,
       );
     }
-    profileName = config.defaultProfile;
-    url = profile.url;
   }
 
-  url = flags.apiUrl || url || env.RIS_API_URL || DEFAULT_API_URL;
-
+  const url = (profile?.url ?? DEFAULT_API_URL).replace(/\/+$/, "");
   const headers: Record<string, string> = {};
-  if (flags.noAuth) return { url: url.replace(/\/+$/, ""), profileName, headers };
 
-  const username = flags.user ?? env.RIS_BASIC_USER ?? profile?.basic?.username;
-  let password: string | undefined;
-  if (flags.passwordStdin) {
-    password = await readStdin();
-  } else {
-    password = env.RIS_BASIC_PASSWORD ?? profile?.basic?.password;
-  }
-
-  if (username && password) {
+  if (profile?.basic) {
+    const { username, password } = profile.basic;
     const resolved = `${await resolveSecret(username)}:${await resolveSecret(password)}`;
     headers.Authorization = `Basic ${Buffer.from(resolved, "utf8").toString("base64")}`;
-  } else if (username && !password) {
-    throw new Error(
-      `A username was given but no password. Pipe one in with --password-stdin, ` +
-        `set RIS_BASIC_PASSWORD, or store a reference in the profile.`,
-    );
   }
 
-  const apiKey = flags.apiKey ?? env.RIS_API_KEY ?? profile?.apiKey;
-  if (apiKey) headers["X-Api-Key"] = await resolveSecret(apiKey);
+  if (profile?.apiKey) headers["X-Api-Key"] = await resolveSecret(profile.apiKey);
 
-  return { url: url.replace(/\/+$/, ""), profileName, headers };
+  return { url, profileName: profile ? name : undefined, headers };
 }

@@ -142,14 +142,14 @@ change legal data — the only commands that write anything are \`ris config set
   redirects every later command — including the user's own. \`ris config list\`,
   \`ris config show\`, \`ris config path\` and \`ris config check\` are read-only and
   fine to run.
-- **Need a different environment? Do it per command.** Pass \`--profile <name>\` or
-  \`--api-url <url>\` on that one invocation, and say in your answer which one you
-  used. If the user seems to want a different default, tell them the command
-  (\`ris config use <name>\`) and let them run it.
-- **Never put a secret on the command line.** There is deliberately no
-  \`--password\` flag; credentials come from the profile (as 1Password references),
-  from the environment, or via \`--password-stdin\`. Do not echo credentials into
-  your answer, and do not write them to a file.
+- **Need a different environment? Do it per command.** Pass \`--profile <name>\` on
+  that one invocation, and say in your answer which one you used. If the user seems
+  to want a different default, tell them the command (\`ris config use <name>\`) and
+  let them run it.
+- **Never put a secret on the command line.** Credentials come only from the
+  profile, as 1Password references — there is no flag and no environment variable
+  that takes one. Do not echo credentials into your answer, and do not write them to
+  a file.
 - **Diagnose connection failures, do not work around them.** The fallback target is
   \`http://localhost:8080\`, so "connection refused" usually means no default profile
   is set and no local backend is running. Report that and suggest
@@ -179,11 +179,12 @@ path: \`ris leg toc IVSG --profile testphase\`, **not**
 
 ### Which API gets queried
 
-Resolution order, highest first: \`--api-url\` → \`--profile\` → \`$RIS_API_URL\` →
-the config file's default profile → \`http://localhost:8080\`. Built-in profiles are
-\`local\`, \`staging\` and \`testphase\`. \`ris config list\` shows what is configured
-and which is the default; \`ris config check\` verifies that a profile's URL and
-credentials actually work.
+Profiles are the only source of URLs and credentials. \`--profile <name>\` picks one
+for a single command; otherwise the config file's default profile applies, falling
+back to \`http://localhost:8080\` when none is set. Built-in profiles are \`local\`,
+\`staging\` and \`testphase\`. \`ris config list\` shows what is configured and which
+is the default; \`ris config check\` verifies that a profile's URL and credentials
+actually work.
 
 ### Addressing a document
 

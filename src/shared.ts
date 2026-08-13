@@ -19,22 +19,12 @@ import {
  * every leaf command's `args`.
  */
 export const globalArgs = {
-  "api-url": {
-    type: "string",
-    description: "Base URL of the API (overrides --profile and $RIS_API_URL)",
-    valueHint: "url",
-    alias: "u",
-  },
   profile: {
     type: "string",
-    description: "Named profile from the config file",
+    description: "Named profile from the config file, providing the URL and credentials",
     valueHint: "name",
     alias: "p",
   },
-  user: { type: "string", description: "Username for HTTP Basic auth", valueHint: "name" },
-  "password-stdin": { type: "boolean", description: "Read the Basic auth password from stdin" },
-  "api-key": { type: "string", description: "Value for the X-Api-Key header", valueHint: "key" },
-  "no-auth": { type: "boolean", description: "Send no credentials, ignoring config and env" },
   output: {
     type: "enum",
     options: ["json", "table", "ndjson", "raw"],
@@ -164,14 +154,7 @@ export interface Context {
 /** Builds the client and resolves output settings from the parsed args. */
 export async function createContext(args: AnyArgs): Promise<Context> {
   const config = await loadConfig();
-  const target = await resolveTarget(config, {
-    apiUrl: flag(args, "api-url"),
-    profile: flag(args, "profile"),
-    user: flag(args, "user"),
-    passwordStdin: bool(args, "password-stdin"),
-    apiKey: flag(args, "api-key"),
-    noAuth: bool(args, "no-auth"),
-  });
+  const target = await resolveTarget(config, { profile: flag(args, "profile") });
 
   const timeoutSeconds = flag(args, "timeout");
   const client = new RisClient({

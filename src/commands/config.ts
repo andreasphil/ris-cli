@@ -173,15 +173,7 @@ const checkCommand = defineCommand({
   },
   async run({ args }) {
     const config = await loadConfig();
-    const profileFlag = asString(args.profile);
-    const target = await resolveTarget(config, {
-      apiUrl: asString(args["api-url"]),
-      profile: profileFlag,
-      user: asString(args.user),
-      passwordStdin: args["password-stdin"] === true,
-      apiKey: asString(args["api-key"]),
-      noAuth: args["no-auth"] === true,
-    });
+    const target = await resolveTarget(config, { profile: asString(args.profile) });
 
     const authDescription = [
       target.headers.Authorization ? "basic" : undefined,

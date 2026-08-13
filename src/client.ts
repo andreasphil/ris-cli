@@ -52,8 +52,8 @@ export class ApiError extends Error {
       case 401:
       case 403:
         return (
-          `${base}\n  This environment requires authentication. Pass --user with ` +
-          `--password-stdin for Basic auth, or --api-key, or configure them on the profile.`
+          `${base}\n  This environment requires authentication. Store credentials on the ` +
+          `profile with \`ris config set\`, then check them with \`ris config check\`.`
         );
       case 404:
         return `${base}\n  Not found. Check the document number or ELI.`;
@@ -91,15 +91,15 @@ export function buildUrl(baseUrl: string, path: string, query: Query = {}): stri
 }
 
 /**
- * A copy-pasteable curl command. Credentials are emitted as shell variable
- * references in double quotes — so they expand when pasted, and no secret is ever
- * written to a terminal, a scrollback buffer or a shell history file.
+ * The equivalent curl command. Credentials are emitted as placeholders to be
+ * filled in, so no secret is ever written to a terminal, a scrollback buffer or a
+ * shell history file.
  */
 export function toCurl(url: string, headers: Record<string, string>, accept?: string): string {
   const parts = ["curl", "-sS"];
   if (accept) parts.push("-H", quote(`Accept: ${accept}`));
-  if (headers.Authorization) parts.push("-u", '"$RIS_BASIC_USER:$RIS_BASIC_PASSWORD"');
-  if (headers["X-Api-Key"]) parts.push("-H", '"X-Api-Key: $RIS_API_KEY"');
+  if (headers.Authorization) parts.push("-u", quote("<username>:<password>"));
+  if (headers["X-Api-Key"]) parts.push("-H", quote("X-Api-Key: <api-key>"));
   parts.push(quote(url));
   return parts.join(" ");
 }

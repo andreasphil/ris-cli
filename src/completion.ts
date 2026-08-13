@@ -12,7 +12,7 @@ export const SHELLS = ["bash", "zsh", "fish"] as const;
 export type Shell = (typeof SHELLS)[number];
 
 export interface FlagSpec {
-  /** Long form without dashes, e.g. `api-url`. */
+  /** Long form without dashes, e.g. `output-file`. */
   name: string;
   shortAliases: string[];
   description: string;

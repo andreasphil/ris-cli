@@ -67,15 +67,15 @@ describe("client", () => {
       expect(toCurl("http://x/v1/statistics", {})).toBe("curl -sS http://x/v1/statistics");
     });
 
-    it("references env vars instead of leaking Basic credentials", () => {
+    it("uses a placeholder instead of leaking Basic credentials", () => {
       const curl = toCurl("http://x/v1/statistics", { Authorization: "Basic c2FtOnNlY3JldA==" });
-      expect(curl).toContain("$RIS_BASIC_USER:$RIS_BASIC_PASSWORD");
+      expect(curl).toContain("<username>:<password>");
       expect(curl).not.toContain("c2FtOnNlY3JldA==");
     });
 
-    it("references an env var instead of leaking the API key", () => {
+    it("uses a placeholder instead of leaking the API key", () => {
       const curl = toCurl("http://x/v1/statistics", { "X-Api-Key": "ris_supersecret" });
-      expect(curl).toContain("$RIS_API_KEY");
+      expect(curl).toContain("X-Api-Key: <api-key>");
       expect(curl).not.toContain("ris_supersecret");
     });
 

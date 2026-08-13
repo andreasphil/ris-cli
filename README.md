@@ -119,13 +119,10 @@ not `ris --court BGH cl search`).
 
 ### Profiles, config and authentication
 
-Which API a command talks to is resolved in this order, highest first:
-
-1. `--api-url https://…`
-2. `--profile <name>`
-3. `$RIS_API_URL`
-4. the config file's default profile
-5. `http://localhost:8080`
+Profiles are the only source of URLs and credentials — there are no environment
+variables and no per-request auth flags. `--profile <name>` picks one for a single
+command; otherwise the config file's default profile applies, falling back to
+`http://localhost:8080` when none is set.
 
 Three profiles are built in — `local`, `staging`, `testphase` — and you can add your
 own. Config lives at `$XDG_CONFIG_HOME/ris-cli/config.json`
@@ -155,9 +152,9 @@ ris config set staging \
 ris config set prod --url https://… --api-key-ref "op://Employee/ris-api-key/credential"
 ```
 
-For CI and one-offs there are also `$RIS_BASIC_USER` / `$RIS_BASIC_PASSWORD` /
-`$RIS_API_KEY`, plus `--user` with `--password-stdin`. There is deliberately no
-`--password` flag — it would land in your shell history.
+There is deliberately no way to pass a credential per request — no `--password`
+flag, which would land in your shell history, and no environment variables. If a
+command needs credentials, they belong on a profile.
 
 ### Legislation and ELIs
 
@@ -183,8 +180,7 @@ ris leg get eli/bund/bgbl-1/2026/148/2026-05-15/1/deu
 - `--all` follows every page and emits NDJSON, throttled under the API's
   600 requests/minute limit.
 - `--dry-run` prints the equivalent `curl` command instead of sending it, with
-  credentials shown as shell variable references so nothing secret is written to
-  your scrollback.
+  credentials shown as placeholders so nothing secret is written to your scrollback.
 - `-O, --output-file` writes bodies and binaries to a file (`-` for stdout).
 
 Exit codes: `0` success, `1` the CLI could not run (bad flags, unreachable host),
