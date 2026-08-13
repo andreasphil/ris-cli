@@ -10,6 +10,7 @@ import {
   unwrapMembers,
   type Column,
   type HydraCollection,
+  type OutputFormat,
 } from "./output.ts";
 
 /**
@@ -128,14 +129,13 @@ function positiveInt(args: AnyArgs, name: string): number | undefined {
 
 export interface Context {
   client: RisClient;
-  args: AnyArgs;
-  format: ReturnType<typeof resolveFormat>;
+  format: OutputFormat;
 }
 
 /** Builds the client and resolves output settings from the parsed args. */
 export async function createContext(args: AnyArgs): Promise<Context> {
   const config = await loadConfig();
-  const target = await resolveTarget(config, { profile: flag(args, "profile") });
+  const target = await resolveTarget(config, flag(args, "profile"));
 
   const timeoutSeconds = flag(args, "timeout");
   const client = new RisClient({
@@ -147,7 +147,6 @@ export async function createContext(args: AnyArgs): Promise<Context> {
 
   return {
     client,
-    args,
     format: resolveFormat(flag(args, "output"), Boolean(process.stdout.isTTY)),
   };
 }
@@ -164,12 +163,44 @@ export function searchQuery(args: AnyArgs, searchTerm?: string): Query {
   };
 }
 
-export function pageIndexOf(args: AnyArgs): number {
-  return positiveInt(args, "page") ?? 0;
+/**
+ * Data — the thing a pipeline consumes. Everything a command produces as output
+ * goes through here, so there is one place that owns "this belongs on stdout".
+ */
+export function writeData(text: string): void {
+  process.stdout.write(text.endsWith("\n") ? text : `${text}\n`);
 }
 
-function write(text: string): void {
-  process.stdout.write(text.endsWith("\n") ? text : `${text}\n`);
+/**
+ * A note *about* the data: row counts, pagination hints, empty-result messages.
+ * Kept off stdout so a pipeline sees only rows — and nothing at all when there
+ * are none.
+ */
+export function writeNote(text: string): void {
+  process.stderr.write(text.endsWith("\n") ? text : `${text}\n`);
+}
+
+/**
+ * Renders a list of documents: JSON when asked for, otherwise a table with an
+ * optional footer. Owns the data/note split for every array-shaped result, so the
+ * rule is stated once rather than restated per command.
+ */
+export function printRows(
+  ctx: Context,
+  rows: Record<string, unknown>[],
+  columns: Column[],
+  footer?: string,
+): void {
+  if (ctx.format === "json") {
+    writeData(JSON.stringify(rows, null, 2));
+    return;
+  }
+  if (rows.length === 0) {
+    writeNote("No results.");
+    return;
+  }
+  writeData(renderTable(rows, columns));
+  if (footer) writeNote(`\n${footer}`);
 }
 
 /** Renders one page of a search response. */
@@ -180,20 +211,15 @@ export async function printCollection(
   columns?: Column[],
 ): Promise<void> {
   const collection = await ctx.client.json<HydraCollection>({ path, query });
+  // JSON keeps the Hydra envelope, so `view.next` and `totalItems` stay visible.
   if (ctx.format === "json") {
-    write(JSON.stringify(collection, null, 2));
+    writeData(JSON.stringify(collection, null, 2));
     return;
   }
 
   const items = unwrapMembers<Record<string, unknown>>(collection);
-  // Nothing found is a note, not data: keep stdout empty so a pipeline sees no rows.
-  if (items.length === 0) {
-    process.stderr.write("No results.\n");
-    return;
-  }
-
-  write(renderTable(items, columns ?? columnsFor(items)));
-  process.stderr.write(`\n${paginationFooter(collection, pageIndexOf(ctx.args))}\n`);
+  const pageIndex = Number(query.pageIndex ?? 0);
+  printRows(ctx, items, columns ?? columnsFor(items), paginationFooter(collection, pageIndex));
 }
 
 /** First document of a collection, for the single-result lookups used in ELI resolution. */
@@ -204,27 +230,27 @@ export function unwrapFirstMember<T>(collection: HydraCollection): T | undefined
 /** Renders a single document: key/value on a TTY, JSON otherwise. */
 export function printDocument(ctx: Context, document: Record<string, unknown>): void {
   if (ctx.format === "table") {
-    write(renderDetail(document));
+    writeData(renderDetail(document));
     return;
   }
-  write(JSON.stringify(document, null, 2));
-}
-
-/** Writes text (HTML/XML) to stdout; redirect it with the shell to save it. */
-export function printText(body: string): void {
-  write(body);
+  writeData(JSON.stringify(document, null, 2));
 }
 
 /**
- * Writes binary content to stdout, refusing to dump it into a terminal — the shell
- * is what decides where it lands, so there is nowhere else for it to go.
+ * Binary output only ever goes to stdout, so a terminal is the one destination it
+ * cannot have. Commands assert this *before* fetching — see `printBinary`.
  */
-export function printBinary(data: Uint8Array): void {
+export function requireRedirectedStdout(): void {
   if (process.stdout.isTTY) {
     throw new Error(
       "Refusing to write binary data to the terminal.\n" +
         "  Redirect it to a file or pipe it, e.g. `> out.zip` or `| unzip -l -`.",
     );
   }
+}
+
+/** Writes binary content to stdout. The guard is a backstop; commands check first. */
+export function printBinary(data: Uint8Array): void {
+  requireRedirectedStdout();
   process.stdout.write(data);
 }

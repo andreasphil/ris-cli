@@ -22,7 +22,7 @@ const SEARCH_FLAGS = describeArgs(searchArgs).flags;
 const GLOBAL_NAMES = new Set(GLOBAL_FLAGS.map((flag) => flag.name));
 const SEARCH_NAMES = new Set(SEARCH_FLAGS.map((flag) => flag.name));
 
-/** `--court <name>`, `--output=json|table|…`, `--verbose, -v`. */
+/** `--court <name>`, `--output=json|table`, `--verbose, -v`. */
 function renderFlag(flag: FlagSpec): string {
   const names = [`--${flag.name}`, ...flag.shortAliases.map((alias) => `-${alias}`)].join(", ");
   if (!flag.takesValue) return `\`${names}\``;

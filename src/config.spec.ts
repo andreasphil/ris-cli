@@ -36,19 +36,19 @@ describe("config", () => {
 
   describe("resolveTarget URL", () => {
     it("takes the URL from --profile", async () => {
-      const target = await resolveTarget(CONFIG, { profile: "staging" });
+      const target = await resolveTarget(CONFIG, "staging");
       expect(target.url).toBe("https://staging.example.org");
       expect(target.profileName).toBe("staging");
     });
 
     it("falls back to the default profile", async () => {
-      const target = await resolveTarget(CONFIG, {});
+      const target = await resolveTarget(CONFIG);
       expect(target.url).toBe("http://localhost:8080");
       expect(target.profileName).toBe("local");
     });
 
     it("falls back to localhost when nothing is configured", async () => {
-      const target = await resolveTarget({ profiles: {} }, {});
+      const target = await resolveTarget({ profiles: {} });
       expect(target.url).toBe(DEFAULT_API_URL);
       expect(target.profileName).toBeUndefined();
     });
@@ -56,7 +56,7 @@ describe("config", () => {
     it("ignores the environment", async () => {
       process.env.RIS_API_URL = "https://env.example.org";
       try {
-        const target = await resolveTarget(CONFIG, {});
+        const target = await resolveTarget(CONFIG);
         expect(target.url).toBe("http://localhost:8080");
       } finally {
         delete process.env.RIS_API_URL;
@@ -64,23 +64,21 @@ describe("config", () => {
     });
 
     it("resolves built-in profiles that are absent from the config file", async () => {
-      const target = await resolveTarget({ profiles: {} }, { profile: "testphase" });
+      const target = await resolveTarget({ profiles: {} }, "testphase");
       expect(target.url).toBe("https://testphase.rechtsinformationen.bund.de");
     });
 
     it("strips a trailing slash so paths do not double up", async () => {
-      const target = await resolveTarget(CONFIG, { profile: "trailing" });
+      const target = await resolveTarget(CONFIG, "trailing");
       expect(target.url).toBe("https://trailing.example.org");
     });
 
     it("explains what to do when the profile is unknown", async () => {
-      await expect(resolveTarget(CONFIG, { profile: "nope" })).rejects.toThrow(
-        /Unknown profile "nope"/,
-      );
+      await expect(resolveTarget(CONFIG, "nope")).rejects.toThrow(/Unknown profile "nope"/);
     });
 
     it("rejects a default profile that does not exist", async () => {
-      await expect(resolveTarget({ defaultProfile: "gone", profiles: {} }, {})).rejects.toThrow(
+      await expect(resolveTarget({ defaultProfile: "gone", profiles: {} })).rejects.toThrow(
         /no such profile exists/,
       );
     });
@@ -88,22 +86,22 @@ describe("config", () => {
 
   describe("resolveTarget auth", () => {
     it("sends no credentials when the profile has none", async () => {
-      const target = await resolveTarget(CONFIG, { profile: "local" });
+      const target = await resolveTarget(CONFIG, "local");
       expect(target.headers).toEqual({});
     });
 
     it("builds a Basic header from the profile", async () => {
-      const target = await resolveTarget(CONFIG, { profile: "staging" });
+      const target = await resolveTarget(CONFIG, "staging");
       expect(target.headers.Authorization).toBe(basicHeader("sam", "secret"));
     });
 
     it("builds an X-Api-Key header from the profile", async () => {
-      const target = await resolveTarget(CONFIG, { profile: "prod" });
+      const target = await resolveTarget(CONFIG, "prod");
       expect(target.headers["X-Api-Key"]).toBe("ris_abc");
     });
 
     it("composes Basic and API key, since they are enforced at different layers", async () => {
-      const target = await resolveTarget(CONFIG, { profile: "both" });
+      const target = await resolveTarget(CONFIG, "both");
       expect(target.headers.Authorization).toBe(basicHeader("sam", "secret"));
       expect(target.headers["X-Api-Key"]).toBe("ris_abc");
     });
@@ -113,7 +111,7 @@ describe("config", () => {
       process.env.RIS_BASIC_PASSWORD = "env-pass";
       process.env.RIS_API_KEY = "ris_env";
       try {
-        const target = await resolveTarget(CONFIG, { profile: "local" });
+        const target = await resolveTarget(CONFIG, "local");
         expect(target.headers).toEqual({});
       } finally {
         delete process.env.RIS_BASIC_USER;

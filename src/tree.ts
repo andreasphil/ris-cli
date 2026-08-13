@@ -31,11 +31,15 @@ export interface CommandNode {
   positionals: PositionalSpec[];
 }
 
-async function resolve<T>(value: T | (() => T | Promise<T>) | undefined): Promise<T | undefined> {
+/** citty allows `meta`, `args` and `subCommands` to be thunks, including async ones. */
+export async function resolve<T>(
+  value: T | (() => T | Promise<T>) | undefined,
+): Promise<T | undefined> {
   return typeof value === "function" ? (value as () => Promise<T>)() : value;
 }
 
-function toArray(value: string | string[] | undefined): string[] {
+/** citty's `alias` is a string, an array, or absent. */
+export function toArray(value: string | string[] | undefined): string[] {
   if (value === undefined) return [];
   return Array.isArray(value) ? value : [value];
 }
@@ -87,10 +91,9 @@ export async function describeCommand(
   for (const [name, subDef] of Object.entries(subDefs)) {
     const resolved = await resolve<CommandDef>(subDef as CommandDef);
     if (!resolved) continue;
-    const child = await describeCommand(resolved, name);
-    // Machine-facing commands are named with a __ prefix and stay undocumented.
-    if (child.name.startsWith("__")) continue;
-    subCommands.push({ ...child, name });
+    // citty's own marker for a command that should not be advertised.
+    if ((await resolve(resolved.meta))?.hidden) continue;
+    subCommands.push({ ...(await describeCommand(resolved, name)), name });
   }
 
   return {

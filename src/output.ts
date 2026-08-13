@@ -29,15 +29,6 @@ export interface SearchMember<T = unknown> {
   textMatches?: { name?: string; text?: string; location?: string | null }[];
 }
 
-export function isHydraCollection(value: unknown): value is HydraCollection {
-  return (
-    typeof value === "object" &&
-    value !== null &&
-    Array.isArray((value as HydraCollection).member) &&
-    typeof (value as HydraCollection).totalItems === "number"
-  );
-}
-
 /** Pulls the documents out of `member[].item`, tolerating members that are bare documents. */
 export function unwrapMembers<T = Record<string, unknown>>(collection: HydraCollection): T[] {
   return collection.member.map((member) => {
@@ -47,12 +38,8 @@ export function unwrapMembers<T = Record<string, unknown>>(collection: HydraColl
 }
 
 export function resolveFormat(explicit: string | undefined, isTty: boolean): OutputFormat {
-  if (explicit) {
-    if (!["json", "table"].includes(explicit)) {
-      throw new Error(`Unknown output format "${explicit}". Use json or table.`);
-    }
-    return explicit as OutputFormat;
-  }
+  if (explicit === "json" || explicit === "table") return explicit;
+  if (explicit) throw new Error(`Unknown output format "${explicit}". Use json or table.`);
   return isTty ? "table" : "json";
 }
 
@@ -75,12 +62,13 @@ function truncate(value: string, width: number): string {
   return value.length <= width ? value : `${value.slice(0, Math.max(0, width - 1))}…`;
 }
 
+/** Pure layout: an empty row set renders as nothing. Saying so is the caller's job. */
 export function renderTable(
   rows: Record<string, unknown>[],
   columns: Column[],
   terminalWidth = process.stdout.columns || 120,
 ): string {
-  if (rows.length === 0) return "No results.";
+  if (rows.length === 0) return "";
 
   const cells = rows.map((row) => columns.map((column) => cellValue(row, column)));
   const widths = columns.map((column, index) => {
@@ -226,10 +214,7 @@ export function renderDetail(document: Record<string, unknown>): string {
 }
 
 export function paginationFooter(collection: HydraCollection, pageIndex: number): string {
-  const shown = collection.member.length;
-  if (shown === 0) return "No results.";
   const total = collection.totalItems.toLocaleString("en-US");
-  const parts = [`Showing ${shown} of ${total}`];
-  if (collection.view?.next) parts.push(`next: --page ${pageIndex + 1}`);
-  return parts.join(" · ");
+  const shown = `Showing ${collection.member.length} of ${total}`;
+  return collection.view?.next ? `${shown} · next: --page ${pageIndex + 1}` : shown;
 }

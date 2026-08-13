@@ -52,7 +52,7 @@ Either way, check it with `ris stats`. Without installing at all, the CLI runs a
 
 ```sh
 pnpm unlink --global            # or: rm ~/.local/bin/ris
-rm -rf ~/.config/ris-cli        # profiles and default (no secrets are stored here)
+rm -rf ~/.config/ris-cli        # profiles and default
 ```
 
 Then delete the clone.
@@ -79,30 +79,77 @@ ris skill              install · update
 
 ```console
 $ ris stats
-legislation                2,415
-case-law                  83,695
+legislation                2,453
+case-law                  83,794
 literature                     0
 administrative-directive       0
                           ------
-total                     86,110
+total                     86,247
 
 $ ris case-law search --court BGH --size 3
-DOCUMENT NUMBER  DATE        COURT   TYPE       TITLE
-KORE300462026    2026-07-30  BGH     Urteil     BGH, Urteil vom 30. Juli 2026 - I ZR 130/25
-KORE601422026    2026-07-29  BGH     Beschluss  BGH, Beschluss vom 29. Juli 2026 - V ZR 205/25
-…
+DOCUMENT NUMBER  DATE        COURT  TYPE       TITLE
+KORE300492026    2026-08-04  BGH    Beschluss  BGH, Beschluss vom 4. August 2026 - StB 47/26
+KORE300462026    2026-07-30  BGH    Urteil     BGH, Urteil vom 30. Juli 2026 - I ZR 130/25
+KORE601422026    2026-07-29  BGH    Beschluss  BGH, Beschluss vom 29. Juli 2026 - V ZR 205/25
+
+Showing 3 of 10,000 · next: --page 1
 ```
 
 `ris --help` lists every command, and `ris <command> --help` explains one of them —
 including flags, which belong to the command they follow (`ris cl search --court BGH`,
 not `ris --court BGH cl search`).
 
-### Profiles, config and authentication
+### Searching
 
-Profiles are the only source of URLs and credentials — there are no environment
-variables and no per-request auth flags. `--profile <name>` picks one for a single
-command; otherwise the config file's default profile applies, falling back to
-`http://localhost:8080` when none is set.
+Two ways to search, each available across all kinds or scoped to one:
+
+```sh
+ris search "Mietrecht Kündigung"     # free text, every kind, mixed results
+ris lucene 'Mietrecht AND Kündigung' # Lucene syntax: boolean operators, phrases
+ris cl search --court BGH            # one kind, plus that kind's own filters
+ris cl lucene 'Mietrecht'            # the same Lucene query, case law only
+```
+
+Scoping to a kind unlocks filters that only make sense there, and renders columns to
+match:
+
+| kind  | filters                                                                                                  |
+| ----- | -------------------------------------------------------------------------------------------------------- |
+| `cl`  | `--court` `--file-number` `--ecli` `--legal-effect` `--type` `--type-group`                              |
+| `leg` | `--eli` `--abbreviation` `--ris-abbreviation` `--in-force-on` `--temporal-from/-to` `--most-relevant-on` |
+| `lit` | `--document-number` `--year` `--type` `--author` `--collaborator`                                        |
+| `ad`  | `--document-number`                                                                                      |
+
+Every search takes `--from` / `--to` to bound the document date, and `--size`,
+`--page` and `--sort` for paging. Multi-value filters accept repetition or one
+comma-separated value, so `--type Urteil --type Beschluss` and
+`--type Urteil,Beschluss` mean the same thing. Filters combine as AND.
+
+`ris <kind> changelog` reports what was added, changed or deleted — the last 24 hours
+by default, or any window you give it with `--from` and `--to`.
+
+### Legislation and ELIs
+
+Anywhere an ELI is accepted, you can pass a work, expression or manifestation ELI —
+with or without an `eli/` prefix, or a URL pasted from the browser or an API
+response. A non-ELI argument is resolved by abbreviation, picking the version most
+relevant today (override with `--on-date`):
+
+```sh
+ris leg html IVSG                    # current consolidated text
+ris leg html IVSG --on-date 2020-01-01
+ris leg toc IVSG                     # article eIds, for `ris leg article`
+ris leg get eli/bund/bgbl-1/2026/148/2026-05-15/1/deu
+```
+
+`ris leg versions` lists every expression of a law, and `--in-force-on` narrows a
+search to the expressions in force on a given date.
+
+### Profiles and credentials
+
+A profile holds the API URL and, optionally, credentials. `--profile <name>` picks
+one for a single command; otherwise the config file's default profile applies,
+falling back to `http://localhost:8080`.
 
 Three profiles are built in — `local`, `staging`, `testphase` — and you can add your
 own. Config lives at `$XDG_CONFIG_HOME/ris-cli/config.json`
@@ -120,8 +167,8 @@ The API is protected two different ways, at two different layers, and they compo
 HTTP Basic at the ingress (staging), and an `X-Api-Key` header in the application
 (the `production` Spring profile).
 
-**Credentials are never written to the config file.** Store a 1Password secret
-reference instead; it is resolved with `op read` at request time:
+Credentials live in 1Password rather than in the config file: store a secret
+reference and it is resolved with `op read` at request time.
 
 ```sh
 ris config set staging \
@@ -132,48 +179,29 @@ ris config set staging \
 ris config set prod --url https://… --api-key-ref "op://Employee/ris-api-key/credential"
 ```
 
-There is deliberately no way to pass a credential per request — no `--password`
-flag, which would land in your shell history, and no environment variables. If a
-command needs credentials, they belong on a profile.
-
-### Legislation and ELIs
-
-Anywhere an ELI is accepted, you can pass a work, expression or manifestation ELI —
-with or without an `eli/` prefix, or a URL pasted from the browser or an API
-response. A non-ELI argument is resolved by abbreviation, picking the version most
-relevant today (override with `--on-date`):
-
-```sh
-ris leg html IVSG                    # current consolidated text
-ris leg html IVSG --on-date 2020-01-01
-ris leg toc IVSG                     # article eIds, for `ris leg article`
-ris leg get eli/bund/bgbl-1/2026/148/2026-05-15/1/deu
-```
-
 ### Output
 
-- `-o json|table` — defaults to a table on a terminal, JSON when piped, so piping
-  into `jq` already gives you JSON.
+Data goes to stdout and diagnostics to stderr, so the shell decides where things
+land:
+
+```sh
+ris leg html IVSG > ivsg.html               # save the consolidated text
+ris cl zip KORE300492026 > decision.zip     # redirect or pipe binary output
+ris cl get KORE300492026 | jq -r .headline  # pull out a single field
+```
+
+- `-o json|table` — a table on a terminal, JSON when piped, so `| jq` already gets
+  JSON.
 - Tables unwrap the Hydra envelope, so you see documents rather than
   `member[].item` nesting. JSON keeps it, so `view.next` and `totalItems` tell you
   whether more pages exist.
-- Page through results with `--size` and `--page`; requests are throttled under the
-  API's 600 requests/minute limit.
+- Row counts, pagination hints and `No results.` go to stderr, so a pipeline sees
+  only rows — and nothing at all when there are none.
 - `--dry-run` prints the equivalent `curl` command instead of sending it, with
-  credentials shown as placeholders so nothing secret is written to your scrollback.
-
-Data goes to stdout and diagnostics to stderr, so the shell handles the rest — there
-is no `--output-file`, just redirect:
-
-```sh
-ris leg html IVSG > ivsg.html
-ris cl zip KORE300492026 > decision.zip
-ris cl get KORE300492026 | jq -r .headline
-```
-
-Row counts, pagination hints and `No results.` all go to stderr, so a pipeline sees
-only rows — and nothing at all when there are none. The `zip` and `resource`
-commands refuse to write binary into a bare terminal, so redirect or pipe those.
+  credentials shown as placeholders so nothing secret reaches your scrollback.
+- `-v, --verbose` logs each request to stderr, and `--timeout <seconds>` caps how
+  long one may take.
+- Requests are throttled under the API's 600 requests/minute limit.
 
 Exit codes: `0` success, `1` the CLI could not run (bad flags, unreachable host),
 `2` the API rejected the request (404, 422, …).
@@ -211,8 +239,9 @@ pnpm sync-spec        # refresh spec/openapi.json and regenerate API types
 ```
 
 `pnpm sync-spec` prefers a backend running on `localhost:8080` and falls back to the
-published spec. Note that neither source includes the backend's `@Hidden` endpoints
-(`work-example`, `translatedLegislation`), which this CLI uses anyway.
+published spec. On top of what the spec declares, the CLI also reaches two `@Hidden`
+endpoints — `work-example` (behind `ris leg versions`) and `translatedLegislation`
+(behind `ris leg translations`).
 
 ## Credits
 

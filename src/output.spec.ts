@@ -2,7 +2,6 @@ import { describe, expect, it } from "vitest";
 import {
   COLUMNS,
   columnsFor,
-  isHydraCollection,
   paginationFooter,
   renderDetail,
   TRANSLATION_COLUMNS,
@@ -32,23 +31,6 @@ const COLLECTION: HydraCollection = {
 };
 
 describe("output", () => {
-  describe("isHydraCollection", () => {
-    it("recognises a collection", () => {
-      expect(isHydraCollection(COLLECTION)).toBe(true);
-    });
-
-    it("rejects a single document, an array and nullish values", () => {
-      expect(isHydraCollection({ documentNumber: "STRE1" })).toBe(false);
-      expect(isHydraCollection([])).toBe(false);
-      expect(isHydraCollection(null)).toBe(false);
-      expect(isHydraCollection(undefined)).toBe(false);
-    });
-
-    it("rejects a collection without totalItems", () => {
-      expect(isHydraCollection({ member: [] })).toBe(false);
-    });
-  });
-
   describe("unwrapMembers", () => {
     it("lifts documents out of member[].item", () => {
       expect(
@@ -128,8 +110,9 @@ describe("output", () => {
       expect(lines[2]).toContain("FG Münster");
     });
 
-    it("says so when there is nothing to show", () => {
-      expect(renderTable([], COLUMNS.CaseLaw!)).toBe("No results.");
+    // Saying "No results." is the caller's job — renderTable only lays out rows.
+    it("renders nothing at all for an empty row set", () => {
+      expect(renderTable([], COLUMNS.CaseLaw!)).toBe("");
     });
 
     it("joins array values", () => {
@@ -220,8 +203,8 @@ describe("output", () => {
       expect(paginationFooter({ ...COLLECTION, view: {} }, 3)).toBe("Showing 2 of 4,312");
     });
 
-    it("reports an empty result set", () => {
-      expect(paginationFooter({ totalItems: 0, member: [] }, 0)).toBe("No results.");
+    it("counts the page it was given, without special-casing an empty one", () => {
+      expect(paginationFooter({ totalItems: 0, member: [] }, 0)).toBe("Showing 0 of 0");
     });
   });
 });

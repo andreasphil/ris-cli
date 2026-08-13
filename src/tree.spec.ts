@@ -25,8 +25,8 @@ const FIXTURE = defineCommand({
         }),
       },
     }),
-    __hidden: defineCommand({
-      meta: { name: "__hidden", description: "hidden", hidden: true },
+    internal: defineCommand({
+      meta: { name: "internal", description: "hidden", hidden: true },
     }),
   },
 });
@@ -45,8 +45,8 @@ describe("tree", () => {
       expect(caseLaw?.subCommands.map((child) => child.name)).toEqual(["search"]);
     });
 
-    it("omits hidden machine-facing commands", () => {
-      expect(tree.subCommands.map((child) => child.name)).not.toContain("__hidden");
+    it("omits commands marked hidden, whatever they are named", () => {
+      expect(tree.subCommands.map((child) => child.name)).not.toContain("internal");
     });
 
     it("separates flags from positionals", () => {

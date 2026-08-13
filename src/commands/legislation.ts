@@ -10,7 +10,7 @@ import {
   workPath,
   type ParsedEli,
 } from "../eli.ts";
-import { COLUMNS, TRANSLATION_COLUMNS, renderTable, type HydraCollection } from "../output.ts";
+import { COLUMNS, TRANSLATION_COLUMNS, type HydraCollection } from "../output.ts";
 import type { LegislationTranslation, LegislationWorkExampleMember } from "../types/internal.ts";
 import {
   createContext,
@@ -19,10 +19,13 @@ import {
   printBinary,
   printCollection,
   printDocument,
-  printText,
+  printRows,
+  requireRedirectedStdout,
   searchArgs,
   searchQuery,
   unwrapFirstMember,
+  writeData,
+  writeNote,
 } from "../shared.ts";
 import { changelogCommand, type DocumentKind } from "./factory.ts";
 
@@ -278,7 +281,7 @@ function representation(format: "xml" | "html") {
         path: `${KIND.path}/eli/${manifestationPath(eli)}.${format}`,
         accept: format === "xml" ? "application/xml" : "text/html",
       });
-      printText(body);
+      writeData(body);
     },
   });
 }
@@ -303,7 +306,7 @@ const articleCommand = defineCommand({
       path: `${KIND.path}/eli/${manifestationPath(eli)}/${args.articleEid}.html`,
       accept: "text/html",
     });
-    printText(body);
+    writeData(body);
   },
 });
 
@@ -315,6 +318,8 @@ const zipCommand = defineCommand({
     ...globalArgs,
   },
   async run({ args }) {
+    // Fail before the two resolution requests: binary output has nowhere to go on a TTY.
+    requireRedirectedStdout();
     const ctx = await createContext(args);
     const expression = await resolveExpression(ctx.client, args.eli, asString(args["on-date"]));
     // The ZIP endpoint omits the subtype segment, so resolve via the XML encoding
@@ -340,6 +345,8 @@ const resourceCommand = defineCommand({
     ...globalArgs,
   },
   async run({ args }) {
+    // Fail before the two resolution requests: binary output has nowhere to go on a TTY.
+    requireRedirectedStdout();
     const ctx = await createContext(args);
     const expression = await resolveExpression(ctx.client, args.eli);
     const { eli } = await resolveManifestation(ctx.client, expression, "xml");
@@ -371,10 +378,13 @@ const tocCommand = defineCommand({
       printDocument(ctx, (expression.hasPart ?? []) as unknown as Record<string, unknown>);
       return;
     }
+    // An indented eId tree, not a table — but the empty case is still a note.
     const lines = renderParts(expression.hasPart ?? [], "");
-    process.stdout.write(
-      lines.length > 0 ? `${lines.join("\n")}\n` : "This expression has no articles.\n",
-    );
+    if (lines.length === 0) {
+      writeNote("This expression has no articles.");
+      return;
+    }
+    writeData(lines.join("\n"));
   },
 });
 
@@ -404,7 +414,7 @@ const translationsCommand = defineCommand({
     const ctx = await createContext(args);
     const filename = asString(args.filename);
     if (filename) {
-      printText(
+      writeData(
         await ctx.client.text({
           path: `/v1/translatedLegislation/${encodeURIComponent(filename)}`,
           accept: "text/html",
@@ -416,13 +426,7 @@ const translationsCommand = defineCommand({
       path: "/v1/translatedLegislation",
       query: { id: args.id },
     });
-    if (ctx.format === "json") {
-      printDocument(ctx, translations as unknown as Record<string, unknown>);
-      return;
-    }
-    process.stdout.write(
-      `${renderTable(translations as unknown as Record<string, unknown>[], TRANSLATION_COLUMNS)}\n`,
-    );
+    printRows(ctx, translations as unknown as Record<string, unknown>[], TRANSLATION_COLUMNS);
   },
 });
 

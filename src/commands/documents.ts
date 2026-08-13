@@ -8,6 +8,8 @@ import {
   printDocument,
   searchArgs,
   searchQuery,
+  writeData,
+  writeNote,
 } from "../shared.ts";
 
 type StatisticsApiSchema = components["schemas"]["StatisticsApiSchema"];
@@ -86,16 +88,16 @@ export const statsCommand = defineCommand({
     const labelWidth = Math.max(...rows.map(([kind]) => kind.length));
     const countWidth = Math.max(...rows.map(([, count]) => count.length));
     const total = Object.values(stats).reduce((sum, value) => sum + (value?.count ?? 0), 0);
-    process.stdout.write(
-      `${rows
+    writeData(
+      rows
         .map(([kind, count]) => `${kind.padEnd(labelWidth)}  ${count.padStart(countWidth)}`)
-        .join("\n")}\n`,
+        .join("\n"),
     );
     // The total is a summary, not a row of data — same split as a table's footer.
-    process.stderr.write(
+    writeNote(
       `${"".padEnd(labelWidth)}  ${"-".repeat(countWidth)}\n${"total".padEnd(labelWidth)}  ${total
         .toLocaleString("en-US")
-        .padStart(countWidth)}\n`,
+        .padStart(countWidth)}`,
     );
   },
 });
@@ -120,7 +122,7 @@ export const bulkLinksCommand = defineCommand({
     const lines = (catalog.dataSet ?? []).map(
       (set) => `${set.name}\n  ${set.distribution?.contentUrl ?? "(no download URL)"}`,
     );
-    process.stdout.write(`${lines.join("\n")}\n`);
+    writeData(lines.join("\n"));
   },
 });
 

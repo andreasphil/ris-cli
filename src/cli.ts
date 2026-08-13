@@ -12,6 +12,7 @@ import {
 import { legislationCommand } from "./commands/legislation.ts";
 import { literatureCommand } from "./commands/literature.ts";
 import { skillCommand } from "./commands/skill.ts";
+import { resolve, toArray } from "./tree.ts";
 import { VERSION } from "./version.ts";
 
 // Explicitly typed: `skill` receives the root, so the initializer references
@@ -38,23 +39,17 @@ const main: CommandDef = defineCommand({
   },
 });
 
-async function resolveValue<T>(value: T | (() => T | Promise<T>)): Promise<T> {
-  return typeof value === "function" ? (value as () => Promise<T>)() : value;
-}
-
 async function findSubCommand(
   subCommands: Record<string, unknown>,
   name: string,
 ): Promise<CommandDef | undefined> {
   const direct = subCommands[name];
-  if (direct) return resolveValue(direct as CommandDef);
+  if (direct) return resolve(direct as CommandDef);
 
   for (const candidate of Object.values(subCommands)) {
-    const command = await resolveValue(candidate as CommandDef);
-    const meta = await resolveValue(command.meta);
-    const alias = meta?.alias;
-    const aliases = alias === undefined ? [] : Array.isArray(alias) ? alias : [alias];
-    if (aliases.includes(name)) return command;
+    const command = await resolve(candidate as CommandDef);
+    const meta = await resolve(command?.meta);
+    if (toArray(meta?.alias).includes(name)) return command;
   }
   return undefined;
 }
@@ -70,7 +65,7 @@ async function resolveForUsage(
   rawArgs: string[],
   parent?: CommandDef,
 ): Promise<[CommandDef, CommandDef | undefined]> {
-  const subCommands = await resolveValue(command.subCommands);
+  const subCommands = await resolve(command.subCommands);
   if (subCommands && Object.keys(subCommands).length > 0) {
     const index = rawArgs.findIndex((arg) => !arg.startsWith("-"));
     const name = index === -1 ? undefined : rawArgs[index];

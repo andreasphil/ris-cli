@@ -1,5 +1,12 @@
 import { describe, expect, it, vi } from "vitest";
-import { collectRepeated, list, printBinary, printText } from "./shared.ts";
+import {
+  collectRepeated,
+  list,
+  printBinary,
+  requireRedirectedStdout,
+  writeData,
+  writeNote,
+} from "./shared.ts";
 
 describe("shared", () => {
   // citty's parser keeps only the last occurrence of a repeated flag, so these
@@ -62,56 +69,61 @@ describe("shared", () => {
     });
   });
 
-  // There is no --output-file: the shell decides where output lands, so everything
-  // has to reach stdout unmodified for `>` and `|` to work.
-  describe("printText", () => {
-    it("writes the body to stdout", () => {
-      const stdout = vi.spyOn(process.stdout, "write").mockImplementation(() => true);
-      try {
-        printText("<html>hi</html>");
-        expect(stdout).toHaveBeenCalledWith("<html>hi</html>\n");
-      } finally {
-        stdout.mockRestore();
-      }
+  /**
+   * Runs `body` and returns what reached one stream. Both are mocked, so asserting
+   * that a note stays off stdout does not print the note itself.
+   */
+  function capture(stream: "stdout" | "stderr", body: () => void): unknown[] {
+    const spies = (["stdout", "stderr"] as const).map((name) =>
+      vi.spyOn(process[name], "write").mockImplementation(() => true),
+    );
+    const wanted = spies[stream === "stdout" ? 0 : 1]!;
+    try {
+      body();
+      return wanted.mock.calls.map((call) => call[0]);
+    } finally {
+      for (const spy of spies) spy.mockRestore();
+    }
+  }
+
+  function withTty<T>(isTty: boolean, run: () => T): T {
+    const original = process.stdout.isTTY;
+    // isTTY is undefined rather than false when stdout is not a terminal.
+    Object.defineProperty(process.stdout, "isTTY", { value: isTty, configurable: true });
+    try {
+      return run();
+    } finally {
+      Object.defineProperty(process.stdout, "isTTY", { value: original, configurable: true });
+    }
+  }
+
+  // There is no --output-file: the shell decides where output lands, so data has to
+  // reach stdout unmodified for `>` and `|` to work, and notes must stay off it.
+  describe("writeData / writeNote", () => {
+    it("sends data to stdout and notes to stderr", () => {
+      expect(capture("stdout", () => writeData("rows"))).toEqual(["rows\n"]);
+      expect(capture("stderr", () => writeNote("2 courts"))).toEqual(["2 courts\n"]);
+    });
+
+    it("keeps notes off stdout and data off stderr", () => {
+      expect(capture("stdout", () => writeNote("2 courts"))).toEqual([]);
+      expect(capture("stderr", () => writeData("rows"))).toEqual([]);
     });
 
     it("does not add a second trailing newline", () => {
-      const stdout = vi.spyOn(process.stdout, "write").mockImplementation(() => true);
-      try {
-        printText("<html>hi</html>\n");
-        expect(stdout).toHaveBeenCalledWith("<html>hi</html>\n");
-      } finally {
-        stdout.mockRestore();
-      }
+      expect(capture("stdout", () => writeData("<html>hi</html>\n"))).toEqual([
+        "<html>hi</html>\n",
+      ]);
+      expect(capture("stderr", () => writeNote("done\n"))).toEqual(["done\n"]);
     });
   });
 
   describe("printBinary", () => {
     const BYTES = new Uint8Array([0x50, 0x4b, 0x03, 0x04]);
 
-    function withTty<T>(isTty: boolean, run: () => T): T {
-      const original = process.stdout.isTTY;
-      // isTTY is undefined rather than false when stdout is not a terminal.
-      Object.defineProperty(process.stdout, "isTTY", { value: isTty, configurable: true });
-      try {
-        return run();
-      } finally {
-        Object.defineProperty(process.stdout, "isTTY", {
-          value: original,
-          configurable: true,
-        });
-      }
-    }
-
     it("writes raw bytes to stdout when redirected or piped", () => {
       withTty(false, () => {
-        const stdout = vi.spyOn(process.stdout, "write").mockImplementation(() => true);
-        try {
-          printBinary(BYTES);
-          expect(stdout).toHaveBeenCalledWith(BYTES);
-        } finally {
-          stdout.mockRestore();
-        }
+        expect(capture("stdout", () => printBinary(BYTES))).toEqual([BYTES]);
       });
     });
 
@@ -120,6 +132,12 @@ describe("shared", () => {
         expect(() => printBinary(BYTES)).toThrow(/Refusing to write binary data/);
         expect(() => printBinary(BYTES)).toThrow(/> out\.zip/);
       });
+    });
+
+    // Commands call this before fetching, so a TTY costs no request.
+    it("requireRedirectedStdout throws on a terminal and passes otherwise", () => {
+      withTty(true, () => expect(() => requireRedirectedStdout()).toThrow(/Refusing/));
+      withTty(false, () => expect(() => requireRedirectedStdout()).not.toThrow());
     });
   });
 });

@@ -37,7 +37,9 @@ const FIXTURE = defineCommand({
         }),
       },
     }),
-    __hidden: defineCommand({ meta: { name: "__hidden", description: "hidden" } }),
+    internal: defineCommand({
+      meta: { name: "internal", description: "hidden", hidden: true },
+    }),
   },
 });
 
@@ -89,8 +91,8 @@ describe("skill", () => {
       expect(skill).not.toContain("`--profile, -p <name>`,");
     });
 
-    it("omits hidden machine-facing commands", () => {
-      expect(skill).not.toContain("__hidden");
+    it("omits commands marked hidden, whatever they are named", () => {
+      expect(skill).not.toContain("internal");
     });
 
     it("records the version it was generated from", () => {

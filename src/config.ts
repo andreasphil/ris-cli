@@ -94,10 +94,6 @@ export async function resolveSecret(value: SecretRef): Promise<string> {
   }
 }
 
-export interface TargetFlags {
-  profile?: string;
-}
-
 export interface Target {
   url: string;
   /** Which profile the URL came from, for error messages. */
@@ -107,43 +103,40 @@ export interface Target {
 
 /**
  * Resolves base URL and auth headers from a profile — the only place either comes
- * from. `--profile` picks one; otherwise the config file's default profile applies,
- * falling back to localhost when none is set.
+ * from. An explicit name picks one; otherwise the config file's default profile
+ * applies, falling back to localhost when none is set.
  *
  * Basic and API key compose, because they are enforced at different layers
  * (ingress vs. application).
  */
-export async function resolveTarget(config: Config, flags: TargetFlags): Promise<Target> {
-  const name = flags.profile ?? config.defaultProfile;
-  let profile: Profile | undefined;
-
-  if (flags.profile) {
-    profile = resolveProfile(config, flags.profile);
-    if (!profile) {
-      throw new Error(
-        `Unknown profile "${flags.profile}". Known profiles: ${knownProfileNames(config).join(", ")}.\n` +
-          `  Add one with: ris config set ${flags.profile} --url <url>`,
-      );
-    }
-  } else if (config.defaultProfile) {
-    profile = resolveProfile(config, config.defaultProfile);
-    if (!profile) {
-      throw new Error(
-        `Config sets defaultProfile "${config.defaultProfile}", but no such profile exists.`,
-      );
-    }
+export async function resolveTarget(config: Config, requested?: string): Promise<Target> {
+  const name = requested ?? config.defaultProfile;
+  const profile = name === undefined ? undefined : resolveProfile(config, name);
+  if (name !== undefined && !profile) {
+    throw new Error(
+      requested
+        ? `Unknown profile "${name}". Known profiles: ${knownProfileNames(config).join(", ")}.\n` +
+            `  Add one with: ris config set ${name} --url <url>`
+        : `Config sets defaultProfile "${name}", but no such profile exists.`,
+    );
   }
 
   const url = (profile?.url ?? DEFAULT_API_URL).replace(/\/+$/, "");
   const headers: Record<string, string> = {};
 
+  // Each `op://` reference is a separate `op read` subprocess, so resolve them
+  // together rather than paying the 1Password round trips one after another.
+  const [username, password, apiKey] = await Promise.all([
+    resolveSecret(profile?.basic?.username ?? ""),
+    resolveSecret(profile?.basic?.password ?? ""),
+    resolveSecret(profile?.apiKey ?? ""),
+  ]);
+
   if (profile?.basic) {
-    const { username, password } = profile.basic;
-    const resolved = `${await resolveSecret(username)}:${await resolveSecret(password)}`;
-    headers.Authorization = `Basic ${Buffer.from(resolved, "utf8").toString("base64")}`;
+    const credentials = Buffer.from(`${username}:${password}`, "utf8").toString("base64");
+    headers.Authorization = `Basic ${credentials}`;
   }
+  if (profile?.apiKey) headers["X-Api-Key"] = apiKey;
 
-  if (profile?.apiKey) headers["X-Api-Key"] = await resolveSecret(profile.apiKey);
-
-  return { url, profileName: profile ? name : undefined, headers };
+  return { url, profileName: name, headers };
 }

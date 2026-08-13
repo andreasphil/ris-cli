@@ -8,7 +8,8 @@ import {
   paginationArgs,
   printBinary,
   printCollection,
-  printDocument,
+  printRows,
+  requireRedirectedStdout,
   searchArgs,
   searchQuery,
 } from "../shared.ts";
@@ -103,6 +104,8 @@ const zipCommand = defineCommand({
     ...globalArgs,
   },
   async run({ args }) {
+    // Fail before spending the request: binary output has nowhere to go on a TTY.
+    requireRedirectedStdout();
     const ctx = await createContext(args);
     const data = await ctx.client.bytes({
       path: `${KIND.path}/${encodeURIComponent(args.documentNumber)}.zip`,
@@ -124,6 +127,8 @@ const resourceCommand = defineCommand({
     ...globalArgs,
   },
   async run({ args }) {
+    // Fail before spending the request: binary output has nowhere to go on a TTY.
+    requireRedirectedStdout();
     const ctx = await createContext(args);
     const data = await ctx.client.bytes({
       path: `${KIND.path}/${encodeURIComponent(args.documentNumber)}/${args.filename}`,
@@ -152,19 +157,12 @@ const courtsCommand = defineCommand({
       query: { prefix: args.prefix },
     });
 
-    if (ctx.format === "json") {
-      printDocument(ctx, courts as unknown as Record<string, unknown>);
-      return;
-    }
-    if (courts.length === 0) {
-      process.stderr.write("No results.\n");
-      return;
-    }
-    const { renderTable } = await import("../output.ts");
-    process.stdout.write(
-      `${renderTable(courts as unknown as Record<string, unknown>[], COLUMNS.Court!)}\n`,
+    printRows(
+      ctx,
+      courts as unknown as Record<string, unknown>[],
+      COLUMNS.Court!,
+      `${courts.length} courts`,
     );
-    process.stderr.write(`\n${courts.length} courts\n`);
   },
 });
 
