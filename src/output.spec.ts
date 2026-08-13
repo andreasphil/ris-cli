@@ -2,7 +2,6 @@ import { describe, expect, it } from "vitest";
 import {
   COLUMNS,
   columnsFor,
-  extractPath,
   isHydraCollection,
   paginationFooter,
   renderDetail,
@@ -76,31 +75,17 @@ describe("output", () => {
     });
 
     it("honours an explicit format regardless of the TTY", () => {
-      expect(resolveFormat("ndjson", true)).toBe("ndjson");
+      expect(resolveFormat("json", true)).toBe("json");
       expect(resolveFormat("table", false)).toBe("table");
+    });
+
+    it("rejects the formats that were removed", () => {
+      expect(() => resolveFormat("ndjson", true)).toThrow(/Unknown output format/);
+      expect(() => resolveFormat("raw", true)).toThrow(/Unknown output format/);
     });
 
     it("rejects an unknown format", () => {
       expect(() => resolveFormat("yaml", true)).toThrow(/Unknown output format/);
-    });
-  });
-
-  describe("extractPath", () => {
-    it("walks nested keys", () => {
-      expect(extractPath(COLLECTION, "view.next")).toBe("/v1/case-law?pageIndex=1");
-    });
-
-    it("indexes into arrays", () => {
-      expect(extractPath(COLLECTION, "member[0].item.documentNumber")).toBe("STRE1");
-    });
-
-    it("returns undefined for a missing path instead of throwing", () => {
-      expect(extractPath(COLLECTION, "view.nope.deeper")).toBeUndefined();
-      expect(extractPath(COLLECTION, "member[99].item")).toBeUndefined();
-    });
-
-    it("reads totalItems", () => {
-      expect(extractPath(COLLECTION, "totalItems")).toBe(4312);
     });
   });
 

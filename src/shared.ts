@@ -4,7 +4,6 @@ import { RisClient, type Query } from "./client.ts";
 import { loadConfig, resolveTarget } from "./config.ts";
 import {
   columnsFor,
-  extractPath,
   paginationFooter,
   renderDetail,
   renderTable,
@@ -27,16 +26,10 @@ export const globalArgs = {
   },
   output: {
     type: "enum",
-    options: ["json", "table", "ndjson", "raw"],
+    options: ["json", "table"],
     description: "Output format (default: table on a TTY, else json)",
     valueHint: "format",
     alias: "o",
-  },
-  field: {
-    type: "string",
-    description: "Extract a value by dot path, e.g. view.next or member[0].item.documentNumber",
-    valueHint: "path",
-    alias: "f",
   },
   "dry-run": { type: "boolean", description: "Print the equivalent curl command and exit" },
   verbose: { type: "boolean", description: "Log requests to stderr", alias: "v" },
@@ -57,7 +50,6 @@ export const paginationArgs = {
     description: "Sort field; prefix with - for descending, e.g. -date",
     valueHint: "field",
   },
-  all: { type: "boolean", description: "Follow every page and emit NDJSON" },
 } as const satisfies ArgsDef;
 
 export const dateFilterArgs = {
@@ -148,7 +140,6 @@ export interface Context {
   client: RisClient;
   args: AnyArgs;
   format: ReturnType<typeof resolveFormat>;
-  queryPath?: string;
 }
 
 /** Builds the client and resolves output settings from the parsed args. */
@@ -168,7 +159,6 @@ export async function createContext(args: AnyArgs): Promise<Context> {
     client,
     args,
     format: resolveFormat(flag(args, "output"), Boolean(process.stdout.isTTY)),
-    queryPath: flag(args, "field"),
   };
 }
 
@@ -192,65 +182,24 @@ function write(text: string): void {
   process.stdout.write(text.endsWith("\n") ? text : `${text}\n`);
 }
 
-/** Renders a search response, or streams every page when --all is set. */
+/** Renders one page of a search response. */
 export async function printCollection(
   ctx: Context,
   path: string,
   query: Query,
   columns?: Column[],
 ): Promise<void> {
-  if (bool(ctx.args, "all")) {
-    await printAllPages(ctx, path, query);
-    return;
-  }
-
   const collection = await ctx.client.json<HydraCollection>({ path, query });
-  if (ctx.queryPath) {
-    printExtracted(ctx, collection);
-    return;
-  }
-
   if (ctx.format === "json") {
     write(JSON.stringify(collection, null, 2));
     return;
   }
 
   const items = unwrapMembers<Record<string, unknown>>(collection);
-  if (ctx.format === "ndjson") {
-    for (const item of items) write(JSON.stringify(item));
-    return;
-  }
-
   write(renderTable(items, columns ?? columnsFor(items)));
   // renderTable already says "No results." — don't repeat it in the footer.
   if (items.length > 0) {
     process.stderr.write(`\n${paginationFooter(collection, pageIndexOf(ctx.args))}\n`);
-  }
-}
-
-/**
- * Follows `view.next` to the end. Always NDJSON: the total can reach 10,000
- * documents, and a table or a single JSON array would be unusable at that size.
- */
-async function printAllPages(ctx: Context, path: string, query: Query): Promise<void> {
-  let pageIndex = pageIndexOf(ctx.args);
-  let seen = 0;
-
-  for (;;) {
-    const collection = await ctx.client.json<HydraCollection>({
-      path,
-      query: { ...query, pageIndex },
-    });
-    for (const item of unwrapMembers<Record<string, unknown>>(collection)) {
-      write(JSON.stringify(item));
-    }
-    seen += collection.member.length;
-
-    if (!collection.view?.next || collection.member.length === 0) {
-      process.stderr.write(`Fetched ${seen} of ${collection.totalItems} documents.\n`);
-      return;
-    }
-    pageIndex += 1;
   }
 }
 
@@ -259,18 +208,8 @@ export function unwrapFirstMember<T>(collection: HydraCollection): T | undefined
   return unwrapMembers<T>(collection)[0];
 }
 
-export function printExtracted(ctx: Context, value: unknown): void {
-  const extracted = extractPath(value, ctx.queryPath!);
-  if (extracted === undefined) return;
-  write(typeof extracted === "object" ? JSON.stringify(extracted, null, 2) : String(extracted));
-}
-
 /** Renders a single document: key/value on a TTY, JSON otherwise. */
 export function printDocument(ctx: Context, document: Record<string, unknown>): void {
-  if (ctx.queryPath) {
-    printExtracted(ctx, document);
-    return;
-  }
   if (ctx.format === "table") {
     write(renderDetail(document));
     return;

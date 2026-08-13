@@ -101,16 +101,7 @@ export function changelogCommand(kind: DocumentKind) {
 }
 
 function printChangelog(ctx: Context, response: ChangelogResponse): void {
-  if (ctx.queryPath || ctx.format !== "table") {
-    if (ctx.format === "ndjson") {
-      for (const entry of response.changed ?? []) {
-        process.stdout.write(`${JSON.stringify({ status: "changed", ...entry })}\n`);
-      }
-      for (const entry of response.deleted ?? []) {
-        process.stdout.write(`${JSON.stringify({ status: "deleted", ...entry })}\n`);
-      }
-      return;
-    }
+  if (ctx.format === "json") {
     printDocument(ctx, response as unknown as Record<string, unknown>);
     return;
   }

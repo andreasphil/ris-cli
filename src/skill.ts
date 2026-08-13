@@ -153,8 +153,8 @@ change legal data — the only commands that write anything are \`ris config set
   \`http://localhost:8080\`, so "connection refused" usually means no default profile
   is set and no local backend is running. Report that and suggest
   \`--profile testphase\` for a public instance — do not change the default.
-- **Ask before \`--all\`.** It follows every page and can pull up to 10,000 documents.
-  Prefer \`--size\` with a small number while exploring.
+- **Keep result sets small.** Each command fetches one page. Prefer \`--size\` with a
+  small number while exploring, and page through with \`--page\` only if you must.
 - **Check before you claim.** If a command exits non-zero, say so and show the
   error; do not present a guessed document number, ELI or citation as if it came
   from the API.
@@ -200,13 +200,11 @@ actually work.
 
 ### Output
 
-- \`-o json|table|ndjson|raw\` — a table on a terminal, JSON when piped. Piping into
-  \`jq\` therefore already gives you JSON.
-- \`-f, --field <path>\` extracts one value: \`-f view.next\`,
-  \`-f member[0].item.documentNumber\`. Use it instead of parsing tables.
+- \`-o json|table\` — a table on a terminal, JSON when piped. Piping into \`jq\`
+  therefore already gives you JSON; use it to pull out single values.
 - Tables unwrap the Hydra envelope, so rows are documents rather than
-  \`member[].item\` nesting.
-- \`--all\` follows every page and emits NDJSON.
+  \`member[].item\` nesting. JSON keeps the envelope, so \`view.next\` and
+  \`totalItems\` tell you whether more pages exist.
 - \`-O, --output-file <path>\` writes bodies and binaries to a file (\`-\` for stdout).
 - \`--dry-run\` prints the equivalent \`curl\` command instead of sending it — useful
   to show the user what a command would do.
@@ -248,12 +246,12 @@ ris stats                                   # document counts per kind
 ris search "Mietrecht Kündigung" --size 5   # across all kinds
 ris case-law search --court BGH --from 2024-01-01 --size 5
 ris cl lucene 'courtName:"BGH Karlsruhe" AND date:[2020 TO 2024]'
-ris cl get STRE201770751 -f headline        # one field of one decision
+ris cl get STRE201770751 | jq -r .headline  # one field of one decision
 ris leg html IVSG                           # current consolidated text
 ris leg toc IVSG                            # article eIds
 ris leg article IVSG hauptteil-1_art-1      # one article; eId comes from \`toc\`
 ris cl changelog --from 2026-01-01          # what changed since then
-ris raw /v1/case-law/courts --param prefix=BGH
+ris cl courts BGH                           # courts matching a prefix
 \`\`\`
 
 ---

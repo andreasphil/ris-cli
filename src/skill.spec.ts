@@ -24,7 +24,6 @@ const FIXTURE = defineCommand({
             size: { type: "string", description: "Page size" },
             page: { type: "string", description: "Page index" },
             sort: { type: "string", description: "Sort field" },
-            all: { type: "boolean", description: "Every page" },
             from: { type: "string", description: "From date" },
             to: { type: "string", description: "To date" },
           },
@@ -82,7 +81,7 @@ describe("skill", () => {
 
     it("renders enum options and short aliases of command-specific flags", () => {
       expect(skill).toContain("`--legal-effect=JA|NEIN`");
-      expect(skill).toContain("`--output, -o=json|table|ndjson|raw`");
+      expect(skill).toContain("`--output, -o=json|table`");
     });
 
     it("documents the global flags once, not per command", () => {

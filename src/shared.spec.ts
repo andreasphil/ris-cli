@@ -34,10 +34,6 @@ describe("shared", () => {
     it("does not match a flag that merely shares a prefix", () => {
       expect(collectRepeated(["--type-group", "Urteil"], "type")).toEqual([]);
     });
-
-    it("keeps a value containing a comma intact", () => {
-      expect(collectRepeated(["--param", "court=X, Y"], "param")).toEqual(["court=X, Y"]);
-    });
   });
 
   describe("list", () => {

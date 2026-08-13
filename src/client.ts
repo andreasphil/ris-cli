@@ -181,7 +181,7 @@ export class RisClient {
     };
   }
 
-  /** Spaces requests so a --all loop cannot trip the API's rate limit. */
+  /** Spaces requests so a scripted loop cannot trip the API's rate limit. */
   private async throttle(): Promise<void> {
     const waitMs = this.lastRequestAt + MIN_REQUEST_SPACING_MS - Date.now();
     if (waitMs > 0) await new Promise((resolve) => setTimeout(resolve, waitMs));

@@ -6,7 +6,6 @@ import { directiveCommand } from "./commands/directive.ts";
 import {
   bulkLinksCommand,
   luceneCommand,
-  rawCommand,
   searchCommand,
   statsCommand,
 } from "./commands/documents.ts";
@@ -34,7 +33,6 @@ const main: CommandDef = defineCommand({
     directive: directiveCommand,
     stats: statsCommand,
     "bulk-links": bulkLinksCommand,
-    raw: rawCommand,
     config: configCommand,
     skill: skillCommand(() => main),
   },

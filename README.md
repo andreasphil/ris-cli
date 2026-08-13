@@ -9,7 +9,7 @@
 - 🔍 Search legislation, court decisions, literature and directives — by court, ECLI, date or Lucene
 - 📜 ELIs made bearable: work, expression, manifestation, a pasted URL, or just a law's abbreviation
 - 🔐 Profiles for local, staging and testphase, with credentials as 1Password references
-- 🧰 A table on a terminal, JSON when piped, NDJSON for bulk, `--dry-run` to see the `curl`
+- 🧰 A table on a terminal, JSON when piped, `--dry-run` to see the `curl`
 - 🤖 An agent skill, generated from the CLI itself so it never drifts
 
 > [!NOTE]
@@ -66,7 +66,6 @@ ris search <terms…>              across all document kinds
 ris lucene <query>               Lucene syntax, all kinds
 ris stats                        document counts
 ris bulk-links                   bulk ZIP download URLs
-ris raw <path> --param k=v       any endpoint, with URL/auth/output handled
 
 ris case-law    (cl)   search · lucene · get · xml · html · zip · resource · courts · changelog
 ris legislation (leg)  search · lucene · get · versions · toc · xml · html · article ·
@@ -153,13 +152,13 @@ ris leg get eli/bund/bgbl-1/2026/148/2026-05-15/1/deu
 
 ### Output
 
-- `-o json|table|ndjson|raw` — defaults to a table on a terminal, JSON when piped.
+- `-o json|table` — defaults to a table on a terminal, JSON when piped, so piping
+  into `jq` already gives you JSON.
 - Tables unwrap the Hydra envelope, so you see documents rather than
-  `member[].item` nesting.
-- `-f, --field <path>` extracts a value: `-f view.next`,
-  `-f member[0].item.documentNumber`.
-- `--all` follows every page and emits NDJSON, throttled under the API's
-  600 requests/minute limit.
+  `member[].item` nesting. JSON keeps it, so `view.next` and `totalItems` tell you
+  whether more pages exist.
+- Page through results with `--size` and `--page`; requests are throttled under the
+  API's 600 requests/minute limit.
 - `--dry-run` prints the equivalent `curl` command instead of sending it, with
   credentials shown as placeholders so nothing secret is written to your scrollback.
 - `-O, --output-file` writes bodies and binaries to a file (`-` for stdout).

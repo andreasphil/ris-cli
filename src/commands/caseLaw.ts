@@ -155,12 +155,8 @@ const courtsCommand = defineCommand({
       query: { prefix: args.prefix },
     });
 
-    if (ctx.queryPath || ctx.format === "json") {
+    if (ctx.format === "json") {
       printDocument(ctx, courts as unknown as Record<string, unknown>);
-      return;
-    }
-    if (ctx.format === "ndjson") {
-      for (const court of courts) process.stdout.write(`${JSON.stringify(court)}\n`);
       return;
     }
     const { renderTable } = await import("../output.ts");

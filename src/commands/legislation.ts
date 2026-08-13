@@ -372,7 +372,7 @@ const tocCommand = defineCommand({
       path: `${KIND.path}/eli/${expressionPath(eli)}`,
     });
 
-    if (ctx.queryPath || ctx.format !== "table") {
+    if (ctx.format === "json") {
       printDocument(ctx, (expression.hasPart ?? []) as unknown as Record<string, unknown>);
       return;
     }
@@ -423,7 +423,7 @@ const translationsCommand = defineCommand({
       path: "/v1/translatedLegislation",
       query: { id: args.id },
     });
-    if (ctx.queryPath || ctx.format !== "table") {
+    if (ctx.format === "json") {
       printDocument(ctx, translations as unknown as Record<string, unknown>);
       return;
     }

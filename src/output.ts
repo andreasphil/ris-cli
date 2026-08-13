@@ -6,7 +6,7 @@
  * biggest readability win over curling the API by hand.
  */
 
-export type OutputFormat = "json" | "table" | "ndjson" | "raw";
+export type OutputFormat = "json" | "table";
 
 export interface HydraView {
   first?: string;
@@ -48,29 +48,12 @@ export function unwrapMembers<T = Record<string, unknown>>(collection: HydraColl
 
 export function resolveFormat(explicit: string | undefined, isTty: boolean): OutputFormat {
   if (explicit) {
-    if (!["json", "table", "ndjson", "raw"].includes(explicit)) {
-      throw new Error(`Unknown output format "${explicit}". Use json, table, ndjson or raw.`);
+    if (!["json", "table"].includes(explicit)) {
+      throw new Error(`Unknown output format "${explicit}". Use json or table.`);
     }
     return explicit as OutputFormat;
   }
   return isTty ? "table" : "json";
-}
-
-/** Dot-path extraction (`view.next`, `member[0].item.documentNumber`). */
-export function extractPath(value: unknown, path: string): unknown {
-  let current = value;
-  for (const rawKey of path.split(".")) {
-    if (current === undefined || current === null) return undefined;
-    const match = rawKey.match(/^([^[]*)((?:\[\d+])*)$/);
-    if (!match) return undefined;
-    const [, key = "", indexes = ""] = match;
-    if (key) current = (current as Record<string, unknown>)[key];
-    for (const index of indexes.matchAll(/\[(\d+)]/g)) {
-      if (!Array.isArray(current)) return undefined;
-      current = current[Number(index[1])];
-    }
-  }
-  return current;
 }
 
 export interface Column {

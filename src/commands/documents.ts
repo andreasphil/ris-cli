@@ -1,7 +1,6 @@
 import { defineCommand } from "citty";
 import type { components } from "../types/api.d.ts";
 import {
-  collectRepeated,
   createContext,
   globalArgs,
   paginationArgs,
@@ -76,7 +75,7 @@ export const statsCommand = defineCommand({
     const ctx = await createContext(args);
     const stats = await ctx.client.json<StatisticsApiSchema>({ path: "/v1/statistics" });
 
-    if (ctx.queryPath || ctx.format !== "table") {
+    if (ctx.format === "json") {
       printDocument(ctx, stats as unknown as Record<string, unknown>);
       return;
     }
@@ -107,7 +106,7 @@ export const bulkLinksCommand = defineCommand({
     const ctx = await createContext(args);
     const catalog = await ctx.client.json<ZipDataCatalogSchema>({ path: "/v1/bulk-zip-links" });
 
-    if (ctx.queryPath || ctx.format !== "table") {
+    if (ctx.format === "json") {
       printDocument(ctx, catalog as unknown as Record<string, unknown>);
       return;
     }
@@ -118,48 +117,6 @@ export const bulkLinksCommand = defineCommand({
       (set) => `${set.name}\n  ${set.distribution?.contentUrl ?? "(no download URL)"}`,
     );
     process.stdout.write(`${lines.join("\n")}\n`);
-  },
-});
-
-/**
- * Escape hatch for anything the typed commands do not cover — the hidden sitemap
- * and eclicrawler endpoints, or a new endpoint added after this CLI was built.
- */
-export const rawCommand = defineCommand({
-  meta: {
-    name: "raw",
-    description: "Request an arbitrary API path, with URL, auth and output handled",
-  },
-  args: {
-    path: { type: "positional", description: "Path, e.g. /v1/case-law/courts", required: true },
-    param: {
-      type: "string",
-      description: "Query parameter as key=value; repeatable",
-      valueHint: "key=value",
-    },
-    ...globalArgs,
-  },
-  async run({ args, rawArgs }) {
-    const ctx = await createContext(args);
-
-    const query: Record<string, string[]> = {};
-    // Not `list()`: a value may legitimately contain a comma, e.g. --param court="X, Y".
-    for (const entry of collectRepeated(rawArgs, "param")) {
-      const separator = entry.indexOf("=");
-      if (separator < 1) {
-        throw new Error(`--param expects key=value, got "${entry}".`);
-      }
-      const key = entry.slice(0, separator);
-      (query[key] ??= []).push(entry.slice(separator + 1));
-    }
-
-    const response = await ctx.client.fetch({ path: args.path, query });
-    const contentType = response.headers.get("content-type") ?? "";
-    if (contentType.includes("json")) {
-      printDocument(ctx, (await response.json()) as Record<string, unknown>);
-    } else {
-      process.stdout.write(await response.text());
-    }
   },
 });
 
