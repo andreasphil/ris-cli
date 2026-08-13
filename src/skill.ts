@@ -2,13 +2,12 @@
  * The agent skill installed by `ris skill install`.
  *
  * Only the prose is written by hand. The command surface is walked out of the
- * citty definitions — the same tree shell completion is generated from — so the
- * skill cannot drift from the CLI: adding a command or a flag and re-running
- * `ris skill update` is enough.
+ * citty definitions, so the skill cannot drift from the CLI: adding a command or a
+ * flag and re-running `ris skill update` is enough.
  */
 import { join } from "node:path";
-import { describeArgs, type CommandNode, type FlagSpec } from "./completion.ts";
 import { globalArgs, searchArgs } from "./shared.ts";
+import { describeArgs, type CommandNode, type FlagSpec } from "./tree.ts";
 
 export const SKILL_NAME = "ris-cli";
 export const DEFAULT_SKILL_DIR = join(".claude", "skills");

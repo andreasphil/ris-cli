@@ -10,7 +10,7 @@
 - 📜 ELIs made bearable: work, expression, manifestation, a pasted URL, or just a law's abbreviation
 - 🔐 Profiles for local, staging and testphase, with credentials as 1Password references
 - 🧰 A table on a terminal, JSON when piped, NDJSON for bulk, `--dry-run` to see the `curl`
-- 🤖 Shell completions and an agent skill, generated from the CLI itself so they never drift
+- 🤖 An agent skill, generated from the CLI itself so it never drifts
 
 > [!NOTE]
 >
@@ -48,32 +48,14 @@ ln -s "$PWD/bin/ris.mjs" ~/.local/bin/ris
 Either way, check it with `ris stats`. Without installing at all, the CLI runs as
 `node bin/ris.mjs …` or `pnpm dev …`.
 
-### Shell completion
-
-```sh
-# bash — add to ~/.bashrc
-eval "$(ris completion bash)"
-
-# zsh — first entry of $fpath, then restart the shell
-ris completion zsh > "${fpath[1]}/_ris"
-
-# fish
-ris completion fish > ~/.config/fish/completions/ris.fish
-```
-
-Completes commands, aliases, flags and flag values. `--profile` completes against
-the profiles you have actually configured.
-
 ### Uninstalling
 
 ```sh
 pnpm unlink --global            # or: rm ~/.local/bin/ris
 rm -rf ~/.config/ris-cli        # profiles and default (no secrets are stored here)
-rm "${fpath[1]}/_ris"           # zsh completion, if installed
 ```
 
-For bash, drop the `eval` line from `~/.bashrc`; for fish, remove
-`~/.config/fish/completions/ris.fish`. Then delete the clone.
+Then delete the clone.
 
 ## Usage
 
@@ -93,7 +75,6 @@ ris literature  (lit)  search · lucene · get · xml · html · changelog
 ris directive   (ad)   search · lucene · get · xml · html · changelog
 
 ris config             list · show · set · use · path · check
-ris completion <shell> bash · zsh · fish
 ris skill              install · update
 ```
 
@@ -198,10 +179,10 @@ ris skill update                               # regenerate after upgrading
 ```
 
 `install` refuses to overwrite an existing file; `update` replaces it. The command
-surface in the skill is walked out of the command definitions — the same tree the
-completion scripts come from — so a new command or flag only needs an `update`,
-never hand-editing. The skill also tells the agent to leave your profile alone: no
-`config use`, no `config set`, `--profile` per command instead.
+surface in the skill is walked out of the command definitions, so a new command or
+flag only needs an `update`, never hand-editing. The skill also tells the agent to
+leave your profile alone: no `config use`, no `config set`, `--profile` per command
+instead.
 
 ## Development
 

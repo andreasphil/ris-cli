@@ -3,9 +3,9 @@ import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { defineCommand, runCommand } from "citty";
 import { afterEach, beforeAll, describe, expect, it, vi } from "vitest";
-import { describeCommand, type CommandNode } from "./completion.ts";
 import { skillCommand } from "./commands/skill.ts";
 import { generateSkill, skillFilePath } from "./skill.ts";
+import { describeCommand, type CommandNode } from "./tree.ts";
 
 const FIXTURE = defineCommand({
   meta: { name: "ris", version: "9.9.9", description: "root" },
@@ -38,7 +38,7 @@ const FIXTURE = defineCommand({
         }),
       },
     }),
-    __profiles: defineCommand({ meta: { name: "__profiles", description: "hidden" } }),
+    __hidden: defineCommand({ meta: { name: "__hidden", description: "hidden" } }),
   },
 });
 
@@ -91,7 +91,7 @@ describe("skill", () => {
     });
 
     it("omits hidden machine-facing commands", () => {
-      expect(skill).not.toContain("__profiles");
+      expect(skill).not.toContain("__hidden");
     });
 
     it("records the version it was generated from", () => {

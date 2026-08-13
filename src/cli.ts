@@ -1,7 +1,6 @@
 import { defineCommand, runCommand, showUsage, type CommandDef } from "citty";
 import { ApiError, DryRunComplete } from "./client.ts";
 import { caseLawCommand } from "./commands/caseLaw.ts";
-import { completionCommand, profileNamesCommand } from "./commands/completion.ts";
 import { configCommand } from "./commands/config.ts";
 import { directiveCommand } from "./commands/directive.ts";
 import {
@@ -16,7 +15,7 @@ import { literatureCommand } from "./commands/literature.ts";
 import { skillCommand } from "./commands/skill.ts";
 import { VERSION } from "./version.ts";
 
-// Explicitly typed: `completion` receives the root, so the initializer references
+// Explicitly typed: `skill` receives the root, so the initializer references
 // `main` and inference would be circular.
 const main: CommandDef = defineCommand({
   meta: {
@@ -37,9 +36,7 @@ const main: CommandDef = defineCommand({
     "bulk-links": bulkLinksCommand,
     raw: rawCommand,
     config: configCommand,
-    completion: completionCommand(() => main),
     skill: skillCommand(() => main),
-    __profiles: profileNamesCommand,
   },
 });
 

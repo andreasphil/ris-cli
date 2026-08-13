@@ -1,8 +1,8 @@
 import { mkdir, writeFile } from "node:fs/promises";
 import { dirname, resolve } from "node:path";
 import { defineCommand, type ArgsDef, type CommandDef } from "citty";
-import { describeCommand } from "../completion.ts";
 import { DEFAULT_SKILL_DIR, generateSkill, SKILL_NAME, skillFilePath } from "../skill.ts";
+import { describeCommand } from "../tree.ts";
 import { VERSION } from "../version.ts";
 
 const targetArgs = {
@@ -40,8 +40,8 @@ async function write(
 }
 
 /**
- * Takes the root command as a thunk, like `completion`: the root imports this
- * module, so reading it at definition time would be a circular import.
+ * Takes the root command as a thunk: the root imports this module, so reading it
+ * at definition time would be a circular import.
  */
 export function skillCommand(getRoot: () => CommandDef) {
   return defineCommand({
