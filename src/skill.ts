@@ -205,7 +205,11 @@ actually work.
 - Tables unwrap the Hydra envelope, so rows are documents rather than
   \`member[].item\` nesting. JSON keeps the envelope, so \`view.next\` and
   \`totalItems\` tell you whether more pages exist.
-- \`-O, --output-file <path>\` writes bodies and binaries to a file (\`-\` for stdout).
+- Everything goes to stdout, so the shell decides where it lands: redirect with
+  \`> file\` to save XML, HTML or a ZIP. Binary commands (\`zip\`, \`resource\`) refuse
+  to run into a bare terminal, so always redirect or pipe those.
+- Diagnostics — row counts, pagination hints, \`No results.\` — go to stderr, so
+  stdout stays pipeable and empty when there is nothing to report.
 - \`--dry-run\` prints the equivalent \`curl\` command instead of sending it — useful
   to show the user what a command would do.
 

@@ -1,4 +1,3 @@
-import { writeFile } from "node:fs/promises";
 import type { ArgsDef } from "citty";
 import { RisClient, type Query } from "./client.ts";
 import { loadConfig, resolveTarget } from "./config.ts";
@@ -60,15 +59,6 @@ export const dateFilterArgs = {
 export const searchArgs = {
   ...dateFilterArgs,
   ...paginationArgs,
-} as const satisfies ArgsDef;
-
-export const fileOutputArgs = {
-  "output-file": {
-    type: "string",
-    description: "Write the response body to this file (- for stdout)",
-    valueHint: "path",
-    alias: "O",
-  },
 } as const satisfies ArgsDef;
 
 /**
@@ -196,11 +186,14 @@ export async function printCollection(
   }
 
   const items = unwrapMembers<Record<string, unknown>>(collection);
-  write(renderTable(items, columns ?? columnsFor(items)));
-  // renderTable already says "No results." — don't repeat it in the footer.
-  if (items.length > 0) {
-    process.stderr.write(`\n${paginationFooter(collection, pageIndexOf(ctx.args))}\n`);
+  // Nothing found is a note, not data: keep stdout empty so a pipeline sees no rows.
+  if (items.length === 0) {
+    process.stderr.write("No results.\n");
+    return;
   }
+
+  write(renderTable(items, columns ?? columnsFor(items)));
+  process.stderr.write(`\n${paginationFooter(collection, pageIndexOf(ctx.args))}\n`);
 }
 
 /** First document of a collection, for the single-result lookups used in ELI resolution. */
@@ -217,34 +210,21 @@ export function printDocument(ctx: Context, document: Record<string, unknown>): 
   write(JSON.stringify(document, null, 2));
 }
 
-/** Writes text (HTML/XML) to stdout, or to --output-file. */
-export async function printText(ctx: Context, body: string): Promise<void> {
-  const destination = flag(ctx.args, "output-file");
-  if (destination && destination !== "-") {
-    await writeFile(destination, body, "utf8");
-    process.stderr.write(`Wrote ${Buffer.byteLength(body)} bytes to ${destination}\n`);
-    return;
-  }
+/** Writes text (HTML/XML) to stdout; redirect it with the shell to save it. */
+export function printText(body: string): void {
   write(body);
 }
 
-/** Writes binary content, refusing to dump it into a terminal. */
-export async function printBinary(
-  ctx: Context,
-  result: { data: Uint8Array; filename?: string },
-  fallbackName: string,
-): Promise<void> {
-  const requested = flag(ctx.args, "output-file");
-  if (requested === "-") {
-    process.stdout.write(result.data);
-    return;
+/**
+ * Writes binary content to stdout, refusing to dump it into a terminal — the shell
+ * is what decides where it lands, so there is nowhere else for it to go.
+ */
+export function printBinary(data: Uint8Array): void {
+  if (process.stdout.isTTY) {
+    throw new Error(
+      "Refusing to write binary data to the terminal.\n" +
+        "  Redirect it to a file or pipe it, e.g. `> out.zip` or `| unzip -l -`.",
+    );
   }
-
-  const destination = requested ?? result.filename ?? fallbackName;
-  if (!requested && process.stdout.isTTY === false && !result.filename) {
-    process.stdout.write(result.data);
-    return;
-  }
-  await writeFile(destination, result.data);
-  process.stderr.write(`Wrote ${result.data.byteLength} bytes to ${destination}\n`);
+  process.stdout.write(data);
 }

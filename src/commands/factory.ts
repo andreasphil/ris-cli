@@ -1,13 +1,6 @@
 import { defineCommand } from "citty";
 import type { components } from "../types/api.d.ts";
-import {
-  createContext,
-  fileOutputArgs,
-  globalArgs,
-  printDocument,
-  printText,
-  type Context,
-} from "../shared.ts";
+import { createContext, globalArgs, printDocument, printText, type Context } from "../shared.ts";
 
 type ChangelogResponse = components["schemas"]["ChangelogResponse"];
 
@@ -56,7 +49,6 @@ export function representationCommand(kind: DocumentKind, format: "xml" | "html"
         description: `Document number, e.g. ${kind.exampleDocumentNumber}`,
         required: true,
       },
-      ...fileOutputArgs,
       ...globalArgs,
     },
     async run({ args }) {
@@ -65,7 +57,7 @@ export function representationCommand(kind: DocumentKind, format: "xml" | "html"
         path: `${kind.path}/${encodeURIComponent(args.documentNumber)}.${format}`,
         accept: format === "xml" ? "application/xml" : "text/html",
       });
-      await printText(ctx, body);
+      printText(body);
     },
   });
 }
@@ -106,14 +98,19 @@ function printChangelog(ctx: Context, response: ChangelogResponse): void {
     return;
   }
 
+  // A note about the response, not part of it.
   if (response.allChanged) {
-    process.stdout.write("All documents changed (the storage was rebuilt).\n");
+    process.stderr.write("All documents changed (the storage was rebuilt).\n");
   }
   const lines = [
     ...(response.changed ?? []).map((entry) => `changed  ${entry["@id"] ?? entry.contentUrl}`),
     ...(response.deleted ?? []).map((entry) => `deleted  ${entry["@id"]}`),
   ];
-  process.stdout.write(lines.length > 0 ? `${lines.join("\n")}\n` : "No changes in this window.\n");
+  if (lines.length > 0) {
+    process.stdout.write(`${lines.join("\n")}\n`);
+  } else {
+    process.stderr.write("No changes in this window.\n");
+  }
   process.stderr.write(
     `\n${response.changed?.length ?? 0} changed · ${response.deleted?.length ?? 0} deleted\n`,
   );

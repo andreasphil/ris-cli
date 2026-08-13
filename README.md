@@ -161,7 +161,19 @@ ris leg get eli/bund/bgbl-1/2026/148/2026-05-15/1/deu
   API's 600 requests/minute limit.
 - `--dry-run` prints the equivalent `curl` command instead of sending it, with
   credentials shown as placeholders so nothing secret is written to your scrollback.
-- `-O, --output-file` writes bodies and binaries to a file (`-` for stdout).
+
+Data goes to stdout and diagnostics to stderr, so the shell handles the rest — there
+is no `--output-file`, just redirect:
+
+```sh
+ris leg html IVSG > ivsg.html
+ris cl zip KORE300492026 > decision.zip
+ris cl get KORE300492026 | jq -r .headline
+```
+
+Row counts, pagination hints and `No results.` all go to stderr, so a pipeline sees
+only rows — and nothing at all when there are none. The `zip` and `resource`
+commands refuse to write binary into a bare terminal, so redirect or pipe those.
 
 Exit codes: `0` success, `1` the CLI could not run (bad flags, unreachable host),
 `2` the API rejected the request (404, 422, …).

@@ -89,9 +89,13 @@ export const statsCommand = defineCommand({
     process.stdout.write(
       `${rows
         .map(([kind, count]) => `${kind.padEnd(labelWidth)}  ${count.padStart(countWidth)}`)
-        .join("\n")}\n${"".padEnd(labelWidth)}  ${"-".repeat(countWidth)}\n${"total".padEnd(
-        labelWidth,
-      )}  ${total.toLocaleString("en-US").padStart(countWidth)}\n`,
+        .join("\n")}\n`,
+    );
+    // The total is a summary, not a row of data — same split as a table's footer.
+    process.stderr.write(
+      `${"".padEnd(labelWidth)}  ${"-".repeat(countWidth)}\n${"total".padEnd(labelWidth)}  ${total
+        .toLocaleString("en-US")
+        .padStart(countWidth)}\n`,
     );
   },
 });

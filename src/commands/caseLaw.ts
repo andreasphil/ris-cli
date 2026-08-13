@@ -3,7 +3,6 @@ import type { components } from "../types/api.d.ts";
 import { COLUMNS } from "../output.ts";
 import {
   createContext,
-  fileOutputArgs,
   globalArgs,
   list,
   paginationArgs,
@@ -101,16 +100,15 @@ const zipCommand = defineCommand({
   meta: { name: "zip", description: "Decision as a ZIP archive (XML plus attachments)" },
   args: {
     documentNumber: { type: "positional", description: "Document number", required: true },
-    ...fileOutputArgs,
     ...globalArgs,
   },
   async run({ args }) {
     const ctx = await createContext(args);
-    const result = await ctx.client.bytes({
+    const data = await ctx.client.bytes({
       path: `${KIND.path}/${encodeURIComponent(args.documentNumber)}.zip`,
       accept: "application/zip",
     });
-    await printBinary(ctx, result, `${args.documentNumber}.zip`);
+    printBinary(data);
   },
 });
 
@@ -123,15 +121,14 @@ const resourceCommand = defineCommand({
       description: "File name with extension, e.g. image.jpg",
       required: true,
     },
-    ...fileOutputArgs,
     ...globalArgs,
   },
   async run({ args }) {
     const ctx = await createContext(args);
-    const result = await ctx.client.bytes({
+    const data = await ctx.client.bytes({
       path: `${KIND.path}/${encodeURIComponent(args.documentNumber)}/${args.filename}`,
     });
-    await printBinary(ctx, result, args.filename);
+    printBinary(data);
   },
 });
 
@@ -157,6 +154,10 @@ const courtsCommand = defineCommand({
 
     if (ctx.format === "json") {
       printDocument(ctx, courts as unknown as Record<string, unknown>);
+      return;
+    }
+    if (courts.length === 0) {
+      process.stderr.write("No results.\n");
       return;
     }
     const { renderTable } = await import("../output.ts");

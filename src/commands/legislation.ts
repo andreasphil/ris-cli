@@ -14,7 +14,6 @@ import { COLUMNS, TRANSLATION_COLUMNS, renderTable, type HydraCollection } from 
 import type { LegislationTranslation, LegislationWorkExampleMember } from "../types/internal.ts";
 import {
   createContext,
-  fileOutputArgs,
   globalArgs,
   paginationArgs,
   printBinary,
@@ -269,7 +268,6 @@ function representation(format: "xml" | "html") {
         description: "Date used when resolving an abbreviation or work ELI (default: today)",
         valueHint: "date",
       },
-      ...fileOutputArgs,
       ...globalArgs,
     },
     async run({ args }) {
@@ -280,7 +278,7 @@ function representation(format: "xml" | "html") {
         path: `${KIND.path}/eli/${manifestationPath(eli)}.${format}`,
         accept: format === "xml" ? "application/xml" : "text/html",
       });
-      await printText(ctx, body);
+      printText(body);
     },
   });
 }
@@ -295,7 +293,6 @@ const articleCommand = defineCommand({
       required: true,
     },
     "on-date": { type: "string", description: "Date used when resolving (default: today)" },
-    ...fileOutputArgs,
     ...globalArgs,
   },
   async run({ args }) {
@@ -306,7 +303,7 @@ const articleCommand = defineCommand({
       path: `${KIND.path}/eli/${manifestationPath(eli)}/${args.articleEid}.html`,
       accept: "text/html",
     });
-    await printText(ctx, body);
+    printText(body);
   },
 });
 
@@ -315,7 +312,6 @@ const zipCommand = defineCommand({
   args: {
     eli: { type: "positional", description: ELI_HINT, required: true },
     "on-date": { type: "string", description: "Date used when resolving (default: today)" },
-    ...fileOutputArgs,
     ...globalArgs,
   },
   async run({ args }) {
@@ -324,11 +320,11 @@ const zipCommand = defineCommand({
     // The ZIP endpoint omits the subtype segment, so resolve via the XML encoding
     // and address the manifestation by date alone.
     const { eli } = await resolveManifestation(ctx.client, expression, "xml");
-    const result = await ctx.client.bytes({
+    const data = await ctx.client.bytes({
       path: `${KIND.path}/eli/${manifestationDatePath(eli)}.zip`,
       accept: "application/zip",
     });
-    await printBinary(ctx, result, `${eli.naturalIdentifier}-${eli.pointInTime}.zip`);
+    printBinary(data);
   },
 });
 
@@ -341,17 +337,16 @@ const resourceCommand = defineCommand({
       description: "File name with extension: pdf, xml, jpg or gif",
       required: true,
     },
-    ...fileOutputArgs,
     ...globalArgs,
   },
   async run({ args }) {
     const ctx = await createContext(args);
     const expression = await resolveExpression(ctx.client, args.eli);
     const { eli } = await resolveManifestation(ctx.client, expression, "xml");
-    const result = await ctx.client.bytes({
+    const data = await ctx.client.bytes({
       path: `${KIND.path}/eli/${manifestationDatePath(eli)}/${args.filename}`,
     });
-    await printBinary(ctx, result, args.filename);
+    printBinary(data);
   },
 });
 
@@ -403,15 +398,13 @@ const translationsCommand = defineCommand({
       description: "Fetch one translation as HTML by its filename",
       valueHint: "name",
     },
-    ...fileOutputArgs,
     ...globalArgs,
   },
   async run({ args }) {
     const ctx = await createContext(args);
     const filename = asString(args.filename);
     if (filename) {
-      await printText(
-        ctx,
+      printText(
         await ctx.client.text({
           path: `/v1/translatedLegislation/${encodeURIComponent(filename)}`,
           accept: "text/html",

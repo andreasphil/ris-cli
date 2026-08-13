@@ -7,7 +7,7 @@
 import type { ArgsDef, CommandDef } from "citty";
 
 export interface FlagSpec {
-  /** Long form without dashes, e.g. `output-file`. */
+  /** Long form without dashes, e.g. `dry-run`. */
   name: string;
   shortAliases: string[];
   description: string;

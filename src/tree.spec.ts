@@ -20,7 +20,7 @@ const FIXTURE = defineCommand({
             },
             profile: { type: "string", description: "Profile", alias: "p" },
             verbose: { type: "boolean", description: "Log requests", alias: "v" },
-            "output-file": { type: "string", description: "Write to file", alias: "O" },
+            "type-group": { type: "string", description: "Type group", alias: "g" },
           },
         }),
       },

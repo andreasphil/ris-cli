@@ -1,5 +1,5 @@
-import { describe, expect, it } from "vitest";
-import { collectRepeated, list } from "./shared.ts";
+import { describe, expect, it, vi } from "vitest";
+import { collectRepeated, list, printBinary, printText } from "./shared.ts";
 
 describe("shared", () => {
   // citty's parser keeps only the last occurrence of a repeated flag, so these
@@ -59,6 +59,67 @@ describe("shared", () => {
 
     it("returns undefined for an empty value rather than sending a blank filter", () => {
       expect(list(["--type", ",, "], "type")).toBeUndefined();
+    });
+  });
+
+  // There is no --output-file: the shell decides where output lands, so everything
+  // has to reach stdout unmodified for `>` and `|` to work.
+  describe("printText", () => {
+    it("writes the body to stdout", () => {
+      const stdout = vi.spyOn(process.stdout, "write").mockImplementation(() => true);
+      try {
+        printText("<html>hi</html>");
+        expect(stdout).toHaveBeenCalledWith("<html>hi</html>\n");
+      } finally {
+        stdout.mockRestore();
+      }
+    });
+
+    it("does not add a second trailing newline", () => {
+      const stdout = vi.spyOn(process.stdout, "write").mockImplementation(() => true);
+      try {
+        printText("<html>hi</html>\n");
+        expect(stdout).toHaveBeenCalledWith("<html>hi</html>\n");
+      } finally {
+        stdout.mockRestore();
+      }
+    });
+  });
+
+  describe("printBinary", () => {
+    const BYTES = new Uint8Array([0x50, 0x4b, 0x03, 0x04]);
+
+    function withTty<T>(isTty: boolean, run: () => T): T {
+      const original = process.stdout.isTTY;
+      // isTTY is undefined rather than false when stdout is not a terminal.
+      Object.defineProperty(process.stdout, "isTTY", { value: isTty, configurable: true });
+      try {
+        return run();
+      } finally {
+        Object.defineProperty(process.stdout, "isTTY", {
+          value: original,
+          configurable: true,
+        });
+      }
+    }
+
+    it("writes raw bytes to stdout when redirected or piped", () => {
+      withTty(false, () => {
+        const stdout = vi.spyOn(process.stdout, "write").mockImplementation(() => true);
+        try {
+          printBinary(BYTES);
+          expect(stdout).toHaveBeenCalledWith(BYTES);
+        } finally {
+          stdout.mockRestore();
+        }
+      });
+    });
+
+    it("refuses to dump binary into a terminal, naming the fix", () => {
+      withTty(true, () => {
+        expect(() => printBinary(BYTES)).toThrow(/Refusing to write binary data/);
+        expect(() => printBinary(BYTES)).toThrow(/> out\.zip/);
+      });
     });
   });
 });

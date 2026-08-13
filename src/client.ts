@@ -171,14 +171,9 @@ export class RisClient {
     return (await this.fetch(spec)).text();
   }
 
-  async bytes(spec: RequestSpec): Promise<{ data: Uint8Array; filename?: string }> {
+  async bytes(spec: RequestSpec): Promise<Uint8Array> {
     const response = await this.fetch(spec);
-    const disposition = response.headers.get("content-disposition") ?? "";
-    const match = disposition.match(/filename\*?=(?:UTF-8'')?"?([^";]+)"?/i);
-    return {
-      data: new Uint8Array(await response.arrayBuffer()),
-      filename: match?.[1],
-    };
+    return new Uint8Array(await response.arrayBuffer());
   }
 
   /** Spaces requests so a scripted loop cannot trip the API's rate limit. */
