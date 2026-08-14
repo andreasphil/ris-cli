@@ -23,6 +23,8 @@
 >
 > Entirely vibe coded and poorly tested 😬
 
+![Screenshot](./screenshot.png)
+
 ## Installation
 
 Requires [Node](https://nodejs.org) 26 or newer (the CLI runs TypeScript directly)
