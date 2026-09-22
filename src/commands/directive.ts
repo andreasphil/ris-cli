@@ -12,6 +12,7 @@ import {
   changelogCommand,
   metadataCommand,
   representationCommand,
+  zipCommand,
   type DocumentKind,
 } from "./factory.ts";
 
@@ -82,6 +83,7 @@ export const directiveCommand = defineCommand({
     get: metadataCommand(KIND),
     xml: representationCommand(KIND, "xml"),
     html: representationCommand(KIND, "html"),
+    zip: zipCommand(KIND),
     changelog: changelogCommand(KIND),
   },
 });

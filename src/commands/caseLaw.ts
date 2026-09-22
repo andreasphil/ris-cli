@@ -17,6 +17,7 @@ import {
   changelogCommand,
   metadataCommand,
   representationCommand,
+  zipCommand,
   type DocumentKind,
 } from "./factory.ts";
 
@@ -97,24 +98,6 @@ const luceneCommand = defineCommand({
   },
 });
 
-const zipCommand = defineCommand({
-  meta: { name: "zip", description: "Decision as a ZIP archive (XML plus attachments)" },
-  args: {
-    documentNumber: { type: "positional", description: "Document number", required: true },
-    ...globalArgs,
-  },
-  async run({ args }) {
-    // Fail before spending the request: binary output has nowhere to go on a TTY.
-    requireRedirectedStdout();
-    const ctx = await createContext(args);
-    const data = await ctx.client.bytes({
-      path: `${KIND.path}/${encodeURIComponent(args.documentNumber)}.zip`,
-      accept: "application/zip",
-    });
-    printBinary(data);
-  },
-});
-
 const resourceCommand = defineCommand({
   meta: { name: "resource", description: "An image or other file embedded in a decision" },
   args: {
@@ -174,7 +157,7 @@ export const caseLawCommand = defineCommand({
     get: metadataCommand(KIND),
     xml: representationCommand(KIND, "xml"),
     html: representationCommand(KIND, "html"),
-    zip: zipCommand,
+    zip: zipCommand(KIND),
     resource: resourceCommand,
     courts: courtsCommand,
     changelog: changelogCommand(KIND),

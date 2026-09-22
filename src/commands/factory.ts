@@ -3,7 +3,9 @@ import type { components } from "../types/api.d.ts";
 import {
   createContext,
   globalArgs,
+  printBinary,
   printDocument,
+  requireRedirectedStdout,
   writeData,
   writeNote,
   type Context,
@@ -65,6 +67,33 @@ export function representationCommand(kind: DocumentKind, format: "xml" | "html"
         accept: format === "xml" ? "application/xml" : "text/html",
       });
       writeData(body);
+    },
+  });
+}
+
+export function zipCommand(kind: DocumentKind) {
+  return defineCommand({
+    meta: {
+      name: "zip",
+      description: `${capitalize(kind.noun)} as a ZIP archive (XML plus attachments)`,
+    },
+    args: {
+      documentNumber: {
+        type: "positional",
+        description: `Document number, e.g. ${kind.exampleDocumentNumber}`,
+        required: true,
+      },
+      ...globalArgs,
+    },
+    async run({ args }) {
+      // Fail before spending the request: binary output has nowhere to go on a TTY.
+      requireRedirectedStdout();
+      const ctx = await createContext(args);
+      const data = await ctx.client.bytes({
+        path: `${kind.path}/${encodeURIComponent(args.documentNumber)}.zip`,
+        accept: "application/zip",
+      });
+      printBinary(data);
     },
   });
 }
