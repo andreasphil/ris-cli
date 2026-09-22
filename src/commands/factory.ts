@@ -16,7 +16,7 @@ type ChangelogResponse = components["schemas"]["ChangelogResponse"];
  * changelog. Only the base path and the example document number differ.
  */
 export interface DocumentKind {
-  /** Base path, e.g. `/v1/case-law`. */
+  /** Base path, e.g. `/v1/rechtsprechung`. */
   path: string;
   /** Human-readable singular noun for help text. */
   noun: string;

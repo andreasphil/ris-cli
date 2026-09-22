@@ -23,7 +23,7 @@ import {
 type CourtSearchResult = components["schemas"]["CourtSearchResult"];
 
 const KIND: DocumentKind = {
-  path: "/v1/case-law",
+  path: "/v1/rechtsprechung",
   noun: "court decision",
   exampleDocumentNumber: "STRE201770751",
 };
