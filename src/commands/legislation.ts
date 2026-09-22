@@ -10,7 +10,12 @@ import {
   workPath,
   type ParsedEli,
 } from "../eli.ts";
-import { COLUMNS, TRANSLATION_COLUMNS, type HydraCollection } from "../output.ts";
+import {
+  ARTICLE_VERSION_COLUMNS,
+  COLUMNS,
+  TRANSLATION_COLUMNS,
+  type HydraCollection,
+} from "../output.ts";
 import type { LegislationTranslation, LegislationWorkExampleMember } from "../types/internal.ts";
 import {
   createContext,
@@ -310,6 +315,33 @@ const articleCommand = defineCommand({
   },
 });
 
+const articleVersionsCommand = defineCommand({
+  meta: {
+    name: "article-versions",
+    description: "Every historical version of a single article (§)",
+  },
+  args: {
+    eli: { type: "positional", description: ELI_HINT, required: true },
+    articleEid: {
+      type: "positional",
+      description: "Article expression identifier, e.g. art-z1 (see `ris legislation toc`)",
+      required: true,
+    },
+    "on-date": { type: "string", description: "Date used when resolving (default: today)" },
+    ...globalArgs,
+  },
+  async run({ args }) {
+    const ctx = await createContext(args);
+    const eli = await resolveExpression(ctx.client, args.eli, asString(args["on-date"]));
+    await printCollection(
+      ctx,
+      `/v1/article/work-example/eli/${expressionPath(eli)}/${args.articleEid}`,
+      {},
+      ARTICLE_VERSION_COLUMNS,
+    );
+  },
+});
+
 const zipCommand = defineCommand({
   meta: { name: "zip", description: "Manifestation as a ZIP archive (XML plus attachments)" },
   args: {
@@ -441,6 +473,7 @@ export const legislationCommand = defineCommand({
     xml: representation("xml"),
     html: representation("html"),
     article: articleCommand,
+    "article-versions": articleVersionsCommand,
     zip: zipCommand,
     resource: resourceCommand,
     translations: translationsCommand,

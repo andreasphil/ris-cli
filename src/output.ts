@@ -159,6 +159,18 @@ export const TRANSLATION_COLUMNS: Column[] = [
   { header: "name", get: "name" },
 ];
 
+/**
+ * Columns for `legislation article-versions`.
+ *
+ * Kept out of `COLUMNS` for the same reason as {@link TRANSLATION_COLUMNS}: this
+ * reports `@type: "Legislation"` too, which would collide with the full-work columns.
+ */
+export const ARTICLE_VERSION_COLUMNS: Column[] = [
+  { header: "coverage", get: "temporalCoverage", maxWidth: 23 },
+  { header: "name", get: "name", maxWidth: 12 },
+  { header: "headline", get: "headline" },
+];
+
 /** Columns for mixed result sets, where each row may be a different document kind. */
 const MIXED_COLUMNS: Column[] = [
   { header: "kind", get: "@type", maxWidth: 24 },
