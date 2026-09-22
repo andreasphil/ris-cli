@@ -31,9 +31,9 @@ const listCommand = defineCommand({
     const rows = names.map((name) => {
       const profile = resolveProfile(config, name)!;
       const markers: string[] = [];
-      if (name === config.defaultProfile) markers.push("default");
       if (!config.profiles[name]) markers.push("built-in");
       return {
+        current: name === config.defaultProfile ? "*" : " ",
         name: `${name}${markers.length > 0 ? ` (${markers.join(", ")})` : ""}`,
         url: profile.url,
         auth: describeAuth(profile),
@@ -44,7 +44,10 @@ const listCommand = defineCommand({
     const urlWidth = Math.max(...rows.map((row) => row.url.length));
     process.stdout.write(
       `${rows
-        .map((row) => `${row.name.padEnd(nameWidth)}  ${row.url.padEnd(urlWidth)}  ${row.auth}`)
+        .map(
+          (row) =>
+            `${row.current} ${row.name.padEnd(nameWidth)}  ${row.url.padEnd(urlWidth)}  ${row.auth}`,
+        )
         .join("\n")}\n`,
     );
     if (!config.defaultProfile) {
