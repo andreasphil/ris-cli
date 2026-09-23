@@ -6,7 +6,7 @@
   <strong>CLI for the <a href="https://docs.rechtsinformationen.bund.de/">NeuRIS Portal API</a></strong>
 </p>
 
-- 🔍 Search legislation, court decisions, literature and directives — by court, ECLI, date or Lucene
+- 🔍 Search legislation, court decisions, literature and directives by court, ECLI, date, or Lucene
 - 📜 ELIs made bearable: work, expression, manifestation, a pasted URL, or just a law's abbreviation
 - 🔐 Profiles for local, staging and testphase, with credentials as 1Password references
 - 🧰 A table on a terminal, JSON when piped, `--dry-run` to see the `curl`
@@ -61,91 +61,9 @@ Then delete the clone.
 
 ## Usage
 
-Every document kind supports the same verbs, so learning one teaches all four:
-
-```
-ris search <terms…>              across all document kinds
-ris lucene <query>               Lucene syntax, all kinds
-ris stats                        document counts
-ris bulk-links                   bulk ZIP download URLs
-
-ris case-law    (cl)   search · lucene · get · xml · html · zip · resource · courts · changelog
-ris legislation (leg)  search · lucene · get · versions · toc · xml · html · article ·
-                       zip · resource · translations · changelog
-ris literature  (lit)  search · lucene · get · xml · html · changelog
-ris directive   (ad)   search · lucene · get · xml · html · changelog
-
-ris config             list · show · set · use · path · check
-ris skill              install · update
-```
-
-```console
-$ ris stats
-legislation                2,453
-case-law                  83,794
-literature                     0
-administrative-directive       0
-                          ------
-total                     86,247
-
-$ ris case-law search --court BGH --size 3
-DOCUMENT NUMBER  DATE        COURT  TYPE       TITLE
-KORE300492026    2026-08-04  BGH    Beschluss  BGH, Beschluss vom 4. August 2026 - StB 47/26
-KORE300462026    2026-07-30  BGH    Urteil     BGH, Urteil vom 30. Juli 2026 - I ZR 130/25
-KORE601422026    2026-07-29  BGH    Beschluss  BGH, Beschluss vom 29. Juli 2026 - V ZR 205/25
-
-Showing 3 of 10,000 · next: --page 1
-```
-
-`ris --help` lists every command, and `ris <command> --help` explains one of them —
-including flags, which belong to the command they follow (`ris cl search --court BGH`,
+`ris --help` lists every command, and `ris <command> --help` explains one of them,
+including flags. Flags belong to the command they follow (`ris cl search --court BGH`,
 not `ris --court BGH cl search`).
-
-### Searching
-
-Two ways to search, each available across all kinds or scoped to one:
-
-```sh
-ris search "Mietrecht Kündigung"     # free text, every kind, mixed results
-ris lucene 'Mietrecht AND Kündigung' # Lucene syntax: boolean operators, phrases
-ris cl search --court BGH            # one kind, plus that kind's own filters
-ris cl lucene 'Mietrecht'            # the same Lucene query, case law only
-```
-
-Scoping to a kind unlocks filters that only make sense there, and renders columns to
-match:
-
-| kind  | filters                                                                                                  |
-| ----- | -------------------------------------------------------------------------------------------------------- |
-| `cl`  | `--court` `--file-number` `--ecli` `--legal-effect` `--type` `--type-group`                              |
-| `leg` | `--eli` `--abbreviation` `--ris-abbreviation` `--in-force-on` `--temporal-from/-to` `--most-relevant-on` |
-| `lit` | `--document-number` `--year` `--type` `--author` `--collaborator`                                        |
-| `ad`  | `--document-number`                                                                                      |
-
-Every search takes `--from` / `--to` to bound the document date, and `--size`,
-`--page` and `--sort` for paging. Multi-value filters accept repetition or one
-comma-separated value, so `--type Urteil --type Beschluss` and
-`--type Urteil,Beschluss` mean the same thing. Filters combine as AND.
-
-`ris <kind> changelog` reports what was added, changed or deleted — the last 24 hours
-by default, or any window you give it with `--from` and `--to`.
-
-### Legislation and ELIs
-
-Anywhere an ELI is accepted, you can pass a work, expression or manifestation ELI —
-with or without an `eli/` prefix, or a URL pasted from the browser or an API
-response. A non-ELI argument is resolved by abbreviation, picking the version most
-relevant today (override with `--on-date`):
-
-```sh
-ris leg html IVSG                    # current consolidated text
-ris leg html IVSG --on-date 2020-01-01
-ris leg toc IVSG                     # article eIds, for `ris leg article`
-ris leg get eli/bund/bgbl-1/2026/148/2026-05-15/1/deu
-```
-
-`ris leg versions` lists every expression of a law, and `--in-force-on` narrows a
-search to the expressions in force on a given date.
 
 ### Profiles and credentials
 
@@ -165,10 +83,6 @@ ris config check                # verify the URL and credentials actually work
 ris config path                 # where the config file lives
 ```
 
-The API is protected two different ways, at two different layers, and they compose:
-HTTP Basic at the ingress (staging), and an `X-Api-Key` header in the application
-(the `production` Spring profile).
-
 Credentials live in 1Password rather than in the config file: store a secret
 reference and it is resolved with `op read` at request time.
 
@@ -180,50 +94,6 @@ ris config set staging \
 
 ris config set prod --url https://… --api-key-ref "op://Employee/ris-api-key/credential"
 ```
-
-### Output
-
-Data goes to stdout and diagnostics to stderr, so the shell decides where things
-land:
-
-```sh
-ris leg html IVSG > ivsg.html               # save the consolidated text
-ris cl zip KORE300492026 > decision.zip     # redirect or pipe binary output
-ris cl get KORE300492026 | jq -r .headline  # pull out a single field
-```
-
-- `-o json|table` — a table on a terminal, JSON when piped, so `| jq` already gets
-  JSON.
-- Tables unwrap the Hydra envelope, so you see documents rather than
-  `member[].item` nesting. JSON keeps it, so `view.next` and `totalItems` tell you
-  whether more pages exist.
-- Row counts, pagination hints and `No results.` go to stderr, so a pipeline sees
-  only rows — and nothing at all when there are none.
-- `--dry-run` prints the equivalent `curl` command instead of sending it, with
-  credentials shown as placeholders so nothing secret reaches your scrollback.
-- `-v, --verbose` logs each request to stderr, and `--timeout <seconds>` caps how
-  long one may take.
-- Requests are throttled under the API's 600 requests/minute limit.
-
-Exit codes: `0` success, `1` the CLI could not run (bad flags, unreachable host),
-`2` the API rejected the request (404, 422, …).
-
-### Agent skill
-
-`ris skill install` writes a usage guide for coding agents to
-`./.claude/skills/ris-cli/SKILL.md`:
-
-```sh
-ris skill install                              # ./.claude/skills/ris-cli/SKILL.md
-ris skill install --target ~/.claude/skills    # anywhere else
-ris skill update                               # regenerate after upgrading
-```
-
-`install` refuses to overwrite an existing file; `update` replaces it. The command
-surface in the skill is walked out of the command definitions, so a new command or
-flag only needs an `update`, never hand-editing. The skill also tells the agent to
-leave your profile alone: no `config use`, no `config set`, `--profile` per command
-instead.
 
 ## Development
 
