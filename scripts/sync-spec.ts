@@ -14,7 +14,7 @@ const execFileAsync = promisify(execFile);
 
 const SOURCES = [
   "http://localhost:8080/v3/api-docs",
-  "https://testphase.rechtsinformationen.bund.de/v3/api-docs",
+  "https://testphase.rechtsinformationen.bund.de/openapi.json",
 ];
 
 const SPEC_PATH = "spec/openapi.json";
