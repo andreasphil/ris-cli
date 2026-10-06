@@ -1,0 +1,88 @@
+# Checks every weekday whether spec/openapi.json still matches the published
+# spec. Opens (or updates) an issue labelled "api-drift" when they differ and
+# closes it again once the vendored spec is back in sync.
+#
+# Only API-relevant changes count. Description and example changes are ignored
+# by oasdiff, as is the `servers` URL.
+
+name: API spec drift
+
+on:
+  schedule:
+    - cron: "0 6 * * 1-5"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+env:
+  SPEC_URL: https://testphase.rechtsinformationen.bund.de/openapi.json
+  OASDIFF_VERSION: 1.33.0
+  LABEL: api-drift
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Install oasdiff
+        run: |
+          curl -fsSL "https://github.com/oasdiff/oasdiff/releases/download/v${OASDIFF_VERSION}/oasdiff_${OASDIFF_VERSION}_linux_amd64.tar.gz" \
+            | tar xz -C "$RUNNER_TEMP" oasdiff
+          echo "$RUNNER_TEMP" >> "$GITHUB_PATH"
+
+      - name: Fetch published spec
+        run: curl -fsSL "$SPEC_URL" -o "$RUNNER_TEMP/published.json"
+
+      - name: Compare specs
+        id: compare
+        run: |
+          # Exit code 1 means changes were found, anything else above 0 is an error.
+          set +e
+          oasdiff changelog spec/openapi.json "$RUNNER_TEMP/published.json" \
+            --format markdown --fail-on INFO > "$RUNNER_TEMP/changelog.md"
+          code=$?
+          set -e
+          if [ "$code" -gt 1 ]; then exit "$code"; fi
+          echo "drift=$([ "$code" -eq 1 ] && echo true || echo false)" >> "$GITHUB_OUTPUT"
+          cat "$RUNNER_TEMP/changelog.md" >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Open or update issue
+        if: steps.compare.outputs.drift == 'true'
+        run: |
+          # The hash lets later runs tell whether the drift itself changed.
+          hash=$(sha256sum "$RUNNER_TEMP/changelog.md" | cut -c1-16)
+          {
+            echo "<!-- changelog:$hash -->"
+            echo "The vendored \`spec/openapi.json\` differs from the [published spec]($SPEC_URL)."
+            echo "Run \`pnpm sync-spec\` to update it, then check the CLI against the changes below."
+            echo
+            echo "_Detected by [this workflow run]($GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID)._"
+            echo
+            cat "$RUNNER_TEMP/changelog.md"
+          } > "$RUNNER_TEMP/body.md"
+
+          gh label create "$LABEL" --color D93F0B --description "Vendored API spec is out of sync" --force
+          issue=$(gh issue list --label "$LABEL" --state open --json number --jq '.[0].number')
+
+          if [ -z "$issue" ]; then
+            gh issue create --title "API spec out of sync" --label "$LABEL" --body-file "$RUNNER_TEMP/body.md"
+          elif ! gh issue view "$issue" --json body --jq .body | grep -q "changelog:$hash"; then
+            # Only notify when the drift changed, not on every run.
+            gh issue edit "$issue" --body-file "$RUNNER_TEMP/body.md"
+            gh issue comment "$issue" --body "The drift changed. The issue description has the updated changelog."
+          fi
+
+      - name: Close resolved issue
+        if: steps.compare.outputs.drift == 'false'
+        run: |
+          issue=$(gh issue list --label "$LABEL" --state open --json number --jq '.[0].number')
+          if [ -n "$issue" ]; then
+            gh issue close "$issue" --comment "The vendored spec matches the published spec again."
+          fi
