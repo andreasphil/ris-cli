@@ -4,3630 +4,3688 @@
  */
 
 export interface paths {
-    "/v1/statistics": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get: operations["getStatisticsData"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+  "/v1/statistics": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    "/v1/rechtsprechung": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * List and search decisions
-         * @description The endpoint returns a list of decisions from our database. The list is paginated and can be filtered and sorted.
-         */
-        get: operations["searchRechtsprechung"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+    get: operations["getStatisticsData"];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/v1/rechtsprechung": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    "/v1/rechtsprechung/{documentNumber}": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Judgment metadata (Metadaten eines Rechtsrechungsdokuments)
-         * @description The endpoint returns a single judgment (Rechtsrechungsdokument) from our database.
-         */
-        get: operations["getCaseLaw"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+    /**
+     * List and search decisions
+     * @description The endpoint returns a list of decisions from our database. The list is paginated and can be filtered and sorted.
+     */
+    get: operations["searchRechtsprechung"];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/v1/rechtsprechung/{documentNumber}": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    "/v1/rechtsprechung/{documentNumber}/{name}.{extension}": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Caselaw resource
-         * @description Returns a specific resource of a particular caselaw.
-         */
-        get: operations["getImage"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+    /**
+     * Judgment metadata (Metadaten eines Rechtsrechungsdokuments)
+     * @description The endpoint returns a single judgment (Rechtsrechungsdokument) from our database.
+     */
+    get: operations["getCaseLaw"];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/v1/rechtsprechung/{documentNumber}/{name}.{extension}": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    "/v1/rechtsprechung/{documentNumber}.zip": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Decision ZIP (XML and attachments)
-         * @description Returns a case law decision, including attachments, as a ZIP archive.
-         */
-        get: operations["getCaseLawDocumentationUnitAsZip"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+    /**
+     * Caselaw resource
+     * @description Returns a specific resource of a particular caselaw.
+     */
+    get: operations["getImage"];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/v1/rechtsprechung/{documentNumber}.zip": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    "/v1/rechtsprechung/{documentNumber}.xml": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Decision XML
-         * @description Returns a case law decision as XML. This content is used as a source for the HTML endpoint.
-         */
-        get: operations["getCaseLawDocumentationUnitAsXml"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+    /**
+     * Decision ZIP (XML and attachments)
+     * @description Returns a case law decision, including attachments, as a ZIP archive.
+     */
+    get: operations["getCaseLawDocumentationUnitAsZip"];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/v1/rechtsprechung/{documentNumber}.xml": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    "/v1/rechtsprechung/{documentNumber}.html": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Decision HTML
-         * @description Renders and returns a case law decision as HTML.
-         */
-        get: operations["getCaseLawDocumentationUnitAsHtml"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+    /**
+     * Decision XML
+     * @description Returns a case law decision as XML. This content is used as a source for the HTML endpoint.
+     */
+    get: operations["getCaseLawDocumentationUnitAsXml"];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/v1/rechtsprechung/{documentNumber}.html": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    "/v1/rechtsprechung/courts": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * List courts
-         * @description Lists courts with long and short name and number of associated decisions. The prefix parameter may be used to filter this list. Only includes courts whose decisions have been published in this database.
-         */
-        get: operations["getRechtsprechungCourts"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+    /**
+     * Decision HTML
+     * @description Renders and returns a case law decision as HTML.
+     */
+    get: operations["getCaseLawDocumentationUnitAsHtml"];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/v1/rechtsprechung/courts": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    "/v1/rechtsprechung/changelog": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Caselaw changelog
-         * @description Returns references of document changes that occurred in between two points in time.
-         */
-        get: operations["getChangelogs"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+    /**
+     * List courts
+     * @description Lists courts with long and short name and number of associated decisions. The prefix parameter may be used to filter this list. Only includes courts whose decisions have been published in this database.
+     */
+    get: operations["getRechtsprechungCourts"];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/v1/rechtsprechung/changelog": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    "/v1/literature": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * List and search literature
-         * @description The endpoint returns a list of literature from our database. The list is paginated and can be filtered and sorted.
-         */
-        get: operations["searchLiterature"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+    /**
+     * Caselaw changelog
+     * @description Returns references of document changes that occurred in between two points in time.
+     */
+    get: operations["getChangelogs"];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/v1/literature": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    "/v1/literature/{documentNumber}": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Literature metadata
-         * @description The endpoint returns the metadata of a single literature from our database.
-         */
-        get: operations["getLiteratureMetadata"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+    /**
+     * List and search literature
+     * @description The endpoint returns a list of literature from our database. The list is paginated and can be filtered and sorted.
+     */
+    get: operations["searchLiterature"];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/v1/literature/{documentNumber}": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    "/v1/literature/{documentNumber}.zip": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Decision ZIP (XML and attachments)
-         * @description Returns all literature document files as a ZIP archive.
-         */
-        get: operations["getLiteratureDocumentAsZip"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+    /**
+     * Literature metadata
+     * @description The endpoint returns the metadata of a single literature from our database.
+     */
+    get: operations["getLiteratureMetadata"];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/v1/literature/{documentNumber}.zip": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    "/v1/literature/{documentNumber}.xml": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Literature XML
-         * @description Returns a literature item as XML. This content is used as a source for the HTML endpoint.
-         */
-        get: operations["getLiteratureAsXml"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+    /**
+     * Decision ZIP (XML and attachments)
+     * @description Returns all literature document files as a ZIP archive.
+     */
+    get: operations["getLiteratureDocumentAsZip"];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/v1/literature/{documentNumber}.xml": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    "/v1/literature/{documentNumber}.html": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Literature HTML
-         * @description Renders and returns a literature item as HTML.
-         */
-        get: operations["getLiteratureAsHtml"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+    /**
+     * Literature XML
+     * @description Returns a literature item as XML. This content is used as a source for the HTML endpoint.
+     */
+    get: operations["getLiteratureAsXml"];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/v1/literature/{documentNumber}.html": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    "/v1/literature/changelog": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Literature changelog
-         * @description Returns references of document changes that occurred in between two points in time.
-         */
-        get: operations["getChangelogs_1"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+    /**
+     * Literature HTML
+     * @description Renders and returns a literature item as HTML.
+     */
+    get: operations["getLiteratureAsHtml"];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/v1/literature/changelog": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    "/v1/legislation": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * List and search legislation
-         * @description List all legislation in our database with support for filtering and pagination.
-         *
-         *     ## Example 1
-         *
-         *     Get all legislation containing the tokens :` Gesetz`, `über`,`das`, `Verfahren`, `bei`, `sonstigen` and `Änderungen`.
-         *     ```http request
-         *     GET /v1/legislation?searchTerm=Gesetz%20über%20das%20Verfahren%20bei%20sonstigen%20Änderungen
-         *     ```
-         *     The API will return only the legislation that contains all these terms. Please note that in practice very common tokens such as `das` are ignored
-         *     (please see <a href="https://en.wikipedia.org/wiki/Stop_word">https://en.wikipedia.org/wiki/Stop_word</a> for more details).
-         *
-         *     ## Example 2
-         *
-         *     Get all legislation containing the tokens :` Gesetz` and `über` and were valid on 2020-01-01
-         *     ```http request
-         *     GET /v1/legislation?temporalCoverageFrom=2020-01-01&temporalCoverageTo=2020-01-01&searchTerm=Gesetz%20über
-         *     ```
-         *     This example can be used to only return currently valid legislation by replacing 2020-01-01 with today's date.
-         *
-         *     ## Example 3
-         *
-         *     Get all of the legislation that belong to the work eli `eli/bund/bgbl-1/1979/s1325`
-         *     ```http request
-         *     GET /v1/legislation?eli=eli/bund/bgbl-1/1979/s1325
-         *     ```
-         */
-        get: operations["searchAndFilterLegislation"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+    /**
+     * Literature changelog
+     * @description Returns references of document changes that occurred in between two points in time.
+     */
+    get: operations["getChangelogs_1"];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/v1/legislation": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    "/v1/legislation/eli/{jurisdiction}/{agent}/{year}/{naturalIdentifier}/{pointInTime}/{version}/{language}": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Work and expression-level metadata
-         * @description Returns metadata of a legislation item.
-         */
-        get: operations["getLegislation"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+    /**
+     * List and search legislation
+     * @description List all legislation in our database with support for filtering and pagination.
+     *
+     *     ## Example 1
+     *
+     *     Get all legislation containing the tokens :` Gesetz`, `über`,`das`, `Verfahren`, `bei`, `sonstigen` and `Änderungen`.
+     *     ```http request
+     *     GET /v1/legislation?searchTerm=Gesetz%20über%20das%20Verfahren%20bei%20sonstigen%20Änderungen
+     *     ```
+     *     The API will return only the legislation that contains all these terms. Please note that in practice very common tokens such as `das` are ignored
+     *     (please see <a href="https://en.wikipedia.org/wiki/Stop_word">https://en.wikipedia.org/wiki/Stop_word</a> for more details).
+     *
+     *     ## Example 2
+     *
+     *     Get all legislation containing the tokens :` Gesetz` and `über` and were valid on 2020-01-01
+     *     ```http request
+     *     GET /v1/legislation?temporalCoverageFrom=2020-01-01&temporalCoverageTo=2020-01-01&searchTerm=Gesetz%20über
+     *     ```
+     *     This example can be used to only return currently valid legislation by replacing 2020-01-01 with today's date.
+     *
+     *     ## Example 3
+     *
+     *     Get all of the legislation that belong to the work eli `eli/bund/bgbl-1/1979/s1325`
+     *     ```http request
+     *     GET /v1/legislation?eli=eli/bund/bgbl-1/1979/s1325
+     *     ```
+     */
+    get: operations["searchAndFilterLegislation"];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/v1/legislation/eli/{jurisdiction}/{agent}/{year}/{naturalIdentifier}/{pointInTime}/{version}/{language}": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    "/v1/legislation/eli/{jurisdiction}/{agent}/{year}/{naturalIdentifier}/{pointInTime}/{version}/{language}/{pointInTimeManifestation}/{subtype}/{articleEid}.html": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Manifestation article (§) HTML
-         * @description Returns a specific article (§) of particular manifestation of a piece of legislation, converted to HTML.
-         */
-        get: operations["getLegislationArticleAsHtml"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+    /**
+     * Work and expression-level metadata
+     * @description Returns metadata of a legislation item.
+     */
+    get: operations["getLegislation"];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/v1/legislation/eli/{jurisdiction}/{agent}/{year}/{naturalIdentifier}/{pointInTime}/{version}/{language}/{pointInTimeManifestation}/{subtype}/{articleEid}.html": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    "/v1/legislation/eli/{jurisdiction}/{agent}/{year}/{naturalIdentifier}/{pointInTime}/{version}/{language}/{pointInTimeManifestation}/{subtype}.xml": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Manifestation XML
-         * @description Returns a particular manifestation of a piece of legislation in XML format.
-         *
-         *     ## Example
-         *
-         *     Download the LegalDocML format for the piece of legislation with a manifestation eli of `eli/bund/bgbl-1/1979/s1325/2020-06-19/2/deu/2020-06-19/regelungstext-1.xml`
-         *
-         *     ```http request
-         *     GET /v1/eli/bund/bgbl-1/1979/s1325/2020-06-19/2/deu/2020-06-19/regelungstext-1.xml
-         *     ```
-         */
-        get: operations["getLegislationSubtypeAsXml"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+    /**
+     * Manifestation article (§) HTML
+     * @description Returns a specific article (§) of particular manifestation of a piece of legislation, converted to HTML.
+     */
+    get: operations["getLegislationArticleAsHtml"];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/v1/legislation/eli/{jurisdiction}/{agent}/{year}/{naturalIdentifier}/{pointInTime}/{version}/{language}/{pointInTimeManifestation}/{subtype}.xml": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    "/v1/legislation/eli/{jurisdiction}/{agent}/{year}/{naturalIdentifier}/{pointInTime}/{version}/{language}/{pointInTimeManifestation}/{subtype}.html": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Manifestation HTML
-         * @description Returns a particular manifestation of a piece of legislation, converted to HTML.
-         */
-        get: operations["getLegislationSubtypeAsHtml"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+    /**
+     * Manifestation XML
+     * @description Returns a particular manifestation of a piece of legislation in XML format.
+     *
+     *     ## Example
+     *
+     *     Download the LegalDocML format for the piece of legislation with a manifestation eli of `eli/bund/bgbl-1/1979/s1325/2020-06-19/2/deu/2020-06-19/regelungstext-1.xml`
+     *
+     *     ```http request
+     *     GET /v1/eli/bund/bgbl-1/1979/s1325/2020-06-19/2/deu/2020-06-19/regelungstext-1.xml
+     *     ```
+     */
+    get: operations["getLegislationSubtypeAsXml"];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/v1/legislation/eli/{jurisdiction}/{agent}/{year}/{naturalIdentifier}/{pointInTime}/{version}/{language}/{pointInTimeManifestation}/{subtype}.html": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    "/v1/legislation/eli/{jurisdiction}/{agent}/{year}/{naturalIdentifier}/{pointInTime}/{version}/{language}/{pointInTimeManifestation}/{name}.{extension}": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Manifestation resource
-         * @description Returns a specific resource of a particular manifestation of a piece of legislation.
-         */
-        get: operations["getFile"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+    /**
+     * Manifestation HTML
+     * @description Returns a particular manifestation of a piece of legislation, converted to HTML.
+     */
+    get: operations["getLegislationSubtypeAsHtml"];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/v1/legislation/eli/{jurisdiction}/{agent}/{year}/{naturalIdentifier}/{pointInTime}/{version}/{language}/{pointInTimeManifestation}/{name}.{extension}": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    "/v1/legislation/eli/{jurisdiction}/{agent}/{year}/{naturalIdentifier}/{pointInTime}/{version}/{language}/{pointInTimeManifestation}.zip": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Manifestation ZIP (XML and attachments)
-         * @description Returns a particular manifestation of a piece of legislation, including attachments, as a ZIP archive.
-         *     Note the omission of the subtype path parameter.
-         */
-        get: operations["getLegislationSubtypeAsZip"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+    /**
+     * Manifestation resource
+     * @description Returns a specific resource of a particular manifestation of a piece of legislation.
+     */
+    get: operations["getFile"];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/v1/legislation/eli/{jurisdiction}/{agent}/{year}/{naturalIdentifier}/{pointInTime}/{version}/{language}/{pointInTimeManifestation}.zip": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    "/v1/legislation/changelog": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Legislation changelog
-         * @description Returns references of document changes that occurred in between two points in time.
-         */
-        get: operations["getChangelogs_2"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+    /**
+     * Manifestation ZIP (XML and attachments)
+     * @description Returns a particular manifestation of a piece of legislation, including attachments, as a ZIP archive.
+     *     Note the omission of the subtype path parameter.
+     */
+    get: operations["getLegislationSubtypeAsZip"];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/v1/legislation/changelog": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    "/v1/document": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Global search / list
-         * @description This endpoint can be used to search for documents across different document kinds. Currently we support case law, legislation and literature document kinds. The endpoint provides a paginated response with up to 10,000 results with at most 100 results per page.
-         *
-         *     The searchTerm parameter searches across multiple fields of a document at the same time. The fields searched depend on the document kind. See the filters guide for more information.
-         *
-         *     Default sorting is by relevance from most relevant to least relevant. Multiple factors are combined to boost the most relevant documents to the top of the result list. Additionally, sorting by date is possible by setting the sort query parameter to date.
-         */
-        get: operations["searchAllDocuments"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+    /**
+     * Legislation changelog
+     * @description Returns references of document changes that occurred in between two points in time.
+     */
+    get: operations["getChangelogs_2"];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/v1/document": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    "/v1/document/lucene-search": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /** Advanced search using Lucene query syntax */
-        get: operations["search"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+    /**
+     * Global search / list
+     * @description This endpoint can be used to search for documents across different document kinds. Currently we support case law, legislation and literature document kinds. The endpoint provides a paginated response with up to 10,000 results with at most 100 results per page.
+     *
+     *     The searchTerm parameter searches across multiple fields of a document at the same time. The fields searched depend on the document kind. See the filters guide for more information.
+     *
+     *     Default sorting is by relevance from most relevant to least relevant. Multiple factors are combined to boost the most relevant documents to the top of the result list. Additionally, sorting by date is possible by setting the sort query parameter to date.
+     */
+    get: operations["searchAllDocuments"];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/v1/document/lucene-search": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    "/v1/document/lucene-search/literature": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /** Advanced search using Lucene query syntax */
-        get: operations["literatureSearch"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+    /** Advanced search using Lucene query syntax */
+    get: operations["search"];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/v1/document/lucene-search/literature": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    "/v1/document/lucene-search/legislation": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /** Advanced search using Lucene query syntax */
-        get: operations["searchLegislation"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+    /** Advanced search using Lucene query syntax */
+    get: operations["literatureSearch"];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/v1/document/lucene-search/legislation": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    "/v1/document/lucene-search/case-law": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /** Advanced search using Lucene query syntax */
-        get: operations["caseLawSearch"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+    /** Advanced search using Lucene query syntax */
+    get: operations["searchLegislation"];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/v1/document/lucene-search/case-law": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    "/v1/document/lucene-search/administrative-directive": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /** Advanced search using Lucene query syntax */
-        get: operations["literatureSearch_1"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+    /** Advanced search using Lucene query syntax */
+    get: operations["caseLawSearch"];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/v1/document/lucene-search/administrative-directive": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    "/v1/context.jsonld": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get: operations["getContext"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+    /** Advanced search using Lucene query syntax */
+    get: operations["literatureSearch_1"];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/v1/context.jsonld": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    "/v1/case-law": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * List and search decisions
-         * @description The endpoint returns a list of decisions from our database. The list is paginated and can be filtered and sorted.
-         */
-        get: operations["searchCaseLaw"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+    get: operations["getContext"];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/v1/case-law": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    "/v1/case-law/{documentNumber}": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Decision metadata
-         * @description The endpoint returns a single decision from our database.
-         */
-        get: operations["getCaseLaw_1"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+    /**
+     * List and search decisions
+     * @description The endpoint returns a list of decisions from our database. The list is paginated and can be filtered and sorted.
+     */
+    get: operations["searchCaseLaw"];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/v1/case-law/{documentNumber}": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    "/v1/case-law/{documentNumber}/{name}.{extension}": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Caselaw resource
-         * @description Returns a specific resource of a particular caselaw.
-         */
-        get: operations["getImage_1"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+    /**
+     * Decision metadata
+     * @description The endpoint returns a single decision from our database.
+     */
+    get: operations["getCaseLaw_1"];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/v1/case-law/{documentNumber}/{name}.{extension}": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    "/v1/case-law/{documentNumber}.zip": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Decision ZIP (XML and attachments)
-         * @description Returns a case law decision, including attachments, as a ZIP archive.
-         */
-        get: operations["getCaseLawDocumentationUnitAsZip_1"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+    /**
+     * Caselaw resource
+     * @description Returns a specific resource of a particular caselaw.
+     */
+    get: operations["getImage_1"];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/v1/case-law/{documentNumber}.zip": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    "/v1/case-law/{documentNumber}.xml": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Decision XML
-         * @description Returns a case law decision as XML. This content is used as a source for the HTML endpoint.
-         */
-        get: operations["getCaseLawDocumentationUnitAsXml_1"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+    /**
+     * Decision ZIP (XML and attachments)
+     * @description Returns a case law decision, including attachments, as a ZIP archive.
+     */
+    get: operations["getCaseLawDocumentationUnitAsZip_1"];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/v1/case-law/{documentNumber}.xml": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    "/v1/case-law/{documentNumber}.html": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Decision HTML
-         * @description Renders and returns a case law decision as HTML.
-         */
-        get: operations["getCaseLawDocumentationUnitAsHtml_1"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+    /**
+     * Decision XML
+     * @description Returns a case law decision as XML. This content is used as a source for the HTML endpoint.
+     */
+    get: operations["getCaseLawDocumentationUnitAsXml_1"];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/v1/case-law/{documentNumber}.html": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    "/v1/case-law/courts": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * List courts
-         * @description Lists courts with long and short name and number of associated decisions. The prefix parameter may be used to filter this list. Only includes courts whose decisions have been published in this database.
-         */
-        get: operations["getCaseLawCourts"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+    /**
+     * Decision HTML
+     * @description Renders and returns a case law decision as HTML.
+     */
+    get: operations["getCaseLawDocumentationUnitAsHtml_1"];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/v1/case-law/courts": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    "/v1/case-law/changelog": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Caselaw changelog
-         * @description Returns references of document changes that occurred in between two points in time.
-         */
-        get: operations["getChangelogs_3"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+    /**
+     * List courts
+     * @description Lists courts with long and short name and number of associated decisions. The prefix parameter may be used to filter this list. Only includes courts whose decisions have been published in this database.
+     */
+    get: operations["getCaseLawCourts"];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/v1/case-law/changelog": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    "/v1/bulk-zip-links": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get: operations["getBulkZipLinks"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+    /**
+     * Caselaw changelog
+     * @description Returns references of document changes that occurred in between two points in time.
+     */
+    get: operations["getChangelogs_3"];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/v1/bulk-zip-links": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    "/v1/article/work-example/eli/{jurisdiction}/{agent}/{year}/{naturalIdentifier}/{pointInTime}/{version}/{language}/{eId}": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get: operations["getArticleVersions"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+    get: operations["getBulkZipLinks"];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/v1/article/work-example/eli/{jurisdiction}/{agent}/{year}/{naturalIdentifier}/{pointInTime}/{version}/{language}/{eId}": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    "/v1/administrative-directive": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * List and search administrative directives
-         * @description The endpoint returns a list of administrative directives from our database. The list is paginated and can be filtered and sorted.
-         */
-        get: operations["searchAdministrativeDirective"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+    get: operations["getArticleVersions"];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/v1/administrative-directive": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    "/v1/administrative-directive/{documentNumber}": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Administrative directive metadata
-         * @description The endpoint returns the metadata of a single administrative directive from our database.
-         */
-        get: operations["getAdministrativeDirectiveMetadata"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+    /**
+     * List and search administrative directives
+     * @description The endpoint returns a list of administrative directives from our database. The list is paginated and can be filtered and sorted.
+     */
+    get: operations["searchAdministrativeDirective"];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/v1/administrative-directive/{documentNumber}": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    "/v1/administrative-directive/{documentNumber}.zip": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Decision ZIP (XML and attachments)
-         * @description Returns all administrative directive files as a ZIP archive.
-         */
-        get: operations["getAdministrativeDirectiveAsZip"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+    /**
+     * Administrative directive metadata
+     * @description The endpoint returns the metadata of a single administrative directive from our database.
+     */
+    get: operations["getAdministrativeDirectiveMetadata"];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/v1/administrative-directive/{documentNumber}.zip": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    "/v1/administrative-directive/{documentNumber}.xml": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Administrative directive XML
-         * @description Returns an administrative directive item as XML. This content is used as a source for the HTML endpoint.
-         */
-        get: operations["getAdministrativeDirectiveAsXml"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+    /**
+     * Decision ZIP (XML and attachments)
+     * @description Returns all administrative directive files as a ZIP archive.
+     */
+    get: operations["getAdministrativeDirectiveAsZip"];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/v1/administrative-directive/{documentNumber}.xml": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    "/v1/administrative-directive/{documentNumber}.html": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Administrative directive HTML
-         * @description Renders and returns an administrative directive as HTML.
-         */
-        get: operations["getAdministrativeDirectiveAsHtml"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+    /**
+     * Administrative directive XML
+     * @description Returns an administrative directive item as XML. This content is used as a source for the HTML endpoint.
+     */
+    get: operations["getAdministrativeDirectiveAsXml"];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/v1/administrative-directive/{documentNumber}.html": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    "/v1/administrative-directive/changelog": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Administrative Directive changelog
-         * @description Returns references of document changes that occurred in between two points in time.
-         */
-        get: operations["getChangelogs_4"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+    /**
+     * Administrative directive HTML
+     * @description Renders and returns an administrative directive as HTML.
+     */
+    get: operations["getAdministrativeDirectiveAsHtml"];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/v1/administrative-directive/changelog": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
+    /**
+     * Administrative Directive changelog
+     * @description Returns references of document changes that occurred in between two points in time.
+     */
+    get: operations["getChangelogs_4"];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
 }
 export type webhooks = Record<string, never>;
 export interface components {
-    schemas: {
-        StatisticsApiSchema: {
-            legislation: components["schemas"]["StatisticsCountSchema"];
-            "case-law": components["schemas"]["StatisticsCountSchema"];
-            literature: components["schemas"]["StatisticsCountSchema"];
-            "administrative-directive": components["schemas"]["StatisticsCountSchema"];
-        };
-        StatisticsCountSchema: {
-            /** Format: int64 */
-            count: number;
-        };
-        CaseLawSearchSchema: Omit<components["schemas"]["AbstractDocumentSchema"], "@type"> & {
-            /** @example Decision */
-            "@type"?: string;
-            /** @example KARE000000000 */
-            documentNumber: string;
-            /** @example ECLI:DE:FGRLP:1969:0905.IV85.68.0A */
-            ecli: string;
-            /** @example Überschrift */
-            headline?: string;
-            /** @example Titelzeile */
-            titleLine?: string;
-            /** @example Sonstiger Langtext */
-            otherLongText?: string;
-            /** Format: date */
-            decisionDate: string;
-            /** @example BGH 123/23 */
-            fileNumbers: string[];
-            /** @example FG */
-            courtType?: string;
-            /** @example Berlin */
-            location?: string;
-            /** @example Urteil */
-            documentType?: string;
-            /** @example Leitsatz */
-            outline?: string;
-            /** @example Gericht */
-            judicialBody?: string;
-            /** @example LArbG Hamm */
-            courtName?: string;
-            /** @example Beispielentscheidung */
-            decisionName: string[];
-            /** @example DEV-123 */
-            deviatingDocumentNumber: string[];
-            encoding: components["schemas"]["DocumentEncodingSchema"][];
-            /** @example /v1/case-law/ECLI:DE:FGRLP:1969:0905.IV85.68.0A */
-            "@id": string;
-            /** @example de */
-            inLanguage: string;
-        } & {
-            /**
-             * @description discriminator enum property added by openapi-typescript
-             * @enum {string}
-             */
-            "@type": "Decision";
-        };
-        CollectionSchemaSearchMemberSchemaCaseLawSearchSchema: {
-            /** @example hydra:Collection */
-            "@type"?: string;
-            "@context": string;
-            /** @example /v1/document?pageIndex=0&size=5 */
-            "@id": string;
-            /**
-             * Format: int64
-             * @example 1
-             */
-            totalItems: number;
-            member: components["schemas"]["SearchMemberSchemaCaseLawSearchSchema"][];
-            view: components["schemas"]["PartialCollectionViewSchema"];
-        };
-        DocumentEncodingSchema: {
-            /** @example MediaObject */
-            "@type"?: string;
-            "@id": string;
-            contentUrl: string;
-            /** @example text/html */
-            encodingFormat: string;
-            /** @example de */
-            inLanguage: string;
-        };
-        PartialCollectionViewSchema: {
-            /** @example hydra:PartialCollectionView */
-            "@type"?: string;
-            first?: string;
-            previous?: string;
-            next?: string;
-            last?: string;
-        };
-        SearchMemberSchemaCaseLawSearchSchema: {
-            /** @example SearchResult */
-            "@type"?: string;
-            item: components["schemas"]["CaseLawSearchSchema"];
-            textMatches: components["schemas"]["TextMatchSchema"][];
-        };
-        TextMatchSchema: {
-            /** @example SearchResultMatch */
-            "@type"?: string;
-            name: string;
-            text: string;
-            location?: string | null;
-        };
-        RechtsprechungSchema: {
-            /** @example Rechtsprechung */
-            "@type"?: string;
-            /** @example KARE000000000 */
-            dokumentNummer: string;
-            /**
-             * @description European Case Law Identifier
-             * @example ECLI:DE:FGRLP:1969:0905.IV85.68.0A
-             */
-            ecli: string;
-            /** @description CELEX-Nummer */
-            celex?: string;
-            /** @description Tatbestand */
-            tatbestand?: string;
-            /** @description Entscheidungsgründe */
-            entscheidungsgruende?: string;
-            /** @description Abweichende Meinung */
-            abweichendeMeinung?: string;
-            /** @description Gründe */
-            gruende?: string;
-            /** @description Leitsatz */
-            leitsatz?: string;
-            /** @description Kurztitel */
-            kurztitel?: string;
-            /** @description Titelzeile */
-            titelzeile?: string;
-            /** @description Orientierungssatz */
-            orientierungssatz?: string;
-            /** @description Sonstiger Orientierungssatz */
-            sonstigerOrientierungssatz?: string;
-            /** @description Sonstiger Langtext */
-            sonstigerLangtext?: string;
-            /** @description Rechtsfrage (gesamt) */
-            rechtsfrageGesamt?: string;
-            /** @description Rechtsfrage */
-            rechtsfrage?: string;
-            /** @description Tenor */
-            tenor?: string;
-            /**
-             * Format: date
-             * @description Datum
-             */
-            datum: string;
-            /** @description Abweichende Daten */
-            abweichendeDaten?: string[];
-            /** @description Gliederung */
-            gliederung?: string;
-            /** @description Aktenzeichen */
-            aktenzeichen?: string;
-            /**
-             * @description Aktenzeichenliste
-             * @example BGH 123/23
-             */
-            aktenzeichenListe: string[];
-            /**
-             * @description Abweichende Aktenzeichen
-             * @example 1
-             */
-            abweichendeAktenzeichen?: string[];
-            /** @description Abweichende ECLIs */
-            abweichendeEclis?: string[];
-            /** @description Berufsbilder */
-            berufsbilder?: string[];
-            /** @description Kündigungsarten */
-            kuendigungsarten?: string[];
-            /** @description Herkunftsländer */
-            herkunftslaender?: string[];
-            /** @description Regionen */
-            regionen?: string[];
-            /** @description Tarifverträge */
-            tarifvertraege?: string[];
-            /** @description Kündigungsgründe */
-            kuendigungsgruende?: string[];
-            /** @description Mitwirkende Richter */
-            mitwirkendeRichter?: string[];
-            /** @description Vorgehende Entscheidungen */
-            vorgehendeEntscheidungen?: string[];
-            /** @description Nachgehende Entscheidungen */
-            nachgehendeEntscheidungen?: string[];
-            /** @description Aktivzitierung Literatur Unselbstständig */
-            aktivzitierungLiteraturUnselbstaendig?: string[];
-            /** @description Passivzitierung Literatur Unselbstständig */
-            passivzitierungLiteraturUnselbstaendig?: string[];
-            /** @description Aktivzitierung Literatur Selbstständig */
-            aktivzitierungLiteraturSelbstaendig?: string[];
-            /** @description Passivzitierung Literatur Selbstständig */
-            passivzitierungLiteraturSelbstaendig?: string[];
-            /** @description Aktivzitierung Rechtsprechung */
-            aktivzitierungRechtsprechung?: string[];
-            /** @description Passivzitierung Rechtsprechung */
-            passivzitierungRechtsprechung?: string[];
-            /** @description Aktivzitierung Verwaltungsvorschriften */
-            aktivzitierungVerwaltungsvorschriften?: string[];
-            /** @description Passivzitierung Verwaltungsvorschriften */
-            passivzitierungVerwaltungsvorschriften?: string[];
-            /**
-             * @description Amtliche Fundstellen
-             * @example BGHSt 67, 273-284
-             */
-            amtlicheFundstellen?: string[];
-            /**
-             * @description Nichtamtliche Fundstellen
-             * @example DStR 2023, 1430-1435
-             */
-            nichtamtlicheFundstellen?: string[];
-            /**
-             * @description Gesetzeskraft
-             * @example vereinbar mit höherrangigem Recht (Bremen)
-             */
-            gesetzeskraft?: string[];
-            /**
-             * @description Normenkette
-             * @example BGB § 823
-             */
-            normenkette?: string[];
-            /** @description Sachgebiete */
-            sachgebiete?: string[];
-            /** @description Streitjahre */
-            streitjahre?: string[];
-            /** @description Fehlerhafte Gerichte */
-            fehlerhafteGerichte?: string[];
-            /** @description Daten der mündlichen Verhandlung */
-            datenDerMuendlichenVerhandlung?: string[];
-            /** @description Definitionen */
-            definitionen?: string[];
-            /**
-             * @description Erledigung
-             * @example Ja
-             */
-            erledigung?: string;
-            /**
-             * @description Rechtskraft
-             * @example Ja
-             */
-            rechtskraft?: string;
-            /**
-             * @description Gesetzgebungsauftrag
-             * @example Ja
-             */
-            gesetzgebungsauftrag?: string;
-            /**
-             * Format: date
-             * @description Langtextdatum
-             */
-            langtextdatum?: string;
-            /** @description Rechtsmittelführer */
-            rechtsmittelfuehrer?: string;
-            /** @description Rechtsmittelzulassung */
-            rechtsmittelzulassung?: string;
-            /**
-             * @description Revision
-             * @example Ja
-             */
-            revision?: string;
-            /**
-             * Format: date
-             * @description Letzte Veröffentlichung
-             */
-            letzteVeroeffentlichung?: string;
-            /** @description Erledigungsvermerk */
-            erledigungsvermerk?: string;
-            /**
-             * Format: date
-             * @description Erstveröffentlichung
-             */
-            erstveroeffentlichung?: string;
-            /**
-             * Format: date
-             * @description Mitteilungsdatum
-             */
-            mitteilungsdatum?: string;
-            /**
-             * @description Gericht
-             * @example FG Berlin
-             */
-            gericht?: string;
-            /** @description Gerichtsbarkeit */
-            gerichtsbarkeit?: string;
-            /** @example Urteil */
-            dokumenttyp?: string;
-            /**
-             * @description Spruchkörper
-             * @example Gericht
-             */
-            spruchkoerper?: string;
-            /**
-             * @description Schlagworte
-             * @example 3. Kammer
-             */
-            schlagwoerter: string[];
-            /** @example LArbG Hamm */
-            courtName?: string;
-            /**
-             * @description Entscheidungsnamen
-             * @example Beispielentscheidung
-             */
-            entscheidungsnamen: string[];
-            /**
-             * @description Abweichende Dokumentnummer
-             * @example DEV-123
-             */
-            abweichendeDokumentnummern: string[];
-            /** @example /v1/case-law/ECLI:DE:FGRLP:1969:0905.IV85.68.0A */
-            "@id": string;
-            /** @example de */
-            inLanguage: string;
-            encoding: components["schemas"]["DocumentEncodingSchema"][];
-            /** @description Whether or not the document is a Vorabdokument */
-            vorabdokument: boolean;
-        };
-        StreamingResponseBody: unknown;
-        CourtSearchResult: {
-            /** @example BGH Karlsruhe */
-            id?: string;
-            /**
-             * Format: int64
-             * @example 10000
-             */
-            count?: number;
-            /** @example Bundesgerichtshof Karlsruhe */
-            label?: string;
-        };
-        ChangelogChangedDocument: {
-            /** @description unique identifier of the document */
-            "@id": string;
-            /** @description type of the document */
-            "@type": string;
-            contentUrl: string;
-        };
-        ChangelogDeletedDocument: {
-            /** @description unique identifier of the document */
-            "@id": string;
-            /** @description type of the document */
-            "@type": string;
-        };
-        ChangelogResponse: {
-            "@type"?: string;
-            "@context": string;
-            /** @description Set of changed documents */
-            changed: components["schemas"]["ChangelogChangedDocument"][];
-            /** @description Set of deleted documents */
-            deleted: components["schemas"]["ChangelogDeletedDocument"][];
-            /** @description flag to communicate that the whole storage got rebuilt */
-            allChanged: boolean;
-        };
-        CollectionSchemaSearchMemberSchemaLiteratureSearchSchema: {
-            /** @example hydra:Collection */
-            "@type"?: string;
-            "@context": string;
-            /** @example /v1/document?pageIndex=0&size=5 */
-            "@id": string;
-            /**
-             * Format: int64
-             * @example 1
-             */
-            totalItems: number;
-            member: components["schemas"]["SearchMemberSchemaLiteratureSearchSchema"][];
-            view: components["schemas"]["PartialCollectionViewSchema"];
-        };
-        LiteratureSearchSchema: Omit<components["schemas"]["AbstractDocumentSchema"], "@type"> & {
-            /** @example Literature */
-            "@type"?: string;
-            /** @example KALU000000000 */
-            "@id": string;
-            /** @example de */
-            inLanguage: string;
-            /**
-             * @description Dokumentnummer
-             * @example KALU000000000
-             */
-            documentNumber: string;
-            /**
-             * @description Veröffentlichungsjahre
-             * @example [2014, 2024-09]
-             */
-            yearsOfPublication: string[];
-            /**
-             * @description Dokumenttypen
-             * @example ['Auf']
-             */
-            documentTypes: string[];
-            /**
-             * @description Unselbstständige Fundstellen
-             * @example ['BUV, 1982, 123-123']
-             */
-            dependentReferences: string[];
-            /**
-             * @description Selbstständige Fundstellen
-             * @example ['50 Jahre Betriebs-Berater, 1987, 123-456']
-             */
-            independentReferences: string[];
-            /** @description Haupttitel */
-            headline?: string;
-            /** @description Dokumentarischer Titel */
-            alternativeHeadline?: string;
-            /**
-             * @description Autoren
-             * @example ['Musterfrau, Sabine']
-             */
-            authors: string[];
-            /**
-             * @description Mitarbeiter
-             * @example ['Mustermann, Max']
-             */
-            collaborators: string[];
-            /** @description Kurzreferat */
-            shortReport?: string;
-            /** @description Gliederung */
-            outline?: string;
-            /**
-             * @description Literaturtyp
-             * @example ['sli', 'uli']
-             */
-            literatureType: string;
-            encoding: components["schemas"]["DocumentEncodingSchema"][];
-        } & {
-            /**
-             * @description discriminator enum property added by openapi-typescript
-             * @enum {string}
-             */
-            "@type": "Literature";
-        };
-        SearchMemberSchemaLiteratureSearchSchema: {
-            /** @example SearchResult */
-            "@type"?: string;
-            item: components["schemas"]["LiteratureSearchSchema"];
-            textMatches: components["schemas"]["TextMatchSchema"][];
-        };
-        LiteratureSchema: {
-            /** @example Literature */
-            "@type"?: string;
-            "@context": string;
-            /** @example KALU000000000 */
-            "@id": string;
-            /** @example de */
-            inLanguage: string;
-            /**
-             * @description Dokumentnummer
-             * @example KALU000000000
-             */
-            documentNumber: string;
-            /**
-             * @description Veröffentlichungsjahre
-             * @example [2014, 2024-09]
-             */
-            yearsOfPublication: string[];
-            /**
-             * @description Dokumenttypen
-             * @example ['Auf']
-             */
-            documentTypes: string[];
-            /**
-             * @description Unselbstständige Fundstellen
-             * @example ['BUV, 1982, 123-123']
-             */
-            dependentReferences: string[];
-            /**
-             * @description Selbstständige Fundstellen
-             * @example ['50 Jahre Betriebs-Berater, 1987, 123-456']
-             */
-            independentReferences: string[];
-            /**
-             * @description Norm Verweise
-             * @example ['GG, Art 6 Abs 2 S 1, 1949-05-23']
-             */
-            normReferences: string[];
-            /** @description Haupttitel */
-            headline?: string;
-            /** @description Zusätze zum Haupttitel */
-            headlineAdditions?: string;
-            /** @description Dokumentarischer Titel */
-            alternativeHeadline?: string;
-            /** @description Ausgabe */
-            edition?: string;
-            /** @description Bestellnummer */
-            internationalIdentifiers: string[];
-            /**
-             * @description Autoren
-             * @example ['Musterfrau, Sabine']
-             */
-            authors: string[];
-            /**
-             * @description Mitarbeiter
-             * @example ['Mustermann, Max']
-             */
-            collaborators: string[];
-            /** @description Bearbeiter */
-            editors: string[];
-            /** @description Begründer */
-            founder: string[];
-            /** @description Herausgeber (Person) */
-            publishers: string[];
-            /** @description Herausgeber (Institution) */
-            publisherOrganizations: string[];
-            /** @description Verlag */
-            publishingHouses: string[];
-            /**
-             * @description Sprachen
-             * @example ['deu', 'eng']
-             */
-            languages: string[];
-            /**
-             * @description Urheber
-             * @example ['DGB']
-             */
-            originators: string[];
-            /**
-             * @description Kongressvermerke
-             * @example ['Nationaler Beispiel Kongress, 2024, Berlin, GER']
-             */
-            conferenceNotes: string[];
-            /** @description Kurzreferat */
-            shortReport?: string;
-            /** @description Gliederung */
-            outline?: string;
-            /** @description Hochschulvermerk */
-            universityNotes: string[];
-            /** @description Teilbaende */
-            volumes: string[];
-            /**
-             * @description Literaturtyp
-             * @example ['sli', 'uli']
-             */
-            literatureType: string;
-            encoding: components["schemas"]["DocumentEncodingSchema"][];
-        };
-        CollectionSchemaSearchMemberSchemaLegislationExpressionSearchSchema: {
-            /** @example hydra:Collection */
-            "@type"?: string;
-            "@context": string;
-            /** @example /v1/document?pageIndex=0&size=5 */
-            "@id": string;
-            /**
-             * Format: int64
-             * @example 1
-             */
-            totalItems: number;
-            member: components["schemas"]["SearchMemberSchemaLegislationExpressionSearchSchema"][];
-            view: components["schemas"]["PartialCollectionViewSchema"];
-        };
-        /** @description A legislation expression and references to its manifestations. */
-        LegislationExpressionSearchSchema: Omit<components["schemas"]["AbstractDocumentSchema"], "@type"> & {
-            /** @example Legislation */
-            "@type"?: string;
-            /** @example /v1/legislation/eli/bund/bgbl-1/1975/s1760/1998-01-29/10/deu */
-            "@id": string;
-            /**
-             * @description Amtliche Langüberschrift
-             * @example Verordnung über Kakao und Kakaoerzeugnisse
-             */
-            name: string;
-            /** @example eli/bund/bgbl-1/1975/s1760/1998-01-29/10/deu */
-            legislationIdentifier: string;
-            /** @description The work the expression is based on */
-            exampleOfWork: components["schemas"]["LegislationWorkSchema"];
-            /**
-             * @description Textual string indicating a time period in [ISO 8601 time interval format](https://en.wikipedia.org/wiki/ISO_8601#Time_intervals)
-             * @example 1998-02-06/..
-             */
-            temporalCoverage: string;
-            /**
-             * @description Amtliche Buchstabenabkürzung, if it exists. Otherwise ris-abkuerzung.
-             * @example KakaoV 2003
-             */
-            abbreviation: string;
-            /**
-             * @description Amtliche Kurzüberschrift
-             * @example Kakaoverordnung
-             */
-            alternateName?: string | null;
-            /**
-             * @description Whether the legislation expression is currently in force.
-             * @enum {string}
-             */
-            legislationLegalForce: "InForce" | "NotInForce" | "PartiallyInForce";
-            encoding: components["schemas"]["LegislationObjectSchema"][];
-        } & {
-            /**
-             * @description discriminator enum property added by openapi-typescript
-             * @enum {string}
-             */
-            "@type": "Legislation";
-        };
-        LegislationObjectSchema: {
-            /** @example LegislationObject */
-            "@type"?: string;
-            /** @example /v1/legislation/eli/bund/bgbl-1/1975/s1760/1998-01-29/10/deu/1998-01-29/regelungstext-1/html */
-            "@id": string;
-            /** @example /v1/legislation/eli/bund/bgbl-1/1975/s1760/1998-01-29/10/deu/1998-01-29/regelungstext-1.html */
-            contentUrl: string;
-            /** @example text/html */
-            encodingFormat: string;
-            /** @example de */
-            inLanguage: string;
-        };
-        LegislationWorkSchema: {
-            /** @example Legislation */
-            "@type"?: string;
-            /** @example /v1/legislation/eli/bund/bgbl-1/1975 */
-            "@id": string;
-            /** @example eli/bund/bgbl-1/1975/s1760 */
-            legislationIdentifier: string;
-            /**
-             * Format: date
-             * @description Ausfertigungsdatum (The date of adoption or signature of the legislation. This is the date at which the text is officially acknowledged to be a legislation, even though it might not even be published or in force.)
-             * @example 2003-12-15
-             */
-            legislationDate: string;
-            /**
-             * Format: date
-             * @description Verkündungsdatum (The date of first publication of the legislation, when it was published in the official gazette. This may be later than the `legislationDate`.)
-             * @example 2003-12-16
-             */
-            datePublished: string;
-            isPartOf?: components["schemas"]["PublicationIssueSchema"];
-        };
-        PublicationIssueSchema: {
-            /** @example PublicationIssue */
-            "@type"?: string;
-            /** @example BGBL I 2003, 1760 */
-            name: string;
-        };
-        SearchMemberSchemaLegislationExpressionSearchSchema: {
-            /** @example SearchResult */
-            "@type"?: string;
-            item: components["schemas"]["LegislationExpressionSearchSchema"];
-            textMatches: components["schemas"]["TextMatchSchema"][];
-        };
-        /** @description A specific part of a legislation expression */
-        LegislationExpressionPartSchema: {
-            /** @example Legislation */
-            "@type"?: string;
-            /** @example /v1/legislation/eli/bund/bgbl-1/1975/s1760/regelungstext-1.xml#hauptteitel-para-1 */
-            "@id": string;
-            /**
-             * @description Expression-level identifier, uniquely identifying this element in an FRBR expression
-             * @example hauptteitel-para-1
-             */
-            eId: string;
-            /**
-             * @description Numerical identifier of a specific legislation part
-             * @example § 1
-             */
-            name: string;
-            /**
-             * @description Headline of a specific legislation part
-             * @example Beginn der Rechtsfähigkeit
-             */
-            headline: string;
-            /**
-             * @description Textual string indicating a time period in [ISO 8601 time interval format](https://en.wikipedia.org/wiki/ISO_8601#Time_intervals)
-             * @example 1998-02-06/..
-             */
-            temporalCoverage: string;
-            /**
-             * @description Specifies the type of the part of a Legislation Expression.
-             * @enum {string}
-             */
-            partType?: "preamble" | "article" | "conclusion" | "attachment";
-            /** @description The source data for this part, if available on its own */
-            encoding?: components["schemas"]["LegislationObjectSchema"][];
-            hasPart?: components["schemas"]["LegislationExpressionPartSchema"][];
-        };
-        /** @description A legislation expression and references to its manifestations. */
-        LegislationExpressionSchema: {
-            /** @example Legislation */
-            "@type"?: string;
-            "@context": string;
-            /** @example /v1/legislation/eli/bund/bgbl-1/1975/s1760/1998-01-29/10/deu */
-            "@id": string;
-            /**
-             * @description Amtliche Langüberschrift
-             * @example Verordnung über Kakao und Kakaoerzeugnisse
-             */
-            name: string;
-            /**
-             * @description Amtliche Buchstabenabkürzung, if it exists. Otherwise ris-abkuerzung.
-             * @example KakaoV 2003
-             */
-            abbreviation: string;
-            /**
-             * @description The ris-abbreviation.
-             * @example StVO 2013
-             */
-            risAbbreviation: string;
-            /**
-             * @description Amtliche Kurzüberschrift
-             * @example Kakaoverordnung
-             */
-            alternateName?: string | null;
-            /** @description The work the expression is based on */
-            exampleOfWork: components["schemas"]["LegislationWorkSchema"];
-            /** @example eli/bund/bgbl-1/1975/s1760/1998-01-29/10/deu */
-            legislationIdentifier: string;
-            /**
-             * @description Textual string indicating a time period in [ISO 8601 time interval format](https://en.wikipedia.org/wiki/ISO_8601#Time_intervals)
-             * @example 1998-02-06/..
-             */
-            temporalCoverage: string;
-            /**
-             * @description Whether the legislation expression is currently in force.
-             * @enum {string}
-             */
-            legislationLegalForce: "InForce" | "NotInForce" | "PartiallyInForce";
-            /** @description List of components (articles, preambles, conclusions, attachments, …) that form this legislation item. */
-            hasPart: components["schemas"]["LegislationExpressionPartSchema"][];
-            encoding: components["schemas"]["LegislationObjectSchema"][];
-        };
-        AbstractDocumentSchema: {
-            "@type": string;
-        };
-        AdministrativeDirectiveSearchSchema: Omit<components["schemas"]["AbstractDocumentSchema"], "@type"> & {
-            /** @example AdministrativeDirective */
-            "@type"?: string;
-            /** @example KALU000000000 */
-            "@id": string;
-            /**
-             * @description Dokumentnummer
-             * @example KALU000000000
-             */
-            documentNumber: string;
-            /** @description Haupttitel */
-            headline?: string;
-            /** @description Kurzreferat */
-            shortReport?: string;
-            /** @description Gliederung */
-            outline?: string[];
-            /**
-             * @description Dokumenttyp
-             * @example VV
-             */
-            documentType: string;
-            /**
-             * @description Aktenzeichen
-             * @example ['ZZ', 'YY']
-             */
-            referenceNumbers: string[];
-            /** @description Normgeber */
-            legislationAuthority?: string;
-            /**
-             * Format: date
-             * @description Gültig ab Datum
-             * @example 2003-12-15
-             */
-            entryIntoForceDate?: string;
-            encoding: components["schemas"]["DocumentEncodingSchema"][];
-        } & {
-            /**
-             * @description discriminator enum property added by openapi-typescript
-             * @enum {string}
-             */
-            "@type": "AdministrativeDirective";
-        };
-        CollectionSchemaSearchMemberSchemaAbstractDocumentSchema: {
-            /** @example hydra:Collection */
-            "@type"?: string;
-            "@context": string;
-            /** @example /v1/document?pageIndex=0&size=5 */
-            "@id": string;
-            /**
-             * Format: int64
-             * @example 1
-             */
-            totalItems: number;
-            member: components["schemas"]["SearchMemberSchemaAbstractDocumentSchema"][];
-            view: components["schemas"]["PartialCollectionViewSchema"];
-        };
-        SearchMemberSchemaAbstractDocumentSchema: {
-            /** @example SearchResult */
-            "@type"?: string;
-            item: components["schemas"]["AdministrativeDirectiveSearchSchema"] | components["schemas"]["CaseLawSearchSchema"] | components["schemas"]["LegislationExpressionSearchSchema"] | components["schemas"]["LiteratureSearchSchema"];
-            textMatches: components["schemas"]["TextMatchSchema"][];
-        };
-        CollectionSchemaSearchMemberSchemaAdministrativeDirectiveSearchSchema: {
-            /** @example hydra:Collection */
-            "@type"?: string;
-            "@context": string;
-            /** @example /v1/document?pageIndex=0&size=5 */
-            "@id": string;
-            /**
-             * Format: int64
-             * @example 1
-             */
-            totalItems: number;
-            member: components["schemas"]["SearchMemberSchemaAdministrativeDirectiveSearchSchema"][];
-            view: components["schemas"]["PartialCollectionViewSchema"];
-        };
-        SearchMemberSchemaAdministrativeDirectiveSearchSchema: {
-            /** @example SearchResult */
-            "@type"?: string;
-            item: components["schemas"]["AdministrativeDirectiveSearchSchema"];
-            textMatches: components["schemas"]["TextMatchSchema"][];
-        };
-        CaseLawSchema: {
-            /** @example Decision */
-            "@type"?: string;
-            "@context": string;
-            /** @example KARE000000000 */
-            documentNumber: string;
-            /**
-             * @description European Case Law Identifier
-             * @example ECLI:DE:FGRLP:1969:0905.IV85.68.0A
-             */
-            ecli: string;
-            /** @description Tatbestand */
-            caseFacts?: string;
-            /** @description Entscheidungsgründe */
-            decisionGrounds?: string;
-            /** @description Abweichende Meinung */
-            dissentingOpinion?: string;
-            /** @description Gründe */
-            grounds?: string;
-            /** @description Leitsatz */
-            guidingPrinciple?: string;
-            /** @description Überschrift */
-            headline?: string;
-            /** @description Titelzeile */
-            titleLine?: string;
-            /** @description Orientierungssatz */
-            headnote?: string;
-            /** @description Sonstiger Orientierungssatz */
-            otherHeadnote?: string;
-            /** @description Sonstiger Langtext */
-            otherLongText?: string;
-            /** @description Tenor */
-            tenor?: string;
-            /**
-             * Format: date
-             * @description Entscheidungsdatum
-             */
-            decisionDate: string;
-            /**
-             * @description Aktenzeichen
-             * @example BGH 123/23
-             */
-            fileNumbers: string[];
-            /**
-             * @description Gerichtstyp
-             * @example FG
-             */
-            courtType?: string;
-            /**
-             * @description Gerichtssitz
-             * @example Berlin
-             */
-            location?: string;
-            /** @example Urteil */
-            documentType?: string;
-            /** @description Leitsatz */
-            outline?: string;
-            /**
-             * @description Spruchkörper
-             * @example Gericht
-             */
-            judicialBody?: string;
-            /**
-             * @description Schlagworte
-             * @example 3. Kammer
-             */
-            keywords: string[];
-            /** @example LArbG Hamm */
-            courtName?: string;
-            /**
-             * @description Entscheidungsname
-             * @example Beispielentscheidung
-             */
-            decisionName: string[];
-            /**
-             * @description Abweichende Dokumentnummer
-             * @example DEV-123
-             */
-            deviatingDocumentNumber: string[];
-            /** @description Vorgehende Entscheidungen */
-            previousDecisions?: string[];
-            /** @description Nachgehende Entscheidungen */
-            ensuingDecisions?: string[];
-            /**
-             * @description Gesetzeskraft
-             * @example vereinbar mit höherrangigem Recht (Bremen)
-             */
-            gesetzeskraft?: string[];
-            /** @description Streitjahre */
-            streitjahre?: string[];
-            /** @example /v1/case-law/ECLI:DE:FGRLP:1969:0905.IV85.68.0A */
-            "@id": string;
-            /** @example de */
-            inLanguage: string;
-            encoding: components["schemas"]["DocumentEncodingSchema"][];
-            /** @description Whether or not the document is a Vorabdokument */
-            vorabdokument: boolean;
-        };
-        /** @description Represents a <a href="https://schema.org/DataCatalog">schema.org/DataCatalog</a>. */
-        ZipDataCatalogSchema: {
-            /** @example https://schema.org/ */
-            "@context"?: string;
-            /** @example DataCatalog */
-            "@type"?: string;
-            /** @description The name of this data catalog. */
-            name: string;
-            /** @description The list of zip datasets contained in this catalog. */
-            dataSet: components["schemas"]["ZipDataSetSchema"][];
-        };
-        /** @description Represents <a href="https://schema.org/DataDownload">schema.org/DataDownload</a>. */
-        ZipDataDownloadSchema: {
-            /** @example DataDownload */
-            "@type"?: string;
-            /** @description Will always be application/zip. */
-            encodingFormat: string;
-            /** @description The url to download the zip file. */
-            contentUrl: string;
-        };
-        /** @description Represents <a href="https://schema.org/Dataset">schema.org/Dataset</a>. */
-        ZipDataSetSchema: {
-            /** @example Dataset */
-            "@type"?: string;
-            /** @description The name of the dataset. */
-            name: string;
-            /** @description A short summary describing the contents of the dataset. */
-            description: string;
-            /** @description The downloadable form of this dataset. */
-            distribution?: components["schemas"]["ZipDataDownloadSchema"];
-        };
-        CollectionSchemaLegislationExpressionPartSchema: {
-            /** @example hydra:Collection */
-            "@type"?: string;
-            "@context": string;
-            /** @example /v1/document?pageIndex=0&size=5 */
-            "@id": string;
-            /**
-             * Format: int64
-             * @example 1
-             */
-            totalItems: number;
-            member: components["schemas"]["LegislationExpressionPartSchema"][];
-            view: components["schemas"]["PartialCollectionViewSchema"];
-        };
-        AdministrativeDirectiveSchema: {
-            /** @example AdministrativeDirective */
-            "@type"?: string;
-            "@context": string;
-            /** @example KALU000000000 */
-            "@id": string;
-            /**
-             * @description Dokumentnummer
-             * @example KALU000000000
-             */
-            documentNumber: string;
-            /** @description Haupttitel */
-            headline?: string;
-            /** @description Kurzreferat */
-            shortReport?: string;
-            /**
-             * @description Dokumenttyp
-             * @example VV
-             */
-            documentType: string;
-            /**
-             * @description Art der Verwaltungsvorschrift
-             * @example Bekanntmachung
-             */
-            documentTypeDetail?: string;
-            /**
-             * @description Aktenzeichen
-             * @example ['ZZ', 'YY']
-             */
-            referenceNumbers: string[];
-            /**
-             * Format: date
-             * @description Gültig ab Datum
-             * @example 2003-12-15
-             */
-            entryIntoForceDate?: string;
-            /**
-             * Format: date
-             * @description Gültig bis Datum
-             * @example 2005-12-01
-             */
-            expiryDate?: string;
-            /** @description Normgeber */
-            legislationAuthority?: string;
-            /** @description Fundstelle */
-            references: string[];
-            /** @description Zitierdaten */
-            citationDates: string[];
-            /**
-             * @description Normkette
-             * @example ['§ 1 Abs1 SGB']
-             */
-            normReferences: string[];
-            /** @description Gliederung */
-            outline: string[];
-            encoding: components["schemas"]["DocumentEncodingSchema"][];
-        };
+  schemas: {
+    StatisticsApiSchema: {
+      legislation: components["schemas"]["StatisticsCountSchema"];
+      "case-law": components["schemas"]["StatisticsCountSchema"];
+      literature: components["schemas"]["StatisticsCountSchema"];
+      "administrative-directive": components["schemas"]["StatisticsCountSchema"];
     };
-    responses: never;
-    parameters: never;
-    requestBodies: never;
-    headers: never;
-    pathItems: never;
+    StatisticsCountSchema: {
+      /** Format: int64 */
+      count: number;
+    };
+    CaseLawSearchSchema: Omit<components["schemas"]["AbstractDocumentSchema"], "@type"> & {
+      /** @example Decision */
+      "@type"?: string;
+      /** @example KARE000000000 */
+      documentNumber: string;
+      /** @example ECLI:DE:FGRLP:1969:0905.IV85.68.0A */
+      ecli: string;
+      /** @example Überschrift */
+      headline?: string;
+      /** @example Titelzeile */
+      titleLine?: string;
+      /** @example Sonstiger Langtext */
+      otherLongText?: string;
+      /** Format: date */
+      decisionDate: string;
+      /** @example BGH 123/23 */
+      fileNumbers: string[];
+      /** @example FG */
+      courtType?: string;
+      /** @example Berlin */
+      location?: string;
+      /** @example Urteil */
+      documentType?: string;
+      /** @example Leitsatz */
+      outline?: string;
+      /** @example Gericht */
+      judicialBody?: string;
+      /** @example LArbG Hamm */
+      courtName?: string;
+      /** @example Beispielentscheidung */
+      decisionName: string[];
+      /** @example DEV-123 */
+      deviatingDocumentNumber: string[];
+      encoding: components["schemas"]["DocumentEncodingSchema"][];
+      /** @example /v1/case-law/ECLI:DE:FGRLP:1969:0905.IV85.68.0A */
+      "@id": string;
+      /** @example de */
+      inLanguage: string;
+    } & {
+      /**
+       * @description discriminator enum property added by openapi-typescript
+       * @enum {string}
+       */
+      "@type": "Decision";
+    };
+    CollectionSchemaSearchMemberSchemaCaseLawSearchSchema: {
+      /** @example hydra:Collection */
+      "@type"?: string;
+      "@context": string;
+      /** @example /v1/document?pageIndex=0&size=5 */
+      "@id": string;
+      /**
+       * Format: int64
+       * @example 1
+       */
+      totalItems: number;
+      member: components["schemas"]["SearchMemberSchemaCaseLawSearchSchema"][];
+      view: components["schemas"]["PartialCollectionViewSchema"];
+    };
+    DocumentEncodingSchema: {
+      /** @example MediaObject */
+      "@type"?: string;
+      "@id": string;
+      contentUrl: string;
+      /** @example text/html */
+      encodingFormat: string;
+      /** @example de */
+      inLanguage: string;
+    };
+    PartialCollectionViewSchema: {
+      /** @example hydra:PartialCollectionView */
+      "@type"?: string;
+      first?: string;
+      previous?: string;
+      next?: string;
+      last?: string;
+    };
+    SearchMemberSchemaCaseLawSearchSchema: {
+      /** @example SearchResult */
+      "@type"?: string;
+      item: components["schemas"]["CaseLawSearchSchema"];
+      textMatches: components["schemas"]["TextMatchSchema"][];
+    };
+    TextMatchSchema: {
+      /** @example SearchResultMatch */
+      "@type"?: string;
+      name: string;
+      text: string;
+      location?: string | null;
+    };
+    RechtsprechungSchema: {
+      /** @example Rechtsprechung */
+      "@type"?: string;
+      /** @example KARE000000000 */
+      dokumentNummer: string;
+      /**
+       * @description European Case Law Identifier
+       * @example ECLI:DE:FGRLP:1969:0905.IV85.68.0A
+       */
+      ecli: string;
+      /** @description CELEX-Nummer */
+      celex?: string;
+      /** @description Tatbestand */
+      tatbestand?: string;
+      /** @description Entscheidungsgründe */
+      entscheidungsgruende?: string;
+      /** @description Abweichende Meinung */
+      abweichendeMeinung?: string;
+      /** @description Gründe */
+      gruende?: string;
+      /** @description Leitsatz */
+      leitsatz?: string;
+      /** @description Kurztitel */
+      kurztitel?: string;
+      /** @description Titelzeile */
+      titelzeile?: string;
+      /** @description Orientierungssatz */
+      orientierungssatz?: string;
+      /** @description Sonstiger Orientierungssatz */
+      sonstigerOrientierungssatz?: string;
+      /** @description Sonstiger Langtext */
+      sonstigerLangtext?: string;
+      /** @description Rechtsfrage (gesamt) */
+      rechtsfrageGesamt?: string;
+      /** @description Rechtsfrage */
+      rechtsfrage?: string;
+      /** @description Tenor */
+      tenor?: string;
+      /**
+       * Format: date
+       * @description Datum
+       */
+      datum: string;
+      /**
+       * @description Art des Datums
+       * @example Entscheidungsdatum
+       * @enum {string}
+       */
+      datumsTyp?:
+        | "Entscheidungsdatum"
+        | "Mitteilungsdatum"
+        | "Datum der Zustellung an Verkündungs statt";
+      /** @description Abweichende Daten */
+      abweichendeDaten?: string[];
+      /** @description Gliederung */
+      gliederung?: string;
+      /** @description Aktenzeichen */
+      aktenzeichen?: string;
+      /**
+       * @description Aktenzeichenliste
+       * @example BGH 123/23
+       */
+      aktenzeichenListe: string[];
+      /**
+       * @description Abweichende Aktenzeichen
+       * @example 1
+       */
+      abweichendeAktenzeichen?: string[];
+      /** @description Abweichende ECLIs */
+      abweichendeEclis?: string[];
+      /** @description Berufsbilder */
+      berufsbilder?: string[];
+      /** @description Kündigungsarten */
+      kuendigungsarten?: string[];
+      /** @description Herkunftsländer */
+      herkunftslaender?: string[];
+      /** @description Regionen */
+      regionen?: string[];
+      /** @description Tarifverträge */
+      tarifvertraege?: string[];
+      /** @description Kündigungsgründe */
+      kuendigungsgruende?: string[];
+      /** @description Mitwirkende Richter */
+      mitwirkendeRichter?: string[];
+      /** @description Vorgehende Entscheidungen */
+      vorgehendeEntscheidungen?: string[];
+      /** @description Nachgehende Entscheidungen */
+      nachgehendeEntscheidungen?: string[];
+      /** @description Aktivzitierung Literatur Unselbstständig */
+      aktivzitierungLiteraturUnselbstaendig?: string[];
+      /** @description Passivzitierung Literatur Unselbstständig */
+      passivzitierungLiteraturUnselbstaendig?: string[];
+      /** @description Aktivzitierung Literatur Selbstständig */
+      aktivzitierungLiteraturSelbstaendig?: string[];
+      /** @description Passivzitierung Literatur Selbstständig */
+      passivzitierungLiteraturSelbstaendig?: string[];
+      /** @description Aktivzitierung Rechtsprechung */
+      aktivzitierungRechtsprechung?: string[];
+      /** @description Passivzitierung Rechtsprechung */
+      passivzitierungRechtsprechung?: string[];
+      /** @description Aktivzitierung Verwaltungsvorschriften */
+      aktivzitierungVerwaltungsvorschriften?: string[];
+      /** @description Passivzitierung Verwaltungsvorschriften */
+      passivzitierungVerwaltungsvorschriften?: string[];
+      /**
+       * @description Amtliche Fundstellen
+       * @example BGHSt 67, 273-284
+       */
+      amtlicheFundstellen?: string[];
+      /**
+       * @description Nichtamtliche Fundstellen
+       * @example DStR 2023, 1430-1435
+       */
+      nichtamtlicheFundstellen?: string[];
+      /**
+       * @description Gesetzeskraft
+       * @example vereinbar mit höherrangigem Recht (Bremen)
+       */
+      gesetzeskraft?: string[];
+      /**
+       * @description Normenkette
+       * @example BGB § 823
+       */
+      normenkette?: string[];
+      /** @description Sachgebiete */
+      sachgebiete?: string[];
+      /** @description Streitjahre */
+      streitjahre?: string[];
+      /** @description Fehlerhafte Gerichte */
+      fehlerhafteGerichte?: string[];
+      /** @description Daten der mündlichen Verhandlung */
+      datenDerMuendlichenVerhandlung?: string[];
+      /** @description Definitionen */
+      definitionen?: string[];
+      /**
+       * @description Erledigung
+       * @example Ja
+       */
+      erledigung?: string;
+      /**
+       * @description Rechtskraft
+       * @example Ja
+       */
+      rechtskraft?: string;
+      /**
+       * @description Gesetzgebungsauftrag
+       * @example Ja
+       */
+      gesetzgebungsauftrag?: string;
+      /**
+       * Format: date
+       * @description Langtextdatum
+       */
+      langtextdatum?: string;
+      /** @description Rechtsmittelführer */
+      rechtsmittelfuehrer?: string;
+      /** @description Rechtsmittelzulassung */
+      rechtsmittelzulassung?: string;
+      /**
+       * @description Revision
+       * @example Ja
+       */
+      revision?: string;
+      /**
+       * Format: date
+       * @description Letzte Veröffentlichung
+       */
+      letzteVeroeffentlichung?: string;
+      /** @description Erledigungsvermerk */
+      erledigungsvermerk?: string;
+      /**
+       * Format: date
+       * @description Erstveröffentlichung
+       */
+      erstveroeffentlichung?: string;
+      /**
+       * Format: date
+       * @description Mitteilungsdatum
+       */
+      mitteilungsdatum?: string;
+      /**
+       * @description Gericht
+       * @example FG Berlin
+       */
+      gericht?: string;
+      /** @description Gerichtsbarkeit */
+      gerichtsbarkeit?: string;
+      /** @example Urteil */
+      dokumenttyp?: string;
+      /**
+       * @description Spruchkörper
+       * @example Gericht
+       */
+      spruchkoerper?: string;
+      /**
+       * @description Schlagworte
+       * @example 3. Kammer
+       */
+      schlagwoerter: string[];
+      /** @example LArbG Hamm */
+      courtName?: string;
+      /**
+       * @description Entscheidungsnamen
+       * @example Beispielentscheidung
+       */
+      entscheidungsnamen: string[];
+      /**
+       * @description Abweichende Dokumentnummer
+       * @example DEV-123
+       */
+      abweichendeDokumentnummern: string[];
+      /** @example /v1/case-law/ECLI:DE:FGRLP:1969:0905.IV85.68.0A */
+      "@id": string;
+      /** @example de */
+      inLanguage: string;
+      encoding: components["schemas"]["DocumentEncodingSchema"][];
+      /** @description Whether or not the document is a Vorabdokument */
+      vorabdokument: boolean;
+    };
+    StreamingResponseBody: unknown;
+    CourtSearchResult: {
+      /** @example BGH Karlsruhe */
+      id?: string;
+      /**
+       * Format: int64
+       * @example 10000
+       */
+      count?: number;
+      /** @example Bundesgerichtshof Karlsruhe */
+      label?: string;
+    };
+    ChangelogChangedDocument: {
+      /** @description unique identifier of the document */
+      "@id": string;
+      /** @description type of the document */
+      "@type": string;
+      contentUrl: string;
+    };
+    ChangelogDeletedDocument: {
+      /** @description unique identifier of the document */
+      "@id": string;
+      /** @description type of the document */
+      "@type": string;
+    };
+    ChangelogResponse: {
+      "@type"?: string;
+      "@context": string;
+      /** @description Set of changed documents */
+      changed: components["schemas"]["ChangelogChangedDocument"][];
+      /** @description Set of deleted documents */
+      deleted: components["schemas"]["ChangelogDeletedDocument"][];
+      /** @description flag to communicate that the whole storage got rebuilt */
+      allChanged: boolean;
+    };
+    CollectionSchemaSearchMemberSchemaLiteratureSearchSchema: {
+      /** @example hydra:Collection */
+      "@type"?: string;
+      "@context": string;
+      /** @example /v1/document?pageIndex=0&size=5 */
+      "@id": string;
+      /**
+       * Format: int64
+       * @example 1
+       */
+      totalItems: number;
+      member: components["schemas"]["SearchMemberSchemaLiteratureSearchSchema"][];
+      view: components["schemas"]["PartialCollectionViewSchema"];
+    };
+    LiteratureSearchSchema: Omit<components["schemas"]["AbstractDocumentSchema"], "@type"> & {
+      /** @example Literature */
+      "@type"?: string;
+      /** @example KALU000000000 */
+      "@id": string;
+      /** @example de */
+      inLanguage: string;
+      /**
+       * @description Dokumentnummer
+       * @example KALU000000000
+       */
+      documentNumber: string;
+      /**
+       * @description Veröffentlichungsjahre
+       * @example [2014, 2024-09]
+       */
+      yearsOfPublication: string[];
+      /**
+       * @description Dokumenttypen
+       * @example ['Auf']
+       */
+      documentTypes: string[];
+      /**
+       * @description Unselbstständige Fundstellen
+       * @example ['BUV, 1982, 123-123']
+       */
+      dependentReferences: string[];
+      /**
+       * @description Selbstständige Fundstellen
+       * @example ['50 Jahre Betriebs-Berater, 1987, 123-456']
+       */
+      independentReferences: string[];
+      /** @description Haupttitel */
+      headline?: string;
+      /** @description Dokumentarischer Titel */
+      alternativeHeadline?: string;
+      /**
+       * @description Autoren
+       * @example ['Musterfrau, Sabine']
+       */
+      authors: string[];
+      /**
+       * @description Mitarbeiter
+       * @example ['Mustermann, Max']
+       */
+      collaborators: string[];
+      /** @description Kurzreferat */
+      shortReport?: string;
+      /** @description Gliederung */
+      outline?: string;
+      /**
+       * @description Literaturtyp
+       * @example ['sli', 'uli']
+       */
+      literatureType: string;
+      encoding: components["schemas"]["DocumentEncodingSchema"][];
+    } & {
+      /**
+       * @description discriminator enum property added by openapi-typescript
+       * @enum {string}
+       */
+      "@type": "Literature";
+    };
+    SearchMemberSchemaLiteratureSearchSchema: {
+      /** @example SearchResult */
+      "@type"?: string;
+      item: components["schemas"]["LiteratureSearchSchema"];
+      textMatches: components["schemas"]["TextMatchSchema"][];
+    };
+    LiteratureSchema: {
+      /** @example Literature */
+      "@type"?: string;
+      "@context": string;
+      /** @example KALU000000000 */
+      "@id": string;
+      /** @example de */
+      inLanguage: string;
+      /**
+       * @description Dokumentnummer
+       * @example KALU000000000
+       */
+      documentNumber: string;
+      /**
+       * @description Veröffentlichungsjahre
+       * @example [2014, 2024-09]
+       */
+      yearsOfPublication: string[];
+      /**
+       * @description Dokumenttypen
+       * @example ['Auf']
+       */
+      documentTypes: string[];
+      /**
+       * @description Unselbstständige Fundstellen
+       * @example ['BUV, 1982, 123-123']
+       */
+      dependentReferences: string[];
+      /**
+       * @description Selbstständige Fundstellen
+       * @example ['50 Jahre Betriebs-Berater, 1987, 123-456']
+       */
+      independentReferences: string[];
+      /**
+       * @description Norm Verweise
+       * @example ['GG, Art 6 Abs 2 S 1, 1949-05-23']
+       */
+      normReferences: string[];
+      /** @description Haupttitel */
+      headline?: string;
+      /** @description Zusätze zum Haupttitel */
+      headlineAdditions?: string;
+      /** @description Dokumentarischer Titel */
+      alternativeHeadline?: string;
+      /** @description Ausgabe */
+      edition?: string;
+      /** @description Bestellnummer */
+      internationalIdentifiers: string[];
+      /**
+       * @description Autoren
+       * @example ['Musterfrau, Sabine']
+       */
+      authors: string[];
+      /**
+       * @description Mitarbeiter
+       * @example ['Mustermann, Max']
+       */
+      collaborators: string[];
+      /** @description Bearbeiter */
+      editors: string[];
+      /** @description Begründer */
+      founder: string[];
+      /** @description Herausgeber (Person) */
+      publishers: string[];
+      /** @description Herausgeber (Institution) */
+      publisherOrganizations: string[];
+      /** @description Verlag */
+      publishingHouses: string[];
+      /**
+       * @description Sprachen
+       * @example ['deu', 'eng']
+       */
+      languages: string[];
+      /**
+       * @description Urheber
+       * @example ['DGB']
+       */
+      originators: string[];
+      /**
+       * @description Kongressvermerke
+       * @example ['Nationaler Beispiel Kongress, 2024, Berlin, GER']
+       */
+      conferenceNotes: string[];
+      /** @description Kurzreferat */
+      shortReport?: string;
+      /** @description Gliederung */
+      outline?: string;
+      /** @description Hochschulvermerk */
+      universityNotes: string[];
+      /** @description Teilbaende */
+      volumes: string[];
+      /**
+       * @description Literaturtyp
+       * @example ['sli', 'uli']
+       */
+      literatureType: string;
+      encoding: components["schemas"]["DocumentEncodingSchema"][];
+    };
+    CollectionSchemaSearchMemberSchemaLegislationExpressionSearchSchema: {
+      /** @example hydra:Collection */
+      "@type"?: string;
+      "@context": string;
+      /** @example /v1/document?pageIndex=0&size=5 */
+      "@id": string;
+      /**
+       * Format: int64
+       * @example 1
+       */
+      totalItems: number;
+      member: components["schemas"]["SearchMemberSchemaLegislationExpressionSearchSchema"][];
+      view: components["schemas"]["PartialCollectionViewSchema"];
+    };
+    /** @description A legislation expression and references to its manifestations. */
+    LegislationExpressionSearchSchema: Omit<
+      components["schemas"]["AbstractDocumentSchema"],
+      "@type"
+    > & {
+      /** @example Legislation */
+      "@type"?: string;
+      /** @example /v1/legislation/eli/bund/bgbl-1/1975/s1760/1998-01-29/10/deu */
+      "@id": string;
+      /**
+       * @description Amtliche Langüberschrift
+       * @example Verordnung über Kakao und Kakaoerzeugnisse
+       */
+      name: string;
+      /** @example eli/bund/bgbl-1/1975/s1760/1998-01-29/10/deu */
+      legislationIdentifier: string;
+      /** @description The work the expression is based on */
+      exampleOfWork: components["schemas"]["LegislationWorkSchema"];
+      /**
+       * @description Textual string indicating a time period in [ISO 8601 time interval format](https://en.wikipedia.org/wiki/ISO_8601#Time_intervals)
+       * @example 1998-02-06/..
+       */
+      temporalCoverage: string;
+      /**
+       * @description Amtliche Buchstabenabkürzung, if it exists. Otherwise ris-abkuerzung.
+       * @example KakaoV 2003
+       */
+      abbreviation: string;
+      /**
+       * @description Amtliche Kurzüberschrift
+       * @example Kakaoverordnung
+       */
+      alternateName?: string | null;
+      /**
+       * @description Whether the legislation expression is currently in force.
+       * @enum {string}
+       */
+      legislationLegalForce: "InForce" | "NotInForce" | "PartiallyInForce";
+      encoding: components["schemas"]["LegislationObjectSchema"][];
+    } & {
+      /**
+       * @description discriminator enum property added by openapi-typescript
+       * @enum {string}
+       */
+      "@type": "Legislation";
+    };
+    LegislationObjectSchema: {
+      /** @example LegislationObject */
+      "@type"?: string;
+      /** @example /v1/legislation/eli/bund/bgbl-1/1975/s1760/1998-01-29/10/deu/1998-01-29/regelungstext-1/html */
+      "@id": string;
+      /** @example /v1/legislation/eli/bund/bgbl-1/1975/s1760/1998-01-29/10/deu/1998-01-29/regelungstext-1.html */
+      contentUrl: string;
+      /** @example text/html */
+      encodingFormat: string;
+      /** @example de */
+      inLanguage: string;
+    };
+    LegislationWorkSchema: {
+      /** @example Legislation */
+      "@type"?: string;
+      /** @example /v1/legislation/eli/bund/bgbl-1/1975 */
+      "@id": string;
+      /** @example eli/bund/bgbl-1/1975/s1760 */
+      legislationIdentifier: string;
+      /**
+       * Format: date
+       * @description Ausfertigungsdatum (The date of adoption or signature of the legislation. This is the date at which the text is officially acknowledged to be a legislation, even though it might not even be published or in force.)
+       * @example 2003-12-15
+       */
+      legislationDate: string;
+      /**
+       * Format: date
+       * @description Verkündungsdatum (The date of first publication of the legislation, when it was published in the official gazette. This may be later than the `legislationDate`.)
+       * @example 2003-12-16
+       */
+      datePublished: string;
+      isPartOf?: components["schemas"]["PublicationIssueSchema"];
+    };
+    PublicationIssueSchema: {
+      /** @example PublicationIssue */
+      "@type"?: string;
+      /** @example BGBL I 2003, 1760 */
+      name: string;
+    };
+    SearchMemberSchemaLegislationExpressionSearchSchema: {
+      /** @example SearchResult */
+      "@type"?: string;
+      item: components["schemas"]["LegislationExpressionSearchSchema"];
+      textMatches: components["schemas"]["TextMatchSchema"][];
+    };
+    /** @description A specific part of a legislation expression */
+    LegislationExpressionPartSchema: {
+      /** @example Legislation */
+      "@type"?: string;
+      /** @example /v1/legislation/eli/bund/bgbl-1/1975/s1760/regelungstext-1.xml#hauptteitel-para-1 */
+      "@id": string;
+      /**
+       * @description Expression-level identifier, uniquely identifying this element in an FRBR expression
+       * @example hauptteitel-para-1
+       */
+      eId: string;
+      /**
+       * @description Numerical identifier of a specific legislation part
+       * @example § 1
+       */
+      name: string;
+      /**
+       * @description Headline of a specific legislation part
+       * @example Beginn der Rechtsfähigkeit
+       */
+      headline: string;
+      /**
+       * @description Textual string indicating a time period in [ISO 8601 time interval format](https://en.wikipedia.org/wiki/ISO_8601#Time_intervals)
+       * @example 1998-02-06/..
+       */
+      temporalCoverage: string;
+      /**
+       * @description Specifies the type of the part of a Legislation Expression.
+       * @enum {string}
+       */
+      partType?: "preamble" | "article" | "conclusion" | "attachment";
+      /** @description The source data for this part, if available on its own */
+      encoding?: components["schemas"]["LegislationObjectSchema"][];
+      hasPart?: components["schemas"]["LegislationExpressionPartSchema"][];
+    };
+    /** @description A legislation expression and references to its manifestations. */
+    LegislationExpressionSchema: {
+      /** @example Legislation */
+      "@type"?: string;
+      "@context": string;
+      /** @example /v1/legislation/eli/bund/bgbl-1/1975/s1760/1998-01-29/10/deu */
+      "@id": string;
+      /**
+       * @description Amtliche Langüberschrift
+       * @example Verordnung über Kakao und Kakaoerzeugnisse
+       */
+      name: string;
+      /**
+       * @description Amtliche Buchstabenabkürzung, if it exists. Otherwise ris-abkuerzung.
+       * @example KakaoV 2003
+       */
+      abbreviation: string;
+      /**
+       * @description The ris-abbreviation.
+       * @example StVO 2013
+       */
+      risAbbreviation: string;
+      /**
+       * @description Amtliche Kurzüberschrift
+       * @example Kakaoverordnung
+       */
+      alternateName?: string | null;
+      /** @description The work the expression is based on */
+      exampleOfWork: components["schemas"]["LegislationWorkSchema"];
+      /** @example eli/bund/bgbl-1/1975/s1760/1998-01-29/10/deu */
+      legislationIdentifier: string;
+      /**
+       * @description Textual string indicating a time period in [ISO 8601 time interval format](https://en.wikipedia.org/wiki/ISO_8601#Time_intervals)
+       * @example 1998-02-06/..
+       */
+      temporalCoverage: string;
+      /**
+       * @description Whether the legislation expression is currently in force.
+       * @enum {string}
+       */
+      legislationLegalForce: "InForce" | "NotInForce" | "PartiallyInForce";
+      /** @description List of components (articles, preambles, conclusions, attachments, …) that form this legislation item. */
+      hasPart: components["schemas"]["LegislationExpressionPartSchema"][];
+      encoding: components["schemas"]["LegislationObjectSchema"][];
+    };
+    AbstractDocumentSchema: {
+      "@type": string;
+    };
+    AdministrativeDirectiveSearchSchema: Omit<
+      components["schemas"]["AbstractDocumentSchema"],
+      "@type"
+    > & {
+      /** @example AdministrativeDirective */
+      "@type"?: string;
+      /** @example KALU000000000 */
+      "@id": string;
+      /**
+       * @description Dokumentnummer
+       * @example KALU000000000
+       */
+      documentNumber: string;
+      /** @description Haupttitel */
+      headline?: string;
+      /** @description Kurzreferat */
+      shortReport?: string;
+      /** @description Gliederung */
+      outline?: string[];
+      /**
+       * @description Dokumenttyp
+       * @example VV
+       */
+      documentType: string;
+      /**
+       * @description Aktenzeichen
+       * @example ['ZZ', 'YY']
+       */
+      referenceNumbers: string[];
+      /** @description Normgeber */
+      legislationAuthority?: string;
+      /**
+       * Format: date
+       * @description Gültig ab Datum
+       * @example 2003-12-15
+       */
+      entryIntoForceDate?: string;
+      encoding: components["schemas"]["DocumentEncodingSchema"][];
+    } & {
+      /**
+       * @description discriminator enum property added by openapi-typescript
+       * @enum {string}
+       */
+      "@type": "AdministrativeDirective";
+    };
+    CollectionSchemaSearchMemberSchemaAbstractDocumentSchema: {
+      /** @example hydra:Collection */
+      "@type"?: string;
+      "@context": string;
+      /** @example /v1/document?pageIndex=0&size=5 */
+      "@id": string;
+      /**
+       * Format: int64
+       * @example 1
+       */
+      totalItems: number;
+      member: components["schemas"]["SearchMemberSchemaAbstractDocumentSchema"][];
+      view: components["schemas"]["PartialCollectionViewSchema"];
+    };
+    SearchMemberSchemaAbstractDocumentSchema: {
+      /** @example SearchResult */
+      "@type"?: string;
+      item:
+        | components["schemas"]["AdministrativeDirectiveSearchSchema"]
+        | components["schemas"]["CaseLawSearchSchema"]
+        | components["schemas"]["LegislationExpressionSearchSchema"]
+        | components["schemas"]["LiteratureSearchSchema"];
+      textMatches: components["schemas"]["TextMatchSchema"][];
+    };
+    CollectionSchemaSearchMemberSchemaAdministrativeDirectiveSearchSchema: {
+      /** @example hydra:Collection */
+      "@type"?: string;
+      "@context": string;
+      /** @example /v1/document?pageIndex=0&size=5 */
+      "@id": string;
+      /**
+       * Format: int64
+       * @example 1
+       */
+      totalItems: number;
+      member: components["schemas"]["SearchMemberSchemaAdministrativeDirectiveSearchSchema"][];
+      view: components["schemas"]["PartialCollectionViewSchema"];
+    };
+    SearchMemberSchemaAdministrativeDirectiveSearchSchema: {
+      /** @example SearchResult */
+      "@type"?: string;
+      item: components["schemas"]["AdministrativeDirectiveSearchSchema"];
+      textMatches: components["schemas"]["TextMatchSchema"][];
+    };
+    CaseLawSchema: {
+      /** @example Decision */
+      "@type"?: string;
+      "@context": string;
+      /**
+       * @description Dokumentnummer<br>
+       * @example KARE000000000
+       */
+      documentNumber: string;
+      /**
+       * @description European Case Law Identifier
+       * @example ECLI:DE:FGRLP:1969:0905.IV85.68.0A
+       */
+      ecli: string;
+      /** @description Tatbestand */
+      caseFacts?: string;
+      /** @description Entscheidungsgründe */
+      decisionGrounds?: string;
+      /** @description Abweichende Meinung */
+      dissentingOpinion?: string;
+      /** @description Gründe */
+      grounds?: string;
+      /** @description Leitsatz */
+      guidingPrinciple?: string;
+      /** @description Überschrift */
+      headline?: string;
+      /** @description Titelzeile */
+      titleLine?: string;
+      /** @description Orientierungssatz */
+      headnote?: string;
+      /** @description Sonstiger Orientierungssatz */
+      otherHeadnote?: string;
+      /** @description Sonstiger Langtext */
+      otherLongText?: string;
+      /** @description Tenor */
+      tenor?: string;
+      /**
+       * Format: date
+       * @description Datum der Entscheidung, hier kann es zu Dopplungen mit anderen Entscheidungen kommen, auch in Kombination mit Aktenzeichen und Gericht.<br>
+       */
+      decisionDate: string;
+      /**
+       * @description Aktenzeichen des Dokuments<br><br>Der erste Eintrag ist das primäre Aktenzeichen.<br>Weitere Einträge sind abweichende Aktenzeichen, die auch für dieses<br>Dokument verwendet werden.<br>
+       * @example BGH 123/23
+       */
+      fileNumbers: string[];
+      /**
+       * @description Inhalt ist die Angabe des Typs des Gerichtes, das das Dokument verfasst hat.<br>
+       * @example FG
+       */
+      courtType?: string;
+      /**
+       * @description Ort des Gerichtssitzes.<br>
+       * @example Berlin
+       */
+      location?: string;
+      /**
+       * @description Innerhalb der Dokumentart „Rechtsprechung“ werden folgende Dokumenttypen unterschieden:<br><br><ul><li>Äuß: Äußerung</li><li>Ant: EuGH-Vorlage</li><li>AnU: Anerkenntnisurteil</li><li>Bes: Beschluss</li><li>Buß: Bußgeldbescheid</li><li>DrB: Dreierausschussbeschluss</li><li>EiA: Einstweilige Anordnung</li><li>Ent: Entscheidung</li><li>EVg: Einstellungsverfügung der Staatsanwaltschaft</li><li>GeB: Gerichtsbescheid</li><li>Gut: Gutachten</li><li>GWF: Gegenstandswertfestsetzung im verfassungsgerichtlichen Verfahren</li><li>KaB: Kammerbeschluss</li><li>KbN: Nichtannahmebeschluss</li><li>KbS: Stattgebender Kammerbeschluss</li><li>KoB: Kammerbeschluss ohne Begründung</li><li>PkH: Prozesskostenhilfebeschluss</li><li>ReM: Rechtsentscheid in Mietsachen</li><li>Sch: Schiedsgerichtsentscheidung</li><li>Ste: Stellungnahme</li><li>Str: Streitwertbeschluss</li><li>TeB: Teilbeschluss</li><li>TeU: Teilurteil</li><li>Urt: Urteil</li><li>Vgl: Vergleich</li><li>Vor: Vorlagebeschluss</li><li>VsU: Versäumnisurteil</li><li>VzU: Verzichtsurteil</li><li>ZwB: Zwischenbeschluss</li><li>ZwU: Zwischenurteil</li><li>TVU: Teilversäumnisurteil</li><li>Vfg: Verfügung</li><li>Vorab: Ersuchen um Vorabentscheidung</li><li>Anh: Anhängiges Verfahren</li><li>End: Endurteil</li><li>KfB: Kostenfestsetzungsbeschluss</li>
+       * @example Urteil
+       */
+      documentType?: string;
+      /** @description Leitsatz */
+      outline?: string;
+      /**
+       * @description Inhalt ist die Angabe des Spruchkörpers, von dem das Dokument stammt (z.B. 1. Zivilsenat, 3. Strafkammer, Großer Senat).<br>
+       * @example 1. Senat
+       */
+      judicialBody?: string;
+      /**
+       * @description Schlagworte
+       * @example Kündigung
+       */
+      keywords: string[];
+      /**
+       * @description Gericht<br>
+       * @example LArbG Hamm
+       */
+      courtName?: string;
+      /**
+       * @description Entscheidungsname
+       * @example Beispielentscheidung
+       */
+      decisionName: string[];
+      /**
+       * @description Abweichende Dokumentnummer<br>
+       * @example DEV-123
+       */
+      deviatingDocumentNumber: string[];
+      /** @description Vorgehende Entscheidungen */
+      previousDecisions?: string[];
+      /** @description Nachgehende Entscheidungen */
+      ensuingDecisions?: string[];
+      /**
+       * @description Gesetzeskraft
+       * @example vereinbar mit höherrangigem Recht (Bremen)
+       */
+      gesetzeskraft?: string[];
+      /** @description Streitjahre */
+      streitjahre?: string[];
+      /** @example /v1/case-law/ECLI:DE:FGRLP:1969:0905.IV85.68.0A */
+      "@id": string;
+      /** @example de */
+      inLanguage: string;
+      encoding: components["schemas"]["DocumentEncodingSchema"][];
+      /** @description Whether or not the document is a Vorabdokument */
+      vorabdokument: boolean;
+    };
+    /** @description Represents a <a href="https://schema.org/DataCatalog">schema.org/DataCatalog</a>. */
+    ZipDataCatalogSchema: {
+      /** @example https://schema.org/ */
+      "@context"?: string;
+      /** @example DataCatalog */
+      "@type"?: string;
+      /** @description The name of this data catalog. */
+      name: string;
+      /** @description The list of zip datasets contained in this catalog. */
+      dataSet: components["schemas"]["ZipDataSetSchema"][];
+    };
+    /** @description Represents <a href="https://schema.org/DataDownload">schema.org/DataDownload</a>. */
+    ZipDataDownloadSchema: {
+      /** @example DataDownload */
+      "@type"?: string;
+      /** @description Will always be application/zip. */
+      encodingFormat: string;
+      /** @description The url to download the zip file. */
+      contentUrl: string;
+    };
+    /** @description Represents <a href="https://schema.org/Dataset">schema.org/Dataset</a>. */
+    ZipDataSetSchema: {
+      /** @example Dataset */
+      "@type"?: string;
+      /** @description The name of the dataset. */
+      name: string;
+      /** @description A short summary describing the contents of the dataset. */
+      description: string;
+      /** @description The downloadable form of this dataset. */
+      distribution?: components["schemas"]["ZipDataDownloadSchema"];
+    };
+    /** @description A specific part of a legislation expression */
+    ArticleVersionSchema: {
+      /** @example Legislation */
+      "@type"?: string;
+      /** @example /v1/legislation/eli/bund/bgbl-1/1975/s1760/regelungstext-1.xml#hauptteitel-para-1 */
+      "@id": string;
+      /**
+       * @description Expression-level identifier, uniquely identifying this element in an FRBR expression
+       * @example hauptteitel-para-1
+       */
+      eId: string;
+      /**
+       * @description Numerical identifier of a specific legislation part
+       * @example § 1
+       */
+      name: string;
+      /**
+       * @description Textual string indicating a time period in [ISO 8601 time interval format](https://en.wikipedia.org/wiki/ISO_8601#Time_intervals)
+       * @example 1998-02-06/..
+       */
+      temporalCoverage: string;
+      encoding?: components["schemas"]["LegislationObjectSchema"][];
+      isPartOf?: components["schemas"]["IsPartOfReference"][];
+    };
+    CollectionSchemaArticleVersionSchema: {
+      /** @example hydra:Collection */
+      "@type"?: string;
+      "@context": string;
+      /** @example /v1/document?pageIndex=0&size=5 */
+      "@id": string;
+      /**
+       * Format: int64
+       * @example 1
+       */
+      totalItems: number;
+      member: components["schemas"]["ArticleVersionSchema"][];
+      view: components["schemas"]["PartialCollectionViewSchema"];
+    };
+    /** @description A reference to another expression that the article is part of */
+    IsPartOfReference: {
+      "@type"?: string;
+      /** @example /v1/legislation/eli/bund/bgbl-1/1975/s1760/1998-01-29/10/deu/art-z1 */
+      "@id": string;
+    };
+    AdministrativeDirectiveSchema: {
+      /** @example AdministrativeDirective */
+      "@type"?: string;
+      "@context": string;
+      /** @example KALU000000000 */
+      "@id": string;
+      /**
+       * @description Dokumentnummer
+       * @example KALU000000000
+       */
+      documentNumber: string;
+      /** @description Haupttitel */
+      headline?: string;
+      /** @description Kurzreferat */
+      shortReport?: string;
+      /**
+       * @description Dokumenttyp
+       * @example VV
+       */
+      documentType: string;
+      /**
+       * @description Art der Verwaltungsvorschrift
+       * @example Bekanntmachung
+       */
+      documentTypeDetail?: string;
+      /**
+       * @description Aktenzeichen
+       * @example ['ZZ', 'YY']
+       */
+      referenceNumbers: string[];
+      /**
+       * Format: date
+       * @description Gültig ab Datum
+       * @example 2003-12-15
+       */
+      entryIntoForceDate?: string;
+      /**
+       * Format: date
+       * @description Gültig bis Datum
+       * @example 2005-12-01
+       */
+      expiryDate?: string;
+      /** @description Normgeber */
+      legislationAuthority?: string;
+      /** @description Fundstelle */
+      references: string[];
+      /** @description Zitierdaten */
+      citationDates: string[];
+      /**
+       * @description Normkette
+       * @example ['§ 1 Abs1 SGB']
+       */
+      normReferences: string[];
+      /** @description Gliederung */
+      outline: string[];
+      encoding: components["schemas"]["DocumentEncodingSchema"][];
+    };
+  };
+  responses: never;
+  parameters: never;
+  requestBodies: never;
+  headers: never;
+  pathItems: never;
 }
 export type $defs = Record<string, never>;
 export interface operations {
-    getStatisticsData: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description OK */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["StatisticsApiSchema"];
-                };
-            };
-        };
+  getStatisticsData: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    searchRechtsprechung: {
-        parameters: {
-            query?: {
-                fileNumber?: string;
-                ecli?: string;
-                /** @description Filter by court name (Finanzgericht Münster, FG Münster, ArbG Köln) or court type (Finanzgericht, FG, ArbG). Supports both long and short names. */
-                court?: string;
-                /** @description Corresponds to “Rechtskraft”, meaning that the decision referred to is legally binding. */
-                legalEffect?: "JA" | "NEIN" | "KEINE_ANGABE" | "FALSCHE_ANGABE";
-                /** @description Filter by document type (Urteil, Versäumnisurteil, Entscheidung etc.). Multiple values may be specified as a comma-separated list or by repeating the parameter. */
-                type?: string[];
-                /** @description Extended filter by type group. Multiple values may be specified as a comma-separated list or by repeating the parameter. */
-                typeGroup?: "Urteil" | "Beschluss" | "other";
-                /** @description Searches for the given tokens in searchTerm. If searchTerm contains more than one token, all tokens must be in the document for the document to match. */
-                searchTerm?: string;
-                /** @description The from (greater than or equal) parameter returns all entities where date is later than, or equal to, the given date. */
-                dateFrom?: string;
-                /** @description The to (less than or equal) parameter returns all entities where date is earlier than, or equal to, the given date. */
-                dateTo?: string;
-                /**
-                 * @description The number of entities per page
-                 * @example 100
-                 */
-                size?: number;
-                /**
-                 * @description The number of the page to request. The page starts with the value 0
-                 * @example 0
-                 */
-                pageIndex?: number;
-                /** @description The field to sort the results by. Default is the relevance score calculated by OpenSearch. Valid usage of the sort field are : date, courtName, documentNumber and not setting the sort field (sort by relevance descending).Add a leading - to set the order to descending (-date) */
-                sort?: string;
-            };
-            header?: never;
-            path?: never;
-            cookie?: never;
+    requestBody?: never;
+    responses: {
+      /** @description OK */
+      200: {
+        headers: {
+          [name: string]: unknown;
         };
-        requestBody?: never;
-        responses: {
-            /** @description Success */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["CollectionSchemaSearchMemberSchemaCaseLawSearchSchema"];
-                };
-            };
-            /** @description Internal Server Error */
-            500: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content?: never;
-            };
+        content: {
+          "application/json": components["schemas"]["StatisticsApiSchema"];
         };
+      };
     };
-    getCaseLaw: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /** @example STRE201770751 */
-                documentNumber: string;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description OK */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["RechtsprechungSchema"];
-                };
-            };
-            /** @description Not Found */
-            404: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content?: never;
-            };
-        };
+  };
+  searchRechtsprechung: {
+    parameters: {
+      query?: {
+        fileNumber?: string;
+        ecli?: string;
+        /** @description Filter by court name (Finanzgericht Münster, FG Münster, ArbG Köln) or court type (Finanzgericht, FG, ArbG). Supports both long and short names. */
+        court?: string;
+        /** @description Corresponds to “Rechtskraft”, meaning that the decision referred to is legally binding. */
+        legalEffect?: "JA" | "NEIN" | "KEINE_ANGABE" | "FALSCHE_ANGABE";
+        /** @description Filter by document type (Urteil, Versäumnisurteil, Entscheidung etc.). Multiple values may be specified as a comma-separated list or by repeating the parameter. */
+        type?: string[];
+        /** @description Extended filter by type group. Multiple values may be specified as a comma-separated list or by repeating the parameter. */
+        typeGroup?: "Urteil" | "Beschluss" | "other";
+        /** @description Searches for the given tokens in searchTerm. If searchTerm contains more than one token, all tokens must be in the document for the document to match. */
+        searchTerm?: string;
+        /** @description The from (greater than or equal) parameter returns all entities where date is later than, or equal to, the given date. */
+        dateFrom?: string;
+        /** @description The to (less than or equal) parameter returns all entities where date is earlier than, or equal to, the given date. */
+        dateTo?: string;
+        /**
+         * @description The number of entities per page
+         * @example 100
+         */
+        size?: number;
+        /**
+         * @description The number of the page to request. The page starts with the value 0
+         * @example 0
+         */
+        pageIndex?: number;
+        /** @description The field to sort the results by. Default is the relevance score calculated by OpenSearch. Valid usage of the sort field are : date, courtName, documentNumber and not setting the sort field (sort by relevance descending).Add a leading - to set the order to descending (-date) */
+        sort?: string;
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    getImage: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /** @example BDRE000800001 */
-                documentNumber: string;
-                /** @example image */
-                name: string;
-                /** @example jpg */
-                extension: "png" | "jpg" | "jpeg" | "gif" | "wmf" | "emf" | "bitmap";
-            };
-            cookie?: never;
+    requestBody?: never;
+    responses: {
+      /** @description Success */
+      200: {
+        headers: {
+          [name: string]: unknown;
         };
-        requestBody?: never;
-        responses: {
-            /** @description OK */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "*/*": string;
-                };
-            };
-            /** @description Not Found */
-            404: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content?: never;
-            };
+        content: {
+          "application/json": components["schemas"]["CollectionSchemaSearchMemberSchemaCaseLawSearchSchema"];
         };
+      };
+      /** @description Internal Server Error */
+      500: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
     };
-    getCaseLawDocumentationUnitAsZip: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /** @example STRE201770751 */
-                documentNumber: string;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description OK */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/zip": components["schemas"]["StreamingResponseBody"];
-                };
-            };
-            /** @description Not Found */
-            404: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content?: never;
-            };
-        };
+  };
+  getCaseLaw: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        /** @example STRE201770751 */
+        documentNumber: string;
+      };
+      cookie?: never;
     };
-    getCaseLawDocumentationUnitAsXml: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /** @example STRE201770751 */
-                documentNumber: string;
-            };
-            cookie?: never;
+    requestBody?: never;
+    responses: {
+      /** @description OK */
+      200: {
+        headers: {
+          [name: string]: unknown;
         };
-        requestBody?: never;
-        responses: {
-            /** @description OK */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/xml": string;
-                };
-            };
-            /** @description Not Found */
-            404: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content?: never;
-            };
+        content: {
+          "application/json": components["schemas"]["RechtsprechungSchema"];
         };
+      };
+      /** @description Not Found */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
     };
-    getCaseLawDocumentationUnitAsHtml: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /** @example STRE201770751 */
-                documentNumber: string;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description OK */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "text/html": string;
-                };
-            };
-            /** @description Not Found */
-            404: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content?: never;
-            };
-        };
+  };
+  getImage: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        /** @example BDRE000800001 */
+        documentNumber: string;
+        /** @example image */
+        name: string;
+        /** @example jpg */
+        extension: "png" | "jpg" | "jpeg" | "gif" | "wmf" | "emf" | "bitmap";
+      };
+      cookie?: never;
     };
-    getRechtsprechungCourts: {
-        parameters: {
-            query?: {
-                prefix?: string;
-            };
-            header?: never;
-            path?: never;
-            cookie?: never;
+    requestBody?: never;
+    responses: {
+      /** @description OK */
+      200: {
+        headers: {
+          [name: string]: unknown;
         };
-        requestBody?: never;
-        responses: {
-            /** @description OK */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["CourtSearchResult"][];
-                };
-            };
+        content: {
+          "*/*": string;
         };
+      };
+      /** @description Not Found */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
     };
-    getChangelogs: {
-        parameters: {
-            query: {
-                from: string;
-                to: string;
-            };
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description OK */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "*/*": components["schemas"]["ChangelogResponse"];
-                };
-            };
-        };
+  };
+  getCaseLawDocumentationUnitAsZip: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        /** @example STRE201770751 */
+        documentNumber: string;
+      };
+      cookie?: never;
     };
-    searchLiterature: {
-        parameters: {
-            query?: {
-                documentNumber?: string;
-                yearOfPublication?: string[];
-                documentType?: string[];
-                author?: string[];
-                collaborator?: string[];
-                /** @description Searches for the given tokens in searchTerm. If searchTerm contains more than one token, all tokens must be in the document for the document to match. */
-                searchTerm?: string;
-                /** @description The from (greater than or equal) parameter returns all entities where date is later than, or equal to, the given date. */
-                dateFrom?: string;
-                /** @description The to (less than or equal) parameter returns all entities where date is earlier than, or equal to, the given date. */
-                dateTo?: string;
-                /**
-                 * @description The number of entities per page
-                 * @example 100
-                 */
-                size?: number;
-                /**
-                 * @description The number of the page to request. The page starts with the value 0
-                 * @example 0
-                 */
-                pageIndex?: number;
-                /** @description The field to sort the results by. Default is the relevance score calculated by OpenSearch. Valid usage of the sort field are : date and documentNumber and not setting the sort field (sort by relevance descending).Add a leading - to set the order to descending (-date) */
-                sort?: string;
-            };
-            header?: never;
-            path?: never;
-            cookie?: never;
+    requestBody?: never;
+    responses: {
+      /** @description OK */
+      200: {
+        headers: {
+          [name: string]: unknown;
         };
-        requestBody?: never;
-        responses: {
-            /** @description Success */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["CollectionSchemaSearchMemberSchemaLiteratureSearchSchema"];
-                };
-            };
-            /** @description Internal Server Error */
-            500: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content?: never;
-            };
+        content: {
+          "application/zip": components["schemas"]["StreamingResponseBody"];
         };
+      };
+      /** @description Not Found */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
     };
-    getLiteratureMetadata: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /** @example STRE201770751 */
-                documentNumber: string;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description OK */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["LiteratureSchema"];
-                };
-            };
-            /** @description Not Found */
-            404: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content?: never;
-            };
-        };
+  };
+  getCaseLawDocumentationUnitAsXml: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        /** @example STRE201770751 */
+        documentNumber: string;
+      };
+      cookie?: never;
     };
-    getLiteratureDocumentAsZip: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /** @example XXLS201770751 */
-                documentNumber: string;
-            };
-            cookie?: never;
+    requestBody?: never;
+    responses: {
+      /** @description OK */
+      200: {
+        headers: {
+          [name: string]: unknown;
         };
-        requestBody?: never;
-        responses: {
-            /** @description OK */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/zip": components["schemas"]["StreamingResponseBody"];
-                };
-            };
-            /** @description Not Found */
-            404: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content?: never;
-            };
+        content: {
+          "application/xml": string;
         };
+      };
+      /** @description Not Found */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
     };
-    getLiteratureAsXml: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /** @example BJLU075748788 */
-                documentNumber: string;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description OK */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/xml": string;
-                };
-            };
-            /** @description Not Found */
-            404: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content?: never;
-            };
-        };
+  };
+  getCaseLawDocumentationUnitAsHtml: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        /** @example STRE201770751 */
+        documentNumber: string;
+      };
+      cookie?: never;
     };
-    getLiteratureAsHtml: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /** @example BJLU075748788 */
-                documentNumber: string;
-            };
-            cookie?: never;
+    requestBody?: never;
+    responses: {
+      /** @description OK */
+      200: {
+        headers: {
+          [name: string]: unknown;
         };
-        requestBody?: never;
-        responses: {
-            /** @description OK */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "text/html": string;
-                };
-            };
-            /** @description Not Found */
-            404: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content?: never;
-            };
+        content: {
+          "text/html": string;
         };
+      };
+      /** @description Not Found */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
     };
-    getChangelogs_1: {
-        parameters: {
-            query: {
-                from: string;
-                to: string;
-            };
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description OK */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "*/*": components["schemas"]["ChangelogResponse"];
-                };
-            };
-        };
+  };
+  getRechtsprechungCourts: {
+    parameters: {
+      query?: {
+        prefix?: string;
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    searchAndFilterLegislation: {
-        parameters: {
-            query?: {
-                /** @description Search by European Legislation Identifier (ELI). Right now only searching by work ELI is supported, but a general eli prefix match might be supported in the future. */
-                eli?: string;
-                /** @description Filters the result set to only return expressions that are in force *on or after* the provided date. The parameter should be provided in `YYYY-MM-DD` format. Differs from `dateFrom`, which refers to the date of adoption or signature of the legislation. If both `temporalCoverageFrom` and `temporalCoverageTo` are given, this will output all expressions that were in force during at least one day between the two dates. To get all expressions for one specific day, set both parameters to the same day. */
-                temporalCoverageFrom?: string;
-                /** @description Filters the result set to only return expressions that are in force *on or before* the provided date. The parameter should be provided in `YYYY-MM-DD` format. Differs from `dateTo`, which refers to the date of adoption or signature of the legislation. */
-                temporalCoverageTo?: string;
-                /** @description Filters the result set so every work returns exactly one expression. Most relevant is defined as : The expression in force on that date if it exists, then the expression that would next be in force if that exists, then the most recent expression that was in force. If other filters are used the work may return 0 expressions due to the most relevant expression being filtered out. */
-                mostRelevantOn?: string;
-                /** @description Filters the result set by the given abbreviation. */
-                abbreviation?: string;
-                /** @description Filters the result set by the given ris-abbreviation. */
-                risAbbreviation?: string;
-                /** @description Searches for the given tokens in searchTerm. If searchTerm contains more than one token, all tokens must be in the document for the document to match. */
-                searchTerm?: string;
-                /** @description The from (greater than or equal) parameter returns all entities where date is later than, or equal to, the given date. */
-                dateFrom?: string;
-                /** @description The to (less than or equal) parameter returns all entities where date is earlier than, or equal to, the given date. */
-                dateTo?: string;
-                /**
-                 * @description The number of entities per page
-                 * @example 100
-                 */
-                size?: number;
-                /**
-                 * @description The number of the page to request. The page starts with the value 0
-                 * @example 0
-                 */
-                pageIndex?: number;
-                /** @description The field to sort the results by. Default is the relevance score calculated by OpenSearch. Valid usage of the sort field are : date, temporalCoverageFrom, legislationIdentifier and not setting the sort field (sort by relevance descending).Add a leading - to set the order to descending (-date) */
-                sort?: string;
-            };
-            header?: never;
-            path?: never;
-            cookie?: never;
+    requestBody?: never;
+    responses: {
+      /** @description OK */
+      200: {
+        headers: {
+          [name: string]: unknown;
         };
-        requestBody?: never;
-        responses: {
-            /** @description OK */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["CollectionSchemaSearchMemberSchemaLegislationExpressionSearchSchema"];
-                };
-            };
-            /** @description Unprocessable Content */
-            422: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["CollectionSchemaSearchMemberSchemaLegislationExpressionSearchSchema"];
-                };
-            };
+        content: {
+          "application/json": components["schemas"]["CourtSearchResult"][];
         };
+      };
     };
-    getLegislation: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /** @description Country or regional code for the jurisdiction */
-                jurisdiction: "bund";
-                /**
-                 * @description Agent or authority issuing the legislation, e.g., 'bgbl-1' for Bundesgesetzblatt Teil I (Federal Law Gazette part I)
-                 * @example bgbl-1
-                 */
-                agent: string;
-                /**
-                 * @description Year the legislation was enacted or published
-                 * @example 1979
-                 */
-                year: string;
-                /**
-                 * @description Unique natural identifier for the legislation, specific to the jurisdiction and agent
-                 * @example s1325
-                 */
-                naturalIdentifier: string;
-                /** @example 2020-06-19 */
-                pointInTime: string;
-                /** @example 2 */
-                version: number;
-                /** @example deu */
-                language: string;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description OK */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["LegislationExpressionSchema"];
-                };
-            };
-            /** @description Not Found */
-            404: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content?: never;
-            };
-        };
+  };
+  getChangelogs: {
+    parameters: {
+      query: {
+        from: string;
+        to: string;
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    getLegislationArticleAsHtml: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /**
-                 * @description Country or regional code for the jurisdiction
-                 * @example bund
-                 */
-                jurisdiction: "bund";
-                /**
-                 * @description Agent or authority issuing the legislation, e.g., 'bgbl-1' for Bundesgesetzblatt Teil I (Federal Law Gazette part I)
-                 * @example bgbl-1
-                 */
-                agent: string;
-                /**
-                 * @description Year the legislation was enacted or published
-                 * @example 1979
-                 */
-                year: string;
-                /**
-                 * @description Unique natural identifier for the legislation, specific to the jurisdiction and agent
-                 * @example s1325
-                 */
-                naturalIdentifier: string;
-                /** @example 2020-06-19 */
-                pointInTime: string;
-                /** @example 2 */
-                version: number;
-                /** @example deu */
-                language: string;
-                /** @example 2020-06-19 */
-                pointInTimeManifestation: string;
-                /** @example regelungstext-1 */
-                subtype: string;
-                /**
-                 * @description The expression identifier, denoting elements inside an expression
-                 * @example art-z1
-                 */
-                articleEid: string;
-            };
-            cookie?: never;
+    requestBody?: never;
+    responses: {
+      /** @description OK */
+      200: {
+        headers: {
+          [name: string]: unknown;
         };
-        requestBody?: never;
-        responses: {
-            /** @description OK */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "text/html": string;
-                };
-            };
-            /** @description Not Found */
-            404: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "text/html": string;
-                };
-            };
+        content: {
+          "*/*": components["schemas"]["ChangelogResponse"];
         };
+      };
     };
-    getLegislationSubtypeAsXml: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /**
-                 * @description Country or regional code for the jurisdiction
-                 * @example bund
-                 */
-                jurisdiction: "bund";
-                /**
-                 * @description Agent or authority issuing the legislation, e.g., 'bgbl-1' for Bundesgesetzblatt Teil I (Federal Law Gazette part I)
-                 * @example bgbl-1
-                 */
-                agent: string;
-                /**
-                 * @description Year the legislation was enacted or published
-                 * @example 1979
-                 */
-                year: string;
-                /**
-                 * @description Unique natural identifier for the legislation, specific to the jurisdiction and agent
-                 * @example s1325
-                 */
-                naturalIdentifier: string;
-                /** @example 2020-06-19 */
-                pointInTime: string;
-                /** @example 2 */
-                version: number;
-                /** @example deu */
-                language: string;
-                /** @example 2020-06-19 */
-                pointInTimeManifestation: string;
-                /** @example regelungstext-1 */
-                subtype: string;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description OK */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/xml": string;
-                };
-            };
-            /** @description Not Found */
-            404: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content?: never;
-            };
-        };
+  };
+  searchLiterature: {
+    parameters: {
+      query?: {
+        documentNumber?: string;
+        yearOfPublication?: string[];
+        documentType?: string[];
+        author?: string[];
+        collaborator?: string[];
+        /** @description Searches for the given tokens in searchTerm. If searchTerm contains more than one token, all tokens must be in the document for the document to match. */
+        searchTerm?: string;
+        /** @description The from (greater than or equal) parameter returns all entities where date is later than, or equal to, the given date. */
+        dateFrom?: string;
+        /** @description The to (less than or equal) parameter returns all entities where date is earlier than, or equal to, the given date. */
+        dateTo?: string;
+        /**
+         * @description The number of entities per page
+         * @example 100
+         */
+        size?: number;
+        /**
+         * @description The number of the page to request. The page starts with the value 0
+         * @example 0
+         */
+        pageIndex?: number;
+        /** @description The field to sort the results by. Default is the relevance score calculated by OpenSearch. Valid usage of the sort field are : date and documentNumber and not setting the sort field (sort by relevance descending).Add a leading - to set the order to descending (-date) */
+        sort?: string;
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    getLegislationSubtypeAsHtml: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /**
-                 * @description Country or regional code for the jurisdiction
-                 * @example bund
-                 */
-                jurisdiction: "bund";
-                /**
-                 * @description Agent or authority issuing the legislation, e.g., 'bgbl-1' for Bundesgesetzblatt Teil I (Federal Law Gazette part I)
-                 * @example bgbl-1
-                 */
-                agent: string;
-                /**
-                 * @description Year the legislation was enacted or published
-                 * @example 1979
-                 */
-                year: string;
-                /**
-                 * @description Unique natural identifier for the legislation, specific to the jurisdiction and agent
-                 * @example s1325
-                 */
-                naturalIdentifier: string;
-                /** @example 2020-06-19 */
-                pointInTime: string;
-                /** @example 2 */
-                version: number;
-                /** @example deu */
-                language: string;
-                /** @example 2020-06-19 */
-                pointInTimeManifestation: string;
-                /** @example regelungstext-1 */
-                subtype: string;
-            };
-            cookie?: never;
+    requestBody?: never;
+    responses: {
+      /** @description Success */
+      200: {
+        headers: {
+          [name: string]: unknown;
         };
-        requestBody?: never;
-        responses: {
-            /** @description OK */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "text/html": string;
-                };
-            };
-            /** @description Not Found */
-            404: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "text/html": string;
-                };
-            };
+        content: {
+          "application/json": components["schemas"]["CollectionSchemaSearchMemberSchemaLiteratureSearchSchema"];
         };
+      };
+      /** @description Internal Server Error */
+      500: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
     };
-    getFile: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /**
-                 * @description Country or regional code for the jurisdiction
-                 * @example bund
-                 */
-                jurisdiction: "bund";
-                /**
-                 * @description Agent or authority issuing the legislation, e.g., 'bgbl-1' for Bundesgesetzblatt Teil I (Federal Law Gazette part I)
-                 * @example bgbl-1
-                 */
-                agent: string;
-                /**
-                 * @description Year the legislation was enacted or published
-                 * @example 1979
-                 */
-                year: string;
-                /**
-                 * @description Unique natural identifier for the legislation, specific to the jurisdiction and agent
-                 * @example s1325
-                 */
-                naturalIdentifier: string;
-                /** @example 2020-06-19 */
-                pointInTime: string;
-                /** @example 2 */
-                version: number;
-                /** @example deu */
-                language: string;
-                /** @example 2020-06-19 */
-                pointInTimeManifestation: string;
-                /** @example image */
-                name: string;
-                /** @example jpg */
-                extension: "pdf" | "xml" | "jpg" | "gif";
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description OK */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "*/*": string;
-                };
-            };
-            /** @description Not Found */
-            404: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content?: never;
-            };
-        };
+  };
+  getLiteratureMetadata: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        /** @example STRE201770751 */
+        documentNumber: string;
+      };
+      cookie?: never;
     };
-    getLegislationSubtypeAsZip: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /**
-                 * @description Country or regional code for the jurisdiction
-                 * @example bund
-                 */
-                jurisdiction: "bund";
-                /**
-                 * @description Agent or authority issuing the legislation, e.g., 'bgbl-1' for Bundesgesetzblatt Teil I (Federal Law Gazette part I)
-                 * @example bgbl-1
-                 */
-                agent: string;
-                /**
-                 * @description Year the legislation was enacted or published
-                 * @example 1979
-                 */
-                year: string;
-                /**
-                 * @description Unique natural identifier for the legislation, specific to the jurisdiction and agent
-                 * @example s1325
-                 */
-                naturalIdentifier: string;
-                /** @example 2020-06-19 */
-                pointInTime: string;
-                /** @example 2 */
-                version: number;
-                /** @example deu */
-                language: string;
-                /** @example 2020-06-19 */
-                pointInTimeManifestation: string;
-            };
-            cookie?: never;
+    requestBody?: never;
+    responses: {
+      /** @description OK */
+      200: {
+        headers: {
+          [name: string]: unknown;
         };
-        requestBody?: never;
-        responses: {
-            /** @description OK */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/zip": components["schemas"]["StreamingResponseBody"];
-                };
-            };
-            /** @description Not Found */
-            404: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content?: never;
-            };
+        content: {
+          "application/json": components["schemas"]["LiteratureSchema"];
         };
+      };
+      /** @description Not Found */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
     };
-    getChangelogs_2: {
-        parameters: {
-            query: {
-                from: string;
-                to: string;
-            };
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description OK */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "*/*": components["schemas"]["ChangelogResponse"];
-                };
-            };
-        };
+  };
+  getLiteratureDocumentAsZip: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        /** @example XXLS201770751 */
+        documentNumber: string;
+      };
+      cookie?: never;
     };
-    searchAllDocuments: {
-        parameters: {
-            query?: {
-                /** @description Searches for the given tokens in searchTerm. If searchTerm contains more than one token, all tokens must be in the document for the document to match. */
-                searchTerm?: string;
-                /** @description The from (greater than or equal) parameter returns all entities where date is later than, or equal to, the given date. */
-                dateFrom?: string;
-                /** @description The to (less than or equal) parameter returns all entities where date is earlier than, or equal to, the given date. */
-                dateTo?: string;
-                /** @description The field to sort the results by. Default is the relevance score calculated by OpenSearch. Valid usage of the sort field are : date, temporalCoverageFrom, legislationIdentifier, courtName, documentNumber and not setting the sort field (sort by relevance descending).Add a leading - to set the order to descending (-date) */
-                sort?: string;
-                /**
-                 * @description The number of entities per page
-                 * @example 100
-                 */
-                size?: number;
-                /**
-                 * @description The number of the page to request. The page starts with the value 0
-                 * @example 0
-                 */
-                pageIndex?: number;
-                /**
-                 * @description Filters the result set so every work returns exactly one expression. Most relevant is defined as : The expression in force on that date if it exists, then the expression that would next be in force if that exists, then the most recent expression that was in force. If other filters are used the work may return 0 expressions due to the most relevant expression being filtered out.
-                 * @example 2026-03-11
-                 */
-                mostRelevantOn?: string;
-            };
-            header?: never;
-            path?: never;
-            cookie?: never;
+    requestBody?: never;
+    responses: {
+      /** @description OK */
+      200: {
+        headers: {
+          [name: string]: unknown;
         };
-        requestBody?: never;
-        responses: {
-            /** @description Success */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["CollectionSchemaSearchMemberSchemaAbstractDocumentSchema"];
-                };
-            };
-            /** @description Internal Server Error */
-            500: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content?: never;
-            };
+        content: {
+          "application/zip": components["schemas"]["StreamingResponseBody"];
         };
+      };
+      /** @description Not Found */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
     };
-    search: {
-        parameters: {
-            query?: {
-                /** @description The query filter based on Lucene query */
-                query?: string;
-                /**
-                 * @description The number of entities per page
-                 * @example 100
-                 */
-                size?: number;
-                /**
-                 * @description The number of the page to request. The page starts with the value 0
-                 * @example 0
-                 */
-                pageIndex?: number;
-                /** @description The field to sort the results by. Default is the relevance score calculated by OpenSearch. Valid usage of the sort field are : date, temporalCoverageFrom, legislationIdentifier, courtName, documentNumber and not setting the sort field (sort by relevance descending).Add a leading - to set the order to descending (-date) */
-                sort?: string;
-            };
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Success */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "*/*": components["schemas"]["CollectionSchemaSearchMemberSchemaAbstractDocumentSchema"];
-                };
-            };
-            /** @description Internal Server Error */
-            500: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content?: never;
-            };
-        };
+  };
+  getLiteratureAsXml: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        /** @example BJLU075748788 */
+        documentNumber: string;
+      };
+      cookie?: never;
     };
-    literatureSearch: {
-        parameters: {
-            query?: {
-                /** @description The query filter based on Lucene query syntax */
-                query?: string;
-                /**
-                 * @description The number of entities per page
-                 * @example 100
-                 */
-                size?: number;
-                /**
-                 * @description The number of the page to request. The page starts with the value 0
-                 * @example 0
-                 */
-                pageIndex?: number;
-                /** @description The field to sort the results by. Default is the relevance score calculated by OpenSearch. Valid usage of the sort field are : date and documentNumber and not setting the sort field (sort by relevance descending).Add a leading - to set the order to descending (-date) */
-                sort?: string;
-            };
-            header?: never;
-            path?: never;
-            cookie?: never;
+    requestBody?: never;
+    responses: {
+      /** @description OK */
+      200: {
+        headers: {
+          [name: string]: unknown;
         };
-        requestBody?: never;
-        responses: {
-            /** @description Success */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "*/*": components["schemas"]["CollectionSchemaSearchMemberSchemaLiteratureSearchSchema"];
-                };
-            };
-            /** @description Internal Server Error */
-            500: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content?: never;
-            };
+        content: {
+          "application/xml": string;
         };
+      };
+      /** @description Not Found */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
     };
-    searchLegislation: {
-        parameters: {
-            query?: {
-                /** @description The query filter based on Lucene query */
-                query?: string;
-                /**
-                 * @description The number of entities per page
-                 * @example 100
-                 */
-                size?: number;
-                /**
-                 * @description The number of the page to request. The page starts with the value 0
-                 * @example 0
-                 */
-                pageIndex?: number;
-                /** @description The field to sort the results by. Default is the relevance score calculated by OpenSearch. Valid usage of the sort field are : date, temporalCoverageFrom, legislationIdentifier and not setting the sort field (sort by relevance descending).Add a leading - to set the order to descending (-date) */
-                sort?: string;
-            };
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Success */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "*/*": components["schemas"]["CollectionSchemaSearchMemberSchemaLegislationExpressionSearchSchema"];
-                };
-            };
-            /** @description Internal Server Error */
-            500: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content?: never;
-            };
-        };
+  };
+  getLiteratureAsHtml: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        /** @example BJLU075748788 */
+        documentNumber: string;
+      };
+      cookie?: never;
     };
-    caseLawSearch: {
-        parameters: {
-            query?: {
-                /** @description The query filter based on Lucene query syntax */
-                query?: string;
-                /**
-                 * @description The number of entities per page
-                 * @example 100
-                 */
-                size?: number;
-                /**
-                 * @description The number of the page to request. The page starts with the value 0
-                 * @example 0
-                 */
-                pageIndex?: number;
-                /** @description The field to sort the results by. Default is the relevance score calculated by OpenSearch. Valid usage of the sort field are : date, courtName, documentNumber and not setting the sort field (sort by relevance descending).Add a leading - to set the order to descending (-date) */
-                sort?: string;
-            };
-            header?: never;
-            path?: never;
-            cookie?: never;
+    requestBody?: never;
+    responses: {
+      /** @description OK */
+      200: {
+        headers: {
+          [name: string]: unknown;
         };
-        requestBody?: never;
-        responses: {
-            /** @description Success */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "*/*": components["schemas"]["CollectionSchemaSearchMemberSchemaCaseLawSearchSchema"];
-                };
-            };
-            /** @description Internal Server Error */
-            500: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content?: never;
-            };
+        content: {
+          "text/html": string;
         };
+      };
+      /** @description Not Found */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
     };
-    literatureSearch_1: {
-        parameters: {
-            query?: {
-                /** @description The query filter based on Lucene query syntax */
-                query?: string;
-                /**
-                 * @description The number of entities per page
-                 * @example 100
-                 */
-                size?: number;
-                /**
-                 * @description The number of the page to request. The page starts with the value 0
-                 * @example 0
-                 */
-                pageIndex?: number;
-                /** @description The field to sort the results by. Default is the relevance score calculated by OpenSearch. Valid usage of the sort field are : date and documentNumber and not setting the sort field (sort by relevance descending).Add a leading - to set the order to descending (-date) */
-                sort?: string;
-            };
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Success */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "*/*": components["schemas"]["CollectionSchemaSearchMemberSchemaAdministrativeDirectiveSearchSchema"];
-                };
-            };
-            /** @description Internal Server Error */
-            500: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content?: never;
-            };
-        };
+  };
+  getChangelogs_1: {
+    parameters: {
+      query: {
+        from: string;
+        to: string;
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    getContext: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
+    requestBody?: never;
+    responses: {
+      /** @description OK */
+      200: {
+        headers: {
+          [name: string]: unknown;
         };
-        requestBody?: never;
-        responses: {
-            /** @description OK */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/ld+json": string;
-                };
-            };
+        content: {
+          "*/*": components["schemas"]["ChangelogResponse"];
         };
+      };
     };
-    searchCaseLaw: {
-        parameters: {
-            query?: {
-                fileNumber?: string;
-                ecli?: string;
-                /** @description Filter by court name (Finanzgericht Münster, FG Münster, ArbG Köln) or court type (Finanzgericht, FG, ArbG). Supports both long and short names. */
-                court?: string;
-                /** @description Corresponds to “Rechtskraft”, meaning that the decision referred to is legally binding. */
-                legalEffect?: "JA" | "NEIN" | "KEINE_ANGABE" | "FALSCHE_ANGABE";
-                /** @description Filter by document type (Urteil, Versäumnisurteil, Entscheidung etc.). Multiple values may be specified as a comma-separated list or by repeating the parameter. */
-                type?: string[];
-                /** @description Extended filter by type group. Multiple values may be specified as a comma-separated list or by repeating the parameter. */
-                typeGroup?: "Urteil" | "Beschluss" | "other";
-                /** @description Searches for the given tokens in searchTerm. If searchTerm contains more than one token, all tokens must be in the document for the document to match. */
-                searchTerm?: string;
-                /** @description The from (greater than or equal) parameter returns all entities where date is later than, or equal to, the given date. */
-                dateFrom?: string;
-                /** @description The to (less than or equal) parameter returns all entities where date is earlier than, or equal to, the given date. */
-                dateTo?: string;
-                /**
-                 * @description The number of entities per page
-                 * @example 100
-                 */
-                size?: number;
-                /**
-                 * @description The number of the page to request. The page starts with the value 0
-                 * @example 0
-                 */
-                pageIndex?: number;
-                /** @description The field to sort the results by. Default is the relevance score calculated by OpenSearch. Valid usage of the sort field are : date, courtName, documentNumber and not setting the sort field (sort by relevance descending).Add a leading - to set the order to descending (-date) */
-                sort?: string;
-            };
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Success */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["CollectionSchemaSearchMemberSchemaCaseLawSearchSchema"];
-                };
-            };
-            /** @description Internal Server Error */
-            500: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content?: never;
-            };
-        };
+  };
+  searchAndFilterLegislation: {
+    parameters: {
+      query?: {
+        /** @description Search by European Legislation Identifier (ELI). Right now only searching by work ELI is supported, but a general eli prefix match might be supported in the future. */
+        eli?: string;
+        /** @description Filters the result set to only return expressions that are in force *on or after* the provided date. The parameter should be provided in `YYYY-MM-DD` format. Differs from `dateFrom`, which refers to the date of adoption or signature of the legislation. If both `temporalCoverageFrom` and `temporalCoverageTo` are given, this will output all expressions that were in force during at least one day between the two dates. To get all expressions for one specific day, set both parameters to the same day. */
+        temporalCoverageFrom?: string;
+        /** @description Filters the result set to only return expressions that are in force *on or before* the provided date. The parameter should be provided in `YYYY-MM-DD` format. Differs from `dateTo`, which refers to the date of adoption or signature of the legislation. */
+        temporalCoverageTo?: string;
+        /** @description Filters the result set so every work returns exactly one expression. Most relevant is defined as : The expression in force on that date if it exists, then the expression that would next be in force if that exists, then the most recent expression that was in force. If other filters are used the work may return 0 expressions due to the most relevant expression being filtered out. */
+        mostRelevantOn?: string;
+        /** @description Filters the result set by the given abbreviation. */
+        abbreviation?: string;
+        /** @description Filters the result set by the given ris-abbreviation. */
+        risAbbreviation?: string;
+        /** @description Searches for the given tokens in searchTerm. If searchTerm contains more than one token, all tokens must be in the document for the document to match. */
+        searchTerm?: string;
+        /** @description The from (greater than or equal) parameter returns all entities where date is later than, or equal to, the given date. */
+        dateFrom?: string;
+        /** @description The to (less than or equal) parameter returns all entities where date is earlier than, or equal to, the given date. */
+        dateTo?: string;
+        /**
+         * @description The number of entities per page
+         * @example 100
+         */
+        size?: number;
+        /**
+         * @description The number of the page to request. The page starts with the value 0
+         * @example 0
+         */
+        pageIndex?: number;
+        /** @description The field to sort the results by. Default is the relevance score calculated by OpenSearch. Valid usage of the sort field are : date, temporalCoverageFrom, legislationIdentifier and not setting the sort field (sort by relevance descending).Add a leading - to set the order to descending (-date) */
+        sort?: string;
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    getCaseLaw_1: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /** @example STRE201770751 */
-                documentNumber: string;
-            };
-            cookie?: never;
+    requestBody?: never;
+    responses: {
+      /** @description OK */
+      200: {
+        headers: {
+          [name: string]: unknown;
         };
-        requestBody?: never;
-        responses: {
-            /** @description OK */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["CaseLawSchema"];
-                };
-            };
-            /** @description Not Found */
-            404: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content?: never;
-            };
+        content: {
+          "application/json": components["schemas"]["CollectionSchemaSearchMemberSchemaLegislationExpressionSearchSchema"];
         };
+      };
+      /** @description Unprocessable Content */
+      422: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": components["schemas"]["CollectionSchemaSearchMemberSchemaLegislationExpressionSearchSchema"];
+        };
+      };
     };
-    getImage_1: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /** @example BDRE000800001 */
-                documentNumber: string;
-                /** @example image */
-                name: string;
-                /** @example jpg */
-                extension: "png" | "jpg" | "jpeg" | "gif" | "wmf" | "emf" | "bitmap";
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description OK */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "*/*": string;
-                };
-            };
-            /** @description Not Found */
-            404: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content?: never;
-            };
-        };
+  };
+  getLegislation: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        /** @description Country or regional code for the jurisdiction */
+        jurisdiction: "bund";
+        /**
+         * @description Agent or authority issuing the legislation, e.g., 'bgbl-1' for Bundesgesetzblatt Teil I (Federal Law Gazette part I)
+         * @example bgbl-1
+         */
+        agent: string;
+        /**
+         * @description Year the legislation was enacted or published
+         * @example 1979
+         */
+        year: string;
+        /**
+         * @description Unique natural identifier for the legislation, specific to the jurisdiction and agent
+         * @example s1325
+         */
+        naturalIdentifier: string;
+        /** @example 2020-06-19 */
+        pointInTime: string;
+        /** @example 2 */
+        version: number;
+        /** @example deu */
+        language: string;
+      };
+      cookie?: never;
     };
-    getCaseLawDocumentationUnitAsZip_1: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /** @example STRE201770751 */
-                documentNumber: string;
-            };
-            cookie?: never;
+    requestBody?: never;
+    responses: {
+      /** @description OK */
+      200: {
+        headers: {
+          [name: string]: unknown;
         };
-        requestBody?: never;
-        responses: {
-            /** @description OK */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/zip": components["schemas"]["StreamingResponseBody"];
-                };
-            };
-            /** @description Not Found */
-            404: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content?: never;
-            };
+        content: {
+          "application/json": components["schemas"]["LegislationExpressionSchema"];
         };
+      };
+      /** @description Not Found */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
     };
-    getCaseLawDocumentationUnitAsXml_1: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /** @example STRE201770751 */
-                documentNumber: string;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description OK */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/xml": string;
-                };
-            };
-            /** @description Not Found */
-            404: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content?: never;
-            };
-        };
+  };
+  getLegislationArticleAsHtml: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        /**
+         * @description Country or regional code for the jurisdiction
+         * @example bund
+         */
+        jurisdiction: "bund";
+        /**
+         * @description Agent or authority issuing the legislation, e.g., 'bgbl-1' for Bundesgesetzblatt Teil I (Federal Law Gazette part I)
+         * @example bgbl-1
+         */
+        agent: string;
+        /**
+         * @description Year the legislation was enacted or published
+         * @example 1979
+         */
+        year: string;
+        /**
+         * @description Unique natural identifier for the legislation, specific to the jurisdiction and agent
+         * @example s1325
+         */
+        naturalIdentifier: string;
+        /** @example 2020-06-19 */
+        pointInTime: string;
+        /** @example 2 */
+        version: number;
+        /** @example deu */
+        language: string;
+        /** @example 2020-06-19 */
+        pointInTimeManifestation: string;
+        /** @example regelungstext-1 */
+        subtype: string;
+        /**
+         * @description The expression identifier, denoting elements inside an expression
+         * @example art-z1
+         */
+        articleEid: string;
+      };
+      cookie?: never;
     };
-    getCaseLawDocumentationUnitAsHtml_1: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /** @example STRE201770751 */
-                documentNumber: string;
-            };
-            cookie?: never;
+    requestBody?: never;
+    responses: {
+      /** @description OK */
+      200: {
+        headers: {
+          [name: string]: unknown;
         };
-        requestBody?: never;
-        responses: {
-            /** @description OK */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "text/html": string;
-                };
-            };
-            /** @description Not Found */
-            404: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content?: never;
-            };
+        content: {
+          "text/html": string;
         };
+      };
+      /** @description Not Found */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "text/html": string;
+        };
+      };
     };
-    getCaseLawCourts: {
-        parameters: {
-            query?: {
-                prefix?: string;
-            };
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description OK */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["CourtSearchResult"][];
-                };
-            };
-        };
+  };
+  getLegislationSubtypeAsXml: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        /**
+         * @description Country or regional code for the jurisdiction
+         * @example bund
+         */
+        jurisdiction: "bund";
+        /**
+         * @description Agent or authority issuing the legislation, e.g., 'bgbl-1' for Bundesgesetzblatt Teil I (Federal Law Gazette part I)
+         * @example bgbl-1
+         */
+        agent: string;
+        /**
+         * @description Year the legislation was enacted or published
+         * @example 1979
+         */
+        year: string;
+        /**
+         * @description Unique natural identifier for the legislation, specific to the jurisdiction and agent
+         * @example s1325
+         */
+        naturalIdentifier: string;
+        /** @example 2020-06-19 */
+        pointInTime: string;
+        /** @example 2 */
+        version: number;
+        /** @example deu */
+        language: string;
+        /** @example 2020-06-19 */
+        pointInTimeManifestation: string;
+        /** @example regelungstext-1 */
+        subtype: string;
+      };
+      cookie?: never;
     };
-    getChangelogs_3: {
-        parameters: {
-            query: {
-                from: string;
-                to: string;
-            };
-            header?: never;
-            path?: never;
-            cookie?: never;
+    requestBody?: never;
+    responses: {
+      /** @description OK */
+      200: {
+        headers: {
+          [name: string]: unknown;
         };
-        requestBody?: never;
-        responses: {
-            /** @description OK */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "*/*": components["schemas"]["ChangelogResponse"];
-                };
-            };
+        content: {
+          "application/xml": string;
         };
+      };
+      /** @description Not Found */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
     };
-    getBulkZipLinks: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description OK */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["ZipDataCatalogSchema"];
-                };
-            };
-        };
+  };
+  getLegislationSubtypeAsHtml: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        /**
+         * @description Country or regional code for the jurisdiction
+         * @example bund
+         */
+        jurisdiction: "bund";
+        /**
+         * @description Agent or authority issuing the legislation, e.g., 'bgbl-1' for Bundesgesetzblatt Teil I (Federal Law Gazette part I)
+         * @example bgbl-1
+         */
+        agent: string;
+        /**
+         * @description Year the legislation was enacted or published
+         * @example 1979
+         */
+        year: string;
+        /**
+         * @description Unique natural identifier for the legislation, specific to the jurisdiction and agent
+         * @example s1325
+         */
+        naturalIdentifier: string;
+        /** @example 2020-06-19 */
+        pointInTime: string;
+        /** @example 2 */
+        version: number;
+        /** @example deu */
+        language: string;
+        /** @example 2020-06-19 */
+        pointInTimeManifestation: string;
+        /** @example regelungstext-1 */
+        subtype: string;
+      };
+      cookie?: never;
     };
-    getArticleVersions: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /** @description Country or regional code for the jurisdiction */
-                jurisdiction: "bund";
-                /**
-                 * @description Agent or authority issuing the legislation, e.g., 'bgbl-1' for Bundesgesetzblatt Teil I (Federal Law Gazette part I)
-                 * @example bgbl-1
-                 */
-                agent: string;
-                /**
-                 * @description Year the legislation was enacted or published
-                 * @example 1979
-                 */
-                year: string;
-                /**
-                 * @description Unique natural identifier for the legislation, specific to the jurisdiction and agent
-                 * @example s1325
-                 */
-                naturalIdentifier: string;
-                /** @example 2020-06-19 */
-                pointInTime: string;
-                /** @example 2 */
-                version: number;
-                /** @example deu */
-                language: string;
-                /** @example art-z1 */
-                eId: string;
-            };
-            cookie?: never;
+    requestBody?: never;
+    responses: {
+      /** @description OK */
+      200: {
+        headers: {
+          [name: string]: unknown;
         };
-        requestBody?: never;
-        responses: {
-            /** @description OK */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "*/*": components["schemas"]["CollectionSchemaLegislationExpressionPartSchema"];
-                };
-            };
+        content: {
+          "text/html": string;
         };
+      };
+      /** @description Not Found */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "text/html": string;
+        };
+      };
     };
-    searchAdministrativeDirective: {
-        parameters: {
-            query?: {
-                documentNumber?: string;
-                /** @description Searches for the given tokens in searchTerm. If searchTerm contains more than one token, all tokens must be in the document for the document to match. */
-                searchTerm?: string;
-                /** @description The from (greater than or equal) parameter returns all entities where date is later than, or equal to, the given date. */
-                dateFrom?: string;
-                /** @description The to (less than or equal) parameter returns all entities where date is earlier than, or equal to, the given date. */
-                dateTo?: string;
-                /**
-                 * @description The number of entities per page
-                 * @example 100
-                 */
-                size?: number;
-                /**
-                 * @description The number of the page to request. The page starts with the value 0
-                 * @example 0
-                 */
-                pageIndex?: number;
-                /** @description The field to sort the results by. Default is the relevance score calculated by OpenSearch. Valid usage of the sort field are : date and documentNumber and not setting the sort field (sort by relevance descending).Add a leading - to set the order to descending (-date) */
-                sort?: string;
-            };
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Success */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["CollectionSchemaSearchMemberSchemaAdministrativeDirectiveSearchSchema"];
-                };
-            };
-            /** @description Internal Server Error */
-            500: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content?: never;
-            };
-        };
+  };
+  getFile: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        /**
+         * @description Country or regional code for the jurisdiction
+         * @example bund
+         */
+        jurisdiction: "bund";
+        /**
+         * @description Agent or authority issuing the legislation, e.g., 'bgbl-1' for Bundesgesetzblatt Teil I (Federal Law Gazette part I)
+         * @example bgbl-1
+         */
+        agent: string;
+        /**
+         * @description Year the legislation was enacted or published
+         * @example 1979
+         */
+        year: string;
+        /**
+         * @description Unique natural identifier for the legislation, specific to the jurisdiction and agent
+         * @example s1325
+         */
+        naturalIdentifier: string;
+        /** @example 2020-06-19 */
+        pointInTime: string;
+        /** @example 2 */
+        version: number;
+        /** @example deu */
+        language: string;
+        /** @example 2020-06-19 */
+        pointInTimeManifestation: string;
+        /** @example image */
+        name: string;
+        /** @example jpg */
+        extension: "pdf" | "xml" | "jpg" | "gif";
+      };
+      cookie?: never;
     };
-    getAdministrativeDirectiveMetadata: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /** @example KSNR00000 */
-                documentNumber: string;
-            };
-            cookie?: never;
+    requestBody?: never;
+    responses: {
+      /** @description OK */
+      200: {
+        headers: {
+          [name: string]: unknown;
         };
-        requestBody?: never;
-        responses: {
-            /** @description OK */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["AdministrativeDirectiveSchema"];
-                };
-            };
-            /** @description Not Found */
-            404: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content?: never;
-            };
+        content: {
+          "*/*": string;
         };
+      };
+      /** @description Not Found */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
     };
-    getAdministrativeDirectiveAsZip: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /** @example XXLS201770751 */
-                documentNumber: string;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description OK */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/zip": components["schemas"]["StreamingResponseBody"];
-                };
-            };
-            /** @description Not Found */
-            404: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content?: never;
-            };
-        };
+  };
+  getLegislationSubtypeAsZip: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        /**
+         * @description Country or regional code for the jurisdiction
+         * @example bund
+         */
+        jurisdiction: "bund";
+        /**
+         * @description Agent or authority issuing the legislation, e.g., 'bgbl-1' for Bundesgesetzblatt Teil I (Federal Law Gazette part I)
+         * @example bgbl-1
+         */
+        agent: string;
+        /**
+         * @description Year the legislation was enacted or published
+         * @example 1979
+         */
+        year: string;
+        /**
+         * @description Unique natural identifier for the legislation, specific to the jurisdiction and agent
+         * @example s1325
+         */
+        naturalIdentifier: string;
+        /** @example 2020-06-19 */
+        pointInTime: string;
+        /** @example 2 */
+        version: number;
+        /** @example deu */
+        language: string;
+        /** @example 2020-06-19 */
+        pointInTimeManifestation: string;
+      };
+      cookie?: never;
     };
-    getAdministrativeDirectiveAsXml: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /** @example KSNR00000 */
-                documentNumber: string;
-            };
-            cookie?: never;
+    requestBody?: never;
+    responses: {
+      /** @description OK */
+      200: {
+        headers: {
+          [name: string]: unknown;
         };
-        requestBody?: never;
-        responses: {
-            /** @description OK */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/xml": string;
-                };
-            };
-            /** @description Not Found */
-            404: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content?: never;
-            };
+        content: {
+          "application/zip": components["schemas"]["StreamingResponseBody"];
         };
+      };
+      /** @description Not Found */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
     };
-    getAdministrativeDirectiveAsHtml: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /** @example KSNR00000 */
-                documentNumber: string;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description OK */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "text/html": string;
-                };
-            };
-            /** @description Not Found */
-            404: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content?: never;
-            };
-        };
+  };
+  getChangelogs_2: {
+    parameters: {
+      query: {
+        from: string;
+        to: string;
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    getChangelogs_4: {
-        parameters: {
-            query: {
-                from: string;
-                to: string;
-            };
-            header?: never;
-            path?: never;
-            cookie?: never;
+    requestBody?: never;
+    responses: {
+      /** @description OK */
+      200: {
+        headers: {
+          [name: string]: unknown;
         };
-        requestBody?: never;
-        responses: {
-            /** @description OK */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "*/*": components["schemas"]["ChangelogResponse"];
-                };
-            };
+        content: {
+          "*/*": components["schemas"]["ChangelogResponse"];
         };
+      };
     };
+  };
+  searchAllDocuments: {
+    parameters: {
+      query?: {
+        /** @description Searches for the given tokens in searchTerm. If searchTerm contains more than one token, all tokens must be in the document for the document to match. */
+        searchTerm?: string;
+        /** @description The from (greater than or equal) parameter returns all entities where date is later than, or equal to, the given date. */
+        dateFrom?: string;
+        /** @description The to (less than or equal) parameter returns all entities where date is earlier than, or equal to, the given date. */
+        dateTo?: string;
+        /** @description The field to sort the results by. Default is the relevance score calculated by OpenSearch. Valid usage of the sort field are : date, temporalCoverageFrom, legislationIdentifier, courtName, documentNumber and not setting the sort field (sort by relevance descending).Add a leading - to set the order to descending (-date) */
+        sort?: string;
+        /**
+         * @description The number of entities per page
+         * @example 100
+         */
+        size?: number;
+        /**
+         * @description The number of the page to request. The page starts with the value 0
+         * @example 0
+         */
+        pageIndex?: number;
+        /**
+         * @description Filters the result set so every work returns exactly one expression. Most relevant is defined as : The expression in force on that date if it exists, then the expression that would next be in force if that exists, then the most recent expression that was in force. If other filters are used the work may return 0 expressions due to the most relevant expression being filtered out.
+         * @example 2026-03-11
+         */
+        mostRelevantOn?: string;
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description Success */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": components["schemas"]["CollectionSchemaSearchMemberSchemaAbstractDocumentSchema"];
+        };
+      };
+      /** @description Internal Server Error */
+      500: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+    };
+  };
+  search: {
+    parameters: {
+      query?: {
+        /** @description The query filter based on Lucene query */
+        query?: string;
+        /**
+         * @description The number of entities per page
+         * @example 100
+         */
+        size?: number;
+        /**
+         * @description The number of the page to request. The page starts with the value 0
+         * @example 0
+         */
+        pageIndex?: number;
+        /** @description The field to sort the results by. Default is the relevance score calculated by OpenSearch. Valid usage of the sort field are : date, temporalCoverageFrom, legislationIdentifier, courtName, documentNumber and not setting the sort field (sort by relevance descending).Add a leading - to set the order to descending (-date) */
+        sort?: string;
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description Success */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "*/*": components["schemas"]["CollectionSchemaSearchMemberSchemaAbstractDocumentSchema"];
+        };
+      };
+      /** @description Internal Server Error */
+      500: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+    };
+  };
+  literatureSearch: {
+    parameters: {
+      query?: {
+        /** @description The query filter based on Lucene query syntax */
+        query?: string;
+        /**
+         * @description The number of entities per page
+         * @example 100
+         */
+        size?: number;
+        /**
+         * @description The number of the page to request. The page starts with the value 0
+         * @example 0
+         */
+        pageIndex?: number;
+        /** @description The field to sort the results by. Default is the relevance score calculated by OpenSearch. Valid usage of the sort field are : date and documentNumber and not setting the sort field (sort by relevance descending).Add a leading - to set the order to descending (-date) */
+        sort?: string;
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description Success */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "*/*": components["schemas"]["CollectionSchemaSearchMemberSchemaLiteratureSearchSchema"];
+        };
+      };
+      /** @description Internal Server Error */
+      500: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+    };
+  };
+  searchLegislation: {
+    parameters: {
+      query?: {
+        /** @description The query filter based on Lucene query */
+        query?: string;
+        /**
+         * @description The number of entities per page
+         * @example 100
+         */
+        size?: number;
+        /**
+         * @description The number of the page to request. The page starts with the value 0
+         * @example 0
+         */
+        pageIndex?: number;
+        /** @description The field to sort the results by. Default is the relevance score calculated by OpenSearch. Valid usage of the sort field are : date, temporalCoverageFrom, legislationIdentifier and not setting the sort field (sort by relevance descending).Add a leading - to set the order to descending (-date) */
+        sort?: string;
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description Success */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "*/*": components["schemas"]["CollectionSchemaSearchMemberSchemaLegislationExpressionSearchSchema"];
+        };
+      };
+      /** @description Internal Server Error */
+      500: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+    };
+  };
+  caseLawSearch: {
+    parameters: {
+      query?: {
+        /** @description The query filter based on Lucene query syntax */
+        query?: string;
+        /**
+         * @description The number of entities per page
+         * @example 100
+         */
+        size?: number;
+        /**
+         * @description The number of the page to request. The page starts with the value 0
+         * @example 0
+         */
+        pageIndex?: number;
+        /** @description The field to sort the results by. Default is the relevance score calculated by OpenSearch. Valid usage of the sort field are : date, courtName, documentNumber and not setting the sort field (sort by relevance descending).Add a leading - to set the order to descending (-date) */
+        sort?: string;
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description Success */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "*/*": components["schemas"]["CollectionSchemaSearchMemberSchemaCaseLawSearchSchema"];
+        };
+      };
+      /** @description Internal Server Error */
+      500: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+    };
+  };
+  literatureSearch_1: {
+    parameters: {
+      query?: {
+        /** @description The query filter based on Lucene query syntax */
+        query?: string;
+        /**
+         * @description The number of entities per page
+         * @example 100
+         */
+        size?: number;
+        /**
+         * @description The number of the page to request. The page starts with the value 0
+         * @example 0
+         */
+        pageIndex?: number;
+        /** @description The field to sort the results by. Default is the relevance score calculated by OpenSearch. Valid usage of the sort field are : date and documentNumber and not setting the sort field (sort by relevance descending).Add a leading - to set the order to descending (-date) */
+        sort?: string;
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description Success */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "*/*": components["schemas"]["CollectionSchemaSearchMemberSchemaAdministrativeDirectiveSearchSchema"];
+        };
+      };
+      /** @description Internal Server Error */
+      500: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+    };
+  };
+  getContext: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description OK */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/ld+json": string;
+        };
+      };
+    };
+  };
+  searchCaseLaw: {
+    parameters: {
+      query?: {
+        fileNumber?: string;
+        ecli?: string;
+        /** @description Filter by court name (Finanzgericht Münster, FG Münster, ArbG Köln) or court type (Finanzgericht, FG, ArbG). Supports both long and short names. */
+        court?: string;
+        /** @description Corresponds to “Rechtskraft”, meaning that the decision referred to is legally binding. */
+        legalEffect?: "JA" | "NEIN" | "KEINE_ANGABE" | "FALSCHE_ANGABE";
+        /** @description Filter by document type (Urteil, Versäumnisurteil, Entscheidung etc.). Multiple values may be specified as a comma-separated list or by repeating the parameter. */
+        type?: string[];
+        /** @description Extended filter by type group. Multiple values may be specified as a comma-separated list or by repeating the parameter. */
+        typeGroup?: "Urteil" | "Beschluss" | "other";
+        /** @description Searches for the given tokens in searchTerm. If searchTerm contains more than one token, all tokens must be in the document for the document to match. */
+        searchTerm?: string;
+        /** @description The from (greater than or equal) parameter returns all entities where date is later than, or equal to, the given date. */
+        dateFrom?: string;
+        /** @description The to (less than or equal) parameter returns all entities where date is earlier than, or equal to, the given date. */
+        dateTo?: string;
+        /**
+         * @description The number of entities per page
+         * @example 100
+         */
+        size?: number;
+        /**
+         * @description The number of the page to request. The page starts with the value 0
+         * @example 0
+         */
+        pageIndex?: number;
+        /** @description The field to sort the results by. Default is the relevance score calculated by OpenSearch. Valid usage of the sort field are : date, courtName, documentNumber and not setting the sort field (sort by relevance descending).Add a leading - to set the order to descending (-date) */
+        sort?: string;
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description Success */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": components["schemas"]["CollectionSchemaSearchMemberSchemaCaseLawSearchSchema"];
+        };
+      };
+      /** @description Internal Server Error */
+      500: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+    };
+  };
+  getCaseLaw_1: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        /** @example STRE201770751 */
+        documentNumber: string;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description OK */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": components["schemas"]["CaseLawSchema"];
+        };
+      };
+      /** @description Not Found */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+    };
+  };
+  getImage_1: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        /** @example BDRE000800001 */
+        documentNumber: string;
+        /** @example image */
+        name: string;
+        /** @example jpg */
+        extension: "png" | "jpg" | "jpeg" | "gif" | "wmf" | "emf" | "bitmap";
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description OK */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "*/*": string;
+        };
+      };
+      /** @description Not Found */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+    };
+  };
+  getCaseLawDocumentationUnitAsZip_1: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        /** @example STRE201770751 */
+        documentNumber: string;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description OK */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/zip": components["schemas"]["StreamingResponseBody"];
+        };
+      };
+      /** @description Not Found */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+    };
+  };
+  getCaseLawDocumentationUnitAsXml_1: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        /** @example STRE201770751 */
+        documentNumber: string;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description OK */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/xml": string;
+        };
+      };
+      /** @description Not Found */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+    };
+  };
+  getCaseLawDocumentationUnitAsHtml_1: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        /** @example STRE201770751 */
+        documentNumber: string;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description OK */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "text/html": string;
+        };
+      };
+      /** @description Not Found */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+    };
+  };
+  getCaseLawCourts: {
+    parameters: {
+      query?: {
+        prefix?: string;
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description OK */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": components["schemas"]["CourtSearchResult"][];
+        };
+      };
+    };
+  };
+  getChangelogs_3: {
+    parameters: {
+      query: {
+        from: string;
+        to: string;
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description OK */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "*/*": components["schemas"]["ChangelogResponse"];
+        };
+      };
+    };
+  };
+  getBulkZipLinks: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description OK */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": components["schemas"]["ZipDataCatalogSchema"];
+        };
+      };
+    };
+  };
+  getArticleVersions: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        /** @description Country or regional code for the jurisdiction */
+        jurisdiction: "bund";
+        /**
+         * @description Agent or authority issuing the legislation, e.g., 'bgbl-1' for Bundesgesetzblatt Teil I (Federal Law Gazette part I)
+         * @example bgbl-1
+         */
+        agent: string;
+        /**
+         * @description Year the legislation was enacted or published
+         * @example 1979
+         */
+        year: string;
+        /**
+         * @description Unique natural identifier for the legislation, specific to the jurisdiction and agent
+         * @example s1325
+         */
+        naturalIdentifier: string;
+        /** @example 2020-06-19 */
+        pointInTime: string;
+        /** @example 2 */
+        version: number;
+        /** @example deu */
+        language: string;
+        /** @example art-z1 */
+        eId: string;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description OK */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "*/*": components["schemas"]["CollectionSchemaArticleVersionSchema"];
+        };
+      };
+    };
+  };
+  searchAdministrativeDirective: {
+    parameters: {
+      query?: {
+        documentNumber?: string;
+        /** @description Searches for the given tokens in searchTerm. If searchTerm contains more than one token, all tokens must be in the document for the document to match. */
+        searchTerm?: string;
+        /** @description The from (greater than or equal) parameter returns all entities where date is later than, or equal to, the given date. */
+        dateFrom?: string;
+        /** @description The to (less than or equal) parameter returns all entities where date is earlier than, or equal to, the given date. */
+        dateTo?: string;
+        /**
+         * @description The number of entities per page
+         * @example 100
+         */
+        size?: number;
+        /**
+         * @description The number of the page to request. The page starts with the value 0
+         * @example 0
+         */
+        pageIndex?: number;
+        /** @description The field to sort the results by. Default is the relevance score calculated by OpenSearch. Valid usage of the sort field are : date and documentNumber and not setting the sort field (sort by relevance descending).Add a leading - to set the order to descending (-date) */
+        sort?: string;
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description Success */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": components["schemas"]["CollectionSchemaSearchMemberSchemaAdministrativeDirectiveSearchSchema"];
+        };
+      };
+      /** @description Internal Server Error */
+      500: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+    };
+  };
+  getAdministrativeDirectiveMetadata: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        /** @example KSNR00000 */
+        documentNumber: string;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description OK */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": components["schemas"]["AdministrativeDirectiveSchema"];
+        };
+      };
+      /** @description Not Found */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+    };
+  };
+  getAdministrativeDirectiveAsZip: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        /** @example XXLS201770751 */
+        documentNumber: string;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description OK */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/zip": components["schemas"]["StreamingResponseBody"];
+        };
+      };
+      /** @description Not Found */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+    };
+  };
+  getAdministrativeDirectiveAsXml: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        /** @example KSNR00000 */
+        documentNumber: string;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description OK */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/xml": string;
+        };
+      };
+      /** @description Not Found */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+    };
+  };
+  getAdministrativeDirectiveAsHtml: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        /** @example KSNR00000 */
+        documentNumber: string;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description OK */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "text/html": string;
+        };
+      };
+      /** @description Not Found */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+    };
+  };
+  getChangelogs_4: {
+    parameters: {
+      query: {
+        from: string;
+        to: string;
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description OK */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "*/*": components["schemas"]["ChangelogResponse"];
+        };
+      };
+    };
+  };
 }

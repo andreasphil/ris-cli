@@ -167,8 +167,7 @@ export const TRANSLATION_COLUMNS: Column[] = [
  */
 export const ARTICLE_VERSION_COLUMNS: Column[] = [
   { header: "coverage", get: "temporalCoverage", maxWidth: 23 },
-  { header: "name", get: "name", maxWidth: 12 },
-  { header: "headline", get: "headline" },
+  { header: "name", get: "name" },
 ];
 
 /** Columns for mixed result sets, where each row may be a different document kind. */
