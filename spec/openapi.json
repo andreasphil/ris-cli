@@ -421,7 +421,7 @@
             "in": "query",
             "required": false,
             "schema": {
-              "type": "string"
+              "type": ["string", "null"]
             }
           }
         ],
@@ -1817,7 +1817,7 @@
             "description": "The query filter based on Lucene query",
             "required": false,
             "schema": {
-              "type": "string"
+              "type": ["string", "null"]
             }
           },
           {
@@ -1886,7 +1886,7 @@
             "description": "The query filter based on Lucene query syntax",
             "required": false,
             "schema": {
-              "type": "string"
+              "type": ["string", "null"]
             }
           },
           {
@@ -1955,7 +1955,7 @@
             "description": "The query filter based on Lucene query",
             "required": false,
             "schema": {
-              "type": "string"
+              "type": ["string", "null"]
             }
           },
           {
@@ -2024,7 +2024,7 @@
             "description": "The query filter based on Lucene query syntax",
             "required": false,
             "schema": {
-              "type": "string"
+              "type": ["string", "null"]
             }
           },
           {
@@ -2093,7 +2093,7 @@
             "description": "The query filter based on Lucene query syntax",
             "required": false,
             "schema": {
-              "type": "string"
+              "type": ["string", "null"]
             }
           },
           {
@@ -2269,104 +2269,6 @@
             "schema": {
               "type": "string"
             }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "*/*": {
-                "schema": {
-                  "$ref": "#/components/schemas/CollectionSchemaArticleVersionSchema"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/v1/article/work-example/eli/{jurisdiction}/{agent}/{year}/{naturalIdentifier}/{pointInTime}/{version}/{language}/{eId}": {
-      "get": {
-        "tags": ["article-controller"],
-        "operationId": "getArticleVersions",
-        "parameters": [
-          {
-            "name": "jurisdiction",
-            "in": "path",
-            "description": "Country or regional code for the jurisdiction",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "enum": ["bund"]
-            }
-          },
-          {
-            "name": "agent",
-            "in": "path",
-            "description": "Agent or authority issuing the legislation, e.g., 'bgbl-1' for Bundesgesetzblatt Teil I (Federal Law Gazette part I)",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "example": "bgbl-1"
-          },
-          {
-            "name": "year",
-            "in": "path",
-            "description": "Year the legislation was enacted or published",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "example": 1979
-          },
-          {
-            "name": "naturalIdentifier",
-            "in": "path",
-            "description": "Unique natural identifier for the legislation, specific to the jurisdiction and agent",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "example": "s1325"
-          },
-          {
-            "name": "pointInTime",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "format": "date"
-            },
-            "example": "2020-06-19"
-          },
-          {
-            "name": "version",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            },
-            "example": 2
-          },
-          {
-            "name": "language",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "example": "deu"
-          },
-          {
-            "name": "eId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "example": "art-z1"
           }
         ],
         "responses": {
