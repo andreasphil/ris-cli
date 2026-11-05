@@ -1,5 +1,5 @@
 import { defineCommand } from "citty";
-import type { components } from "../types/api.d.ts";
+import type { components, paths } from "../types/api.d.ts";
 import type { RisClient } from "../client.ts";
 import {
   expressionPath,
@@ -333,14 +333,60 @@ const articleVersionsCommand = defineCommand({
   async run({ args }) {
     const ctx = await createContext(args);
     const eli = await resolveExpression(ctx.client, args.eli, asString(args["on-date"]));
+    // The API only serves article history by revision, a per-part identifier that is
+    // stable across expressions. Look it up in the expression's table of contents.
+    const expression = await ctx.client.json<LegislationExpressionSchema>({
+      path: `${KIND.path}/eli/${expressionPath(eli)}`,
+      internal: true,
+    });
+    const revision = articleRevision(expression.hasPart ?? [], args.articleEid, eli);
     await printCollection(
       ctx,
-      `/v1/article/work-example/eli/${expressionPath(eli)}/${args.articleEid}`,
+      ARTICLE_VERSIONS_PATH.replace("{revision}", encodeURIComponent(revision)),
       {},
       ARTICLE_VERSION_COLUMNS,
     );
   },
 });
+
+/** Typed against the generated spec, so a sync that drops the endpoint fails `tsc`. */
+const ARTICLE_VERSIONS_PATH = "/v1/article/work-example/{revision}" satisfies keyof paths;
+
+/** Depth-first search of the part tree for an eId. */
+export function findPart(
+  parts: LegislationExpressionPartSchema[],
+  eId: string,
+): LegislationExpressionPartSchema | undefined {
+  for (const part of parts) {
+    if (part.eId === eId) return part;
+    const nested = findPart(part.hasPart ?? [], eId);
+    if (nested) return nested;
+  }
+  return undefined;
+}
+
+/** The revision of an article, or an error that says why there is none. */
+export function articleRevision(
+  parts: LegislationExpressionPartSchema[],
+  eId: string,
+  eli: ParsedEli,
+): string {
+  const part = findPart(parts, eId);
+  if (!part) {
+    throw new Error(
+      `No article "${eId}" in eli/${expressionPath(eli)}.\n` +
+        `  List the article eIds with: ris legislation toc eli/${expressionPath(eli)}`,
+    );
+  }
+  // The spec types revision as optional, but the API also sends an explicit null.
+  if (!part.revision) {
+    throw new Error(
+      `Article "${eId}" in eli/${expressionPath(eli)} has no revision, ` +
+        `so its version history is not available.`,
+    );
+  }
+  return part.revision;
+}
 
 const zipCommand = defineCommand({
   meta: { name: "zip", description: "Manifestation as a ZIP archive (XML plus attachments)" },
