@@ -2827,7 +2827,7 @@
             "example": "Fundstelle"
           },
           "periodikum": {
-            "type": "string",
+            "$ref": "#/components/schemas/PeriodikumSchema",
             "description": "Periodikum in dem die Fundstelle gefunden werden kann"
           },
           "zitatstelle": {
@@ -2869,6 +2869,74 @@
           }
         }
       },
+      "NachgehendeEntscheidungSchema": {
+        "type": "object",
+        "properties": {
+          "@type": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": ["Verweis", "Rechtsprechung"]
+            }
+          },
+          "art": {
+            "type": "string",
+            "description": "* nachgehend: Die nachgehende Entscheidung ist abgeschlossen.\n* anhängig: Die nachgehende Entscheidung ist ein anhängiges Verfahren.",
+            "example": "nachgehend"
+          },
+          "referenzUri": {
+            "type": "string",
+            "description": "Die URI die auf die referenzierte Dokeinheit verweist."
+          },
+          "dokumenttyp": {
+            "type": "string",
+            "description": "Innerhalb der Dokumentart „Rechtsprechung“ werden folgende Dokumenttypen unterschieden:\n\n* Äuß: Äußerung\n* Ant: EuGH-Vorlage\n* AnU: Anerkenntnisurteil\n* Bes: Beschluss\n* Buß: Bußgeldbescheid\n* DrB: Dreierausschussbeschluss\n* EiA: Einstweilige Anordnung\n* Ent: Entscheidung\n* EVg: Einstellungsverfügung der Staatsanwaltschaft\n* GeB: Gerichtsbescheid\n* Gut: Gutachten\n* GWF: Gegenstandswertfestsetzung im verfassungsgerichtlichen Verfahren\n* KaB: Kammerbeschluss\n* KbN: Nichtannahmebeschluss\n* KbS: Stattgebender Kammerbeschluss\n* KoB: Kammerbeschluss ohne Begründung\n* PkH: Prozesskostenhilfebeschluss\n* ReM: Rechtsentscheid in Mietsachen\n* Sch: Schiedsgerichtsentscheidung\n* Ste: Stellungnahme\n* Str: Streitwertbeschluss\n* TeB: Teilbeschluss\n* TeU: Teilurteil\n* Urt: Urteil\n* Vgl: Vergleich\n* Vor: Vorlagebeschluss\n* VsU: Versäumnisurteil\n* VzU: Verzichtsurteil\n* ZwB: Zwischenbeschluss\n* ZwU: Zwischenurteil\n* TVU: Teilversäumnisurteil\n* Vfg: Verfügung\n* Vorab: Ersuchen um Vorabentscheidung\n* Anh: Anhängiges Verfahren\n* End: Endurteil\n* KfB: Kostenfestsetzungsbeschluss"
+          },
+          "entscheidungsdatum": {
+            "type": "string",
+            "format": "date",
+            "description": "Datum der Entscheidung, hier kann es zu Dopplungen mit anderen Entscheidungen kommen, auch in Kombination mit Aktenzeichen und Gericht."
+          },
+          "mitteilungsdatum": {
+            "type": "string",
+            "format": "date",
+            "description": "Mitteilungsdatum"
+          },
+          "dokumentnummer": {
+            "type": "string",
+            "description": "Dokumentnummer"
+          },
+          "aktenzeichen": {
+            "type": "string",
+            "description": "Aktenzeichen der Entscheidung, hier kann es zu Dopplungen mit anderen Entscheidungen kommen, auch in Kombination mit Entscheidungsdatum und Gericht. Bei Gemeinsamen Ländererlassen (GLE) innerhalb der Dokumentart Verwaltungsvorschriften wird über das Attribut 'normgeber' der jeweilige ausgebende Normgeber des Bundeslandes angegeben. Das optionale Attribut 'normgeberRegion' gibt die zugehörige Region des Normgebers an."
+          },
+          "gericht": {
+            "$ref": "#/components/schemas/GerichtSchema",
+            "description": "Gericht"
+          },
+          "vermerk": {
+            "type": "string",
+            "description": "Vermerk zu einem anhängigen nachfolgenden Verfahren"
+          }
+        }
+      },
+      "PeriodikumSchema": {
+        "type": "object",
+        "properties": {
+          "@type": {
+            "type": "string",
+            "example": "Periodikum"
+          },
+          "abkuerzung": {
+            "type": "string",
+            "description": "Abkürzung des Periodikums"
+          },
+          "titel": {
+            "type": "string",
+            "description": "Titel des Periodikums"
+          }
+        }
+      },
       "RechtsprechungSchema": {
         "type": "object",
         "properties": {
@@ -2895,23 +2963,23 @@
           },
           "tatbestand": {
             "type": "string",
-            "description": "Tatbestand"
+            "description": "Teil einer Entscheidung, der die Tatsachen und Feststellungen beschreibt, von denen das Gericht ausdrücklich ausgeht. Der Tatbestand wird nur gesondert erfasst, wenn er in der Entscheidung als solcher erkennbar ist."
           },
           "entscheidungsgruende": {
             "type": "string",
-            "description": "Entscheidungsgründe"
+            "description": "Teil einer Entscheidung, der sich ausschließlich mit der rechtlichen Würdigung der im Tatbestand getroffenen Feststellungen befasst.\nDie Entscheidungsgründe werden nur dann gesondert erfasst, wenn sie als solche erkennbar sind."
           },
           "abweichendeMeinung": {
             "type": "string",
-            "description": "Abweichende Meinung"
+            "description": "Als Abweichende Meinung wird der Teil einer Entscheidung erfasst, der abweichende Meinungen oder Sondervoten\neines oder mehrerer an der Entscheidung mitwirkenden Richter enthält."
           },
           "gruende": {
             "type": "string",
-            "description": "Gründe"
+            "description": "Die Gründe beinhalten sowohl die Teile, in denen die feststehenden Tatsachen und die getroffenen Feststellungen dargestellt werden, als auch die Teile, in denen die rechtliche Würdigung dieser Tatsachen und Feststellungen vorgenommen wird."
           },
           "leitsatz": {
             "type": "string",
-            "description": "Leitsatz"
+            "description": "Vom Spruchkörper verfasste oder mit seiner Zustimmung gebildete Leitsätze."
           },
           "kurztitel": {
             "type": "string",
@@ -2931,7 +2999,7 @@
           },
           "sonstigerLangtext": {
             "type": "string",
-            "description": "Sonstiger Langtext"
+            "description": "In Sonstiger Langtext werden entsprechende Hinweise aufgenommen, wenn eine Entscheidung ohne Tatbestand und Entscheidungsgründe (nach ZPO § 313a) ergeht. In dieser Rubrik können auch (Hinweise auf) Berichtigungsbeschlüsse u. Ä. aufgenommen werden."
           },
           "rechtsfrageGesamt": {
             "type": "string",
@@ -2943,7 +3011,7 @@
           },
           "tenor": {
             "type": "string",
-            "description": "Tenor"
+            "description": "Rechtlich bindender Ausspruch des Gerichts"
           },
           "datum": {
             "type": "string",
@@ -3057,16 +3125,14 @@
             "type": "array",
             "description": "Nachgewiesen werden gerichtliche Entscheidungen, die im Rahmen eines Verfahrens (einschl. Nebenverfahren) der zu dokumentierenden Entscheidung vorausgehen.",
             "items": {
-              "type": "string",
-              "description": "Nachgewiesen werden gerichtliche Entscheidungen, die im Rahmen eines Verfahrens (einschl. Nebenverfahren) der zu dokumentierenden Entscheidung vorausgehen."
+              "$ref": "#/components/schemas/VorgehendeEntscheidungSchema"
             }
           },
           "nachgehendeEntscheidungen": {
             "type": "array",
             "description": "Nachgewiesen werden die gerichtlichen Entscheidungen, die ihrerseits in der Rubrik „vorgehende Entscheidung“ die vorliegende Entscheidung nennen.",
             "items": {
-              "type": "string",
-              "description": "Nachgewiesen werden die gerichtlichen Entscheidungen, die ihrerseits in der Rubrik „vorgehende Entscheidung“ die vorliegende Entscheidung nennen."
+              "$ref": "#/components/schemas/NachgehendeEntscheidungSchema"
             }
           },
           "zitierungenLiteraturSelbststaendig": {
@@ -3301,16 +3367,55 @@
           "vorabdokument"
         ]
       },
+      "VorgehendeEntscheidungSchema": {
+        "type": "object",
+        "properties": {
+          "@type": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": ["Verweis", "Rechtsprechung"]
+            }
+          },
+          "referenzUri": {
+            "type": "string",
+            "description": "Die URI die auf die referenzierte Dokeinheit verweist."
+          },
+          "dokumenttyp": {
+            "type": "string",
+            "description": "Innerhalb der Dokumentart „Rechtsprechung“ werden folgende Dokumenttypen unterschieden:\n\n* Äuß: Äußerung\n* Ant: EuGH-Vorlage\n* AnU: Anerkenntnisurteil\n* Bes: Beschluss\n* Buß: Bußgeldbescheid\n* DrB: Dreierausschussbeschluss\n* EiA: Einstweilige Anordnung\n* Ent: Entscheidung\n* EVg: Einstellungsverfügung der Staatsanwaltschaft\n* GeB: Gerichtsbescheid\n* Gut: Gutachten\n* GWF: Gegenstandswertfestsetzung im verfassungsgerichtlichen Verfahren\n* KaB: Kammerbeschluss\n* KbN: Nichtannahmebeschluss\n* KbS: Stattgebender Kammerbeschluss\n* KoB: Kammerbeschluss ohne Begründung\n* PkH: Prozesskostenhilfebeschluss\n* ReM: Rechtsentscheid in Mietsachen\n* Sch: Schiedsgerichtsentscheidung\n* Ste: Stellungnahme\n* Str: Streitwertbeschluss\n* TeB: Teilbeschluss\n* TeU: Teilurteil\n* Urt: Urteil\n* Vgl: Vergleich\n* Vor: Vorlagebeschluss\n* VsU: Versäumnisurteil\n* VzU: Verzichtsurteil\n* ZwB: Zwischenbeschluss\n* ZwU: Zwischenurteil\n* TVU: Teilversäumnisurteil\n* Vfg: Verfügung\n* Vorab: Ersuchen um Vorabentscheidung\n* Anh: Anhängiges Verfahren\n* End: Endurteil\n* KfB: Kostenfestsetzungsbeschluss"
+          },
+          "entscheidungsdatum": {
+            "type": "string",
+            "format": "date",
+            "description": "Datum der Entscheidung, hier kann es zu Dopplungen mit anderen Entscheidungen kommen, auch in Kombination mit Aktenzeichen und Gericht."
+          },
+          "dokumentnummer": {
+            "type": "string",
+            "description": "Dokumentnummer"
+          },
+          "aktenzeichen": {
+            "type": "string",
+            "description": "Aktenzeichen der Entscheidung, hier kann es zu Dopplungen mit anderen Entscheidungen kommen, auch in Kombination mit Entscheidungsdatum und Gericht. Bei Gemeinsamen Ländererlassen (GLE) innerhalb der Dokumentart Verwaltungsvorschriften wird über das Attribut 'normgeber' der jeweilige ausgebende Normgeber des Bundeslandes angegeben. Das optionale Attribut 'normgeberRegion' gibt die zugehörige Region des Normgebers an."
+          },
+          "gericht": {
+            "$ref": "#/components/schemas/GerichtSchema",
+            "description": "Gericht"
+          }
+        }
+      },
       "ZitierungLiteraturSelbststaendigSchema": {
         "type": "object",
         "properties": {
           "@type": {
-            "type": "string",
-            "example": "ZitierungLiteraturSelbststaendig"
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": ["Verweis", "Literature"]
+            }
           },
           "richtung": {
             "type": "string",
-            "description": "Ist die Referenz eine Aktivzitierung oder eine Passivzitierung?",
             "enum": ["aktiv", "passiv"]
           },
           "referenzUri": {
@@ -3326,7 +3431,8 @@
             "description": "Autor(en)"
           },
           "titel": {
-            "type": "string"
+            "type": "string",
+            "description": "Titel"
           },
           "veroeffentlichungsjahr": {
             "type": "string",
@@ -3338,12 +3444,14 @@
         "type": "object",
         "properties": {
           "@type": {
-            "type": "string",
-            "example": "ZitierungLiteraturUnselbststaendig"
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": ["Verweis", "Literature"]
+            }
           },
           "richtung": {
             "type": "string",
-            "description": "Ist die Referenz eine Aktivzitierung oder eine Passivzitierung?",
             "enum": ["aktiv", "passiv"]
           },
           "referenzUri": {
@@ -3372,12 +3480,14 @@
         "type": "object",
         "properties": {
           "@type": {
-            "type": "string",
-            "example": "ZitierungRechtsprechung"
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": ["Verweis", "Rechtsprechung"]
+            }
           },
           "richtung": {
             "type": "string",
-            "description": "Ist die Referenz eine Aktivzitierung oder eine Passivzitierung?",
             "enum": ["aktiv", "passiv"]
           },
           "referenzUri": {
@@ -3389,8 +3499,7 @@
             "description": "Dokumentnummer"
           },
           "artDerZitierung": {
-            "type": "string",
-            "description": "Art der Zitierung"
+            "type": "string"
           },
           "gericht": {
             "$ref": "#/components/schemas/GerichtSchema",
@@ -3419,12 +3528,14 @@
         "type": "object",
         "properties": {
           "@type": {
-            "type": "string",
-            "example": "ZitierungVerwaltungsvorschrift"
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": ["Verweis", "AdministrativeDirective"]
+            }
           },
           "richtung": {
             "type": "string",
-            "description": "Ist die Referenz eine Aktivzitierung oder eine Passivzitierung?",
             "enum": ["aktiv", "passiv"]
           },
           "referenzUri": {
@@ -3436,8 +3547,7 @@
             "description": "Dokumentnummer"
           },
           "artDerZitierung": {
-            "type": "string",
-            "description": "Art der Zitierung"
+            "type": "string"
           },
           "jurisAbkuerzung": {
             "type": "string",
@@ -4185,6 +4295,11 @@
           "@id": {
             "type": "string",
             "example": "/v1/legislation/eli/bund/bgbl-1/1975/s1760/1998-01-29/10/deu"
+          },
+          "fullCitation": {
+            "type": ["string", "null"],
+            "description": "Vollzitat",
+            "example": "Kakaoerzeugnisse von 1. Dezember 2000 (BGBl. 1111)"
           },
           "name": {
             "type": "string",
