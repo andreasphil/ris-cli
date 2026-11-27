@@ -1,5 +1,4 @@
 import { defineCommand } from "citty";
-import type { components, paths } from "../types/api.d.ts";
 import type { RisClient } from "../client.ts";
 import {
   expressionPath,
@@ -16,7 +15,6 @@ import {
   TRANSLATION_COLUMNS,
   type HydraCollection,
 } from "../output.ts";
-import type { LegislationTranslation, LegislationWorkExampleMember } from "../types/internal.ts";
 import {
   createContext,
   globalArgs,
@@ -32,6 +30,8 @@ import {
   writeData,
   writeNote,
 } from "../shared.ts";
+import type { components, paths } from "../types/api.d.ts";
+import type { LegislationTranslation, LegislationWorkExampleMember } from "../types/internal.ts";
 import { changelogCommand, type DocumentKind } from "./factory.ts";
 
 type LegislationExpressionSchema = components["schemas"]["LegislationExpressionSchema"];
@@ -50,9 +50,8 @@ const ELI_HINT =
 /**
  * Resolves whatever the user typed into an expression-level ELI.
  *
- * An abbreviation (`BGB`) is looked up via the search endpoint with
- * `mostRelevantOn=today`, which is what the portal itself does to pick the version
- * a reader most likely wants.
+ * An abbreviation (`BGB`) is looked up via the search endpoint with `mostRelevantOn=today`, which
+ * is what the portal itself does to pick the version a reader most likely wants.
  */
 async function resolveExpression(
   client: RisClient,
@@ -106,9 +105,8 @@ async function resolveWork(client: RisClient, eli: ParsedEli, onDate?: string): 
 }
 
 /**
- * Turns an expression-level ELI into a manifestation path by reading the real
- * manifestation URL out of the expression's `encoding` array, rather than guessing
- * the manifestation date and subtype.
+ * Turns an expression-level ELI into a manifestation path by reading the real manifestation URL out
+ * of the expression's `encoding` array, rather than guessing the manifestation date and subtype.
  */
 async function resolveManifestation(
   client: RisClient,

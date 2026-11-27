@@ -1,5 +1,4 @@
 import { defineCommand } from "citty";
-import type { components } from "../types/api.d.ts";
 import { RisClient } from "../client.ts";
 import {
   BUILTIN_PROFILES,
@@ -13,6 +12,7 @@ import {
   type Profile,
 } from "../config.ts";
 import { globalArgsWithoutProfile } from "../shared.ts";
+import type { components } from "../types/api.d.ts";
 
 type StatisticsApiSchema = components["schemas"]["StatisticsApiSchema"];
 

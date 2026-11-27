@@ -3,13 +3,12 @@
  *
  * The API addresses legislation at three FRBR levels, each adding path segments:
  *
- *   work           bund/bgbl-1/1979/s1325                                    (4)
- *   expression     …/2020-06-19/2/deu                                        (7)
- *   manifestation  …/2020-06-19/regelungstext-1                              (9)
+ * Work bund/bgbl-1/1979/s1325 (4) expression …/2020-06-19/2/deu (7) manifestation
+ * …/2020-06-19/regelungstext-1 (9)
  *
- * The 8-segment form (expression + manifestation date, no subtype) is a real
- * addressing level too: the `.zip` endpoint and manifestation resources omit the
- * subtype. See `spec/openapi.json` for the endpoint shapes.
+ * The 8-segment form (expression + manifestation date, no subtype) is a real addressing level too:
+ * the `.zip` endpoint and manifestation resources omit the subtype. See `spec/openapi.json` for the
+ * endpoint shapes.
  */
 
 export type EliLevel = "work" | "expression" | "manifestation-date" | "manifestation";
@@ -37,10 +36,9 @@ export class EliParseError extends Error {
 const KNOWN_EXTENSIONS = ["html", "xml", "zip", "pdf", "jpg", "gif"];
 
 /**
- * Normalises the many shapes an ELI arrives in. Accepts a bare ELI, an
- * `eli/`-prefixed one, a full API path (`/v1/legislation/eli/…`), a portal path
- * (`/gesetze/eli/…`), or an absolute URL — so a value copied out of a browser or
- * an API response can be pasted directly.
+ * Normalises the many shapes an ELI arrives in. Accepts a bare ELI, an `eli/`-prefixed one, a full
+ * API path (`/v1/legislation/eli/…`), a portal path (`/gesetze/eli/…`), or an absolute URL — so a
+ * value copied out of a browser or an API response can be pasted directly.
  */
 export function normalizeEliInput(input: string): string {
   let value = input.trim();

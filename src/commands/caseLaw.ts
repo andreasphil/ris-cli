@@ -1,5 +1,4 @@
 import { defineCommand } from "citty";
-import type { components } from "../types/api.d.ts";
 import { COLUMNS } from "../output.ts";
 import {
   createContext,
@@ -13,6 +12,7 @@ import {
   searchArgs,
   searchQuery,
 } from "../shared.ts";
+import type { components } from "../types/api.d.ts";
 import {
   changelogCommand,
   metadataCommand,

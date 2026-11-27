@@ -1,5 +1,4 @@
 import { defineCommand } from "citty";
-import type { components } from "../types/api.d.ts";
 import {
   createContext,
   globalArgs,
@@ -11,6 +10,7 @@ import {
   writeData,
   writeNote,
 } from "../shared.ts";
+import type { components } from "../types/api.d.ts";
 
 type StatisticsApiSchema = components["schemas"]["StatisticsApiSchema"];
 type ZipDataCatalogSchema = components["schemas"]["ZipDataCatalogSchema"];

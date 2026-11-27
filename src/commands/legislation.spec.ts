@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
-import type { components } from "../types/api.d.ts";
 import { parseEli } from "../eli.ts";
+import type { components } from "../types/api.d.ts";
 import { articleRevision, findPart } from "./legislation.ts";
 
 type Part = components["schemas"]["LegislationExpressionPartSchema"];

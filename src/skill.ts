@@ -1,9 +1,9 @@
 /**
  * The agent skill installed by `ris skill install`.
  *
- * Only the prose is written by hand. The command surface is walked out of the
- * citty definitions, so the skill cannot drift from the CLI: adding a command or a
- * flag and re-running `ris skill update` is enough.
+ * Only the prose is written by hand. The command surface is walked out of the citty definitions, so
+ * the skill cannot drift from the CLI: adding a command or a flag and re-running `ris skill update`
+ * is enough.
  */
 import { join } from "node:path";
 import { globalArgs, searchArgs } from "./shared.ts";
@@ -43,9 +43,9 @@ function usage(path: string[], node: CommandNode): string {
 }
 
 /**
- * The flags that are specific to this command. Flags every command shares are
- * documented once at the top; the search/pagination block is named rather than
- * repeated across the dozen commands that take it.
+ * The flags that are specific to this command. Flags every command shares are documented once at
+ * the top; the search/pagination block is named rather than repeated across the dozen commands that
+ * take it.
  */
 function specificFlags(node: CommandNode): string[] {
   const own = node.flags.filter((flag) => !GLOBAL_NAMES.has(flag.name));
@@ -73,8 +73,8 @@ function groupHeading(node: CommandNode, path: string[], depth: number): string 
 }
 
 /**
- * Leaf commands as a flat list, one `###` section per command group, so a path
- * like `ris case-law search` is always spelled out in full and can be copied.
+ * Leaf commands as a flat list, one `###` section per command group, so a path like `ris case-law
+ * search` is always spelled out in full and can be copied.
  */
 function renderTree(root: CommandNode): string {
   const sections: string[] = [];

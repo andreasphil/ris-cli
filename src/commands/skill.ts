@@ -40,8 +40,8 @@ async function write(
 }
 
 /**
- * Takes the root command as a thunk: the root imports this module, so reading it
- * at definition time would be a circular import.
+ * Takes the root command as a thunk: the root imports this module, so reading it at definition time
+ * would be a circular import.
  */
 export function skillCommand(getRoot: () => CommandDef) {
   return defineCommand({

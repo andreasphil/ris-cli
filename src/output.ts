@@ -1,9 +1,9 @@
 /**
  * Output formatting.
  *
- * Search endpoints wrap results in a Hydra collection whose documents sit two
- * levels down at `member[].item`. Unwrapping that by default is the single
- * biggest readability win over curling the API by hand.
+ * Search endpoints wrap results in a Hydra collection whose documents sit two levels down at
+ * `member[].item`. Unwrapping that by default is the single biggest readability win over curling
+ * the API by hand.
  */
 
 export type OutputFormat = "json" | "table";
@@ -116,8 +116,8 @@ const CASE_LAW_COLUMNS: Column[] = [
 ];
 
 /**
- * Per-document-kind columns, keyed by the `@type` discriminator as the API actually
- * emits it. Case law reports `Decision`, not `CaseLaw`.
+ * Per-document-kind columns, keyed by the `@type` discriminator as the API actually emits it. Case
+ * law reports `Decision`, not `CaseLaw`.
  */
 export const COLUMNS: Record<string, Column[]> = {
   Decision: CASE_LAW_COLUMNS,
@@ -165,10 +165,10 @@ export const COLUMNS: Record<string, Column[]> = {
 /**
  * Columns for the undocumented `/v1/translatedLegislation` list.
  *
- * Kept out of `COLUMNS` deliberately: those are keyed by the `@type`
- * discriminator, and a translation reports `@type: "Legislation"`, which would
- * collide with the legislation columns. The keys here are JSON-LD names because the
- * backend maps its `id` and `filename` fields to `@id` and `ris:filename`.
+ * Kept out of `COLUMNS` deliberately: those are keyed by the `@type` discriminator, and a
+ * translation reports `@type: "Legislation"`, which would collide with the legislation columns. The
+ * keys here are JSON-LD names because the backend maps its `id` and `filename` fields to `@id` and
+ * `ris:filename`.
  */
 export const TRANSLATION_COLUMNS: Column[] = [
   { header: "id", get: "@id", maxWidth: 16 },
@@ -179,8 +179,8 @@ export const TRANSLATION_COLUMNS: Column[] = [
 /**
  * Columns for `legislation article-versions`.
  *
- * Kept out of `COLUMNS` for the same reason as {@link TRANSLATION_COLUMNS}: this
- * reports `@type: "Legislation"` too, which would collide with the full-work columns.
+ * Kept out of `COLUMNS` for the same reason as {@link TRANSLATION_COLUMNS}: this reports `@type:
+ * "Legislation"` too, which would collide with the full-work columns.
  */
 export const ARTICLE_VERSION_COLUMNS: Column[] = [
   { header: "coverage", get: "temporalCoverage", maxWidth: 23 },
