@@ -144,6 +144,50 @@ describe("output", () => {
     });
   });
 
+  describe("kind-specific columns", () => {
+    const cell = (row: Record<string, unknown>, header: string) =>
+      renderTable([row], [columnsFor([row]).find((column) => column.header === header)!], 200)
+        .split("\n")[1]
+        ?.trim();
+
+    it("shows the file numbers of a decision", () => {
+      expect(
+        cell({ "@type": "Decision", fileNumbers: ["IV 85/68", "IV 86/68"] }, "file numbers"),
+      ).toBe("IV 85/68, IV 86/68");
+    });
+
+    it("shows when a law was first published", () => {
+      const law = { "@type": "Legislation", exampleOfWork: { datePublished: "2003-12-16" } };
+      expect(cell(law, "published")).toBe("2003-12-16");
+    });
+
+    it("combines both kinds of literature references", () => {
+      const literature = {
+        "@type": "Literature",
+        dependentReferences: ["BUV, 1982, 123-123"],
+        independentReferences: ["BB, 1987"],
+      };
+      expect(cell(literature, "references")).toBe("BUV, 1982, 123-123, BB, 1987");
+    });
+
+    it("falls back to the documentary title when literature has no main title", () => {
+      const literature = {
+        "@type": "Literature",
+        headline: "",
+        alternativeHeadline: "Ersatztitel",
+      };
+      expect(cell(literature, "title")).toBe("Ersatztitel");
+    });
+
+    it("dates literature by its publication years in mixed results", () => {
+      const rows = [
+        { "@type": "Literature", yearsOfPublication: ["2014"] },
+        { "@type": "Decision", decisionDate: "2020-01-01" },
+      ];
+      expect(renderTable(rows, columnsFor(rows), 200)).toContain("2014");
+    });
+  });
+
   describe("TRANSLATION_COLUMNS", () => {
     // The backend maps `id` → `@id` and `filename` → `ris:filename` via
     // @JsonProperty, so reading the obvious names would render blank cells.

@@ -99,10 +99,18 @@ export function renderTable(
   );
 }
 
+function workOf(row: Record<string, unknown>): Record<string, unknown> | undefined {
+  const work = row.exampleOfWork;
+  return typeof work === "object" && work !== null ? (work as Record<string, unknown>) : undefined;
+}
+
 const CASE_LAW_COLUMNS: Column[] = [
   { header: "document number", get: "documentNumber" },
   { header: "date", get: "decisionDate" },
   { header: "court", get: "courtName", maxWidth: 28 },
+  { header: "body", get: "judicialBody", maxWidth: 12 },
+  { header: "location", get: "location", maxWidth: 14 },
+  { header: "file numbers", get: "fileNumbers", maxWidth: 20 },
   { header: "type", get: "documentType", maxWidth: 16 },
   { header: "title", get: (row) => row.headline ?? row.decisionName ?? row.titleLine },
 ];
@@ -122,18 +130,27 @@ export const COLUMNS: Record<string, Column[]> = {
     },
     { header: "in force", get: "legislationLegalForce", maxWidth: 18 },
     { header: "coverage", get: "temporalCoverage", maxWidth: 23 },
+    { header: "published", get: (row) => workOf(row)?.datePublished },
     { header: "name", get: (row) => row.alternateName ?? row.name },
   ],
   Literature: [
     { header: "document number", get: "documentNumber" },
-    { header: "year", get: (row) => row.yearsOfPublication ?? row.firstPublicationDate },
+    { header: "year", get: "yearsOfPublication" },
     { header: "type", get: "documentTypes", maxWidth: 16 },
+    { header: "lit. type", get: "literatureType", maxWidth: 9 },
     { header: "authors", get: "authors", maxWidth: 24 },
-    { header: "title", get: "headline" },
+    { header: "collaborators", get: "collaborators", maxWidth: 20 },
+    {
+      header: "references",
+      get: (row) => [row.dependentReferences, row.independentReferences].flat(),
+      maxWidth: 30,
+    },
+    { header: "title", get: (row) => row.headline || row.alternativeHeadline },
   ],
   AdministrativeDirective: [
     { header: "document number", get: "documentNumber" },
     { header: "type", get: "documentType", maxWidth: 12 },
+    { header: "reference numbers", get: "referenceNumbers", maxWidth: 20 },
     { header: "in force from", get: "entryIntoForceDate" },
     { header: "authority", get: "legislationAuthority", maxWidth: 20 },
     { header: "title", get: "headline" },
@@ -180,7 +197,8 @@ const MIXED_COLUMNS: Column[] = [
   },
   {
     header: "date",
-    get: (row) => row.decisionDate ?? row.temporalCoverage ?? row.entryIntoForceDate,
+    get: (row) =>
+      row.decisionDate ?? row.temporalCoverage ?? row.entryIntoForceDate ?? row.yearsOfPublication,
     maxWidth: 23,
   },
   {
