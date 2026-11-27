@@ -70,8 +70,8 @@ describe("shared", () => {
   });
 
   /**
-   * Runs `body` and returns what reached one stream. Both are mocked, so asserting
-   * that a note stays off stdout does not print the note itself.
+   * Runs `body` and returns what reached one stream. Both are mocked, so asserting that a note
+   * stays off stdout does not print the note itself.
    */
   function capture(stream: "stdout" | "stderr", body: () => void): unknown[] {
     const spies = (["stdout", "stderr"] as const).map((name) =>

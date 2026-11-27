@@ -14,8 +14,8 @@ import {
 } from "./output.ts";
 
 /**
- * citty does not merge parent args into subcommands, so these are spread into
- * every leaf command's `args`.
+ * Citty does not merge parent args into subcommands, so these are spread into every leaf command's
+ * `args`.
  */
 export const globalArgs = {
   profile: {
@@ -37,8 +37,8 @@ export const globalArgs = {
 } as const satisfies ArgsDef;
 
 /**
- * `config check` takes the profile as a positional, which would collide with the
- * global `--profile` flag in the same args object.
+ * `config check` takes the profile as a positional, which would collide with the global `--profile`
+ * flag in the same args object.
  */
 export const { profile: _profileArg, ...globalArgsWithoutProfile } = globalArgs;
 
@@ -63,9 +63,8 @@ export const searchArgs = {
 } as const satisfies ArgsDef;
 
 /**
- * `ParsedArgs<ArgsDef>` collapses its index signature to `never`, so concrete
- * per-command arg types are not assignable to it. This is the structural shape all
- * of them satisfy.
+ * `ParsedArgs<ArgsDef>` collapses its index signature to `never`, so concrete per-command arg types
+ * are not assignable to it. This is the structural shape all of them satisfy.
  */
 export type AnyArgs = { _: string[] } & Record<
   string,
@@ -85,10 +84,9 @@ function bool(args: AnyArgs, name: string): boolean {
 /**
  * Collects every occurrence of a repeated string flag.
  *
- * citty's parser keeps only the last value of a repeated flag, so
- * `--type A --type B` would silently drop `A`. The API accepts multi-value
- * filters either repeated or comma-separated, and users reasonably try both, so we
- * read the repeats straight out of the raw argv.
+ * Citty's parser keeps only the last value of a repeated flag, so `--type A --type B` would
+ * silently drop `A`. The API accepts multi-value filters either repeated or comma-separated, and
+ * users reasonably try both, so we read the repeats straight out of the raw argv.
  */
 export function collectRepeated(rawArgs: string[], name: string): string[] {
   const values: string[] = [];
@@ -164,26 +162,25 @@ export function searchQuery(args: AnyArgs, searchTerm?: string): Query {
 }
 
 /**
- * Data — the thing a pipeline consumes. Everything a command produces as output
- * goes through here, so there is one place that owns "this belongs on stdout".
+ * Data — the thing a pipeline consumes. Everything a command produces as output goes through here,
+ * so there is one place that owns "this belongs on stdout".
  */
 export function writeData(text: string): void {
   process.stdout.write(text.endsWith("\n") ? text : `${text}\n`);
 }
 
 /**
- * A note *about* the data: row counts, pagination hints, empty-result messages.
- * Kept off stdout so a pipeline sees only rows — and nothing at all when there
- * are none.
+ * A note _about_ the data: row counts, pagination hints, empty-result messages. Kept off stdout so
+ * a pipeline sees only rows — and nothing at all when there are none.
  */
 export function writeNote(text: string): void {
   process.stderr.write(text.endsWith("\n") ? text : `${text}\n`);
 }
 
 /**
- * Renders a list of documents: JSON when asked for, otherwise a table with an
- * optional footer. Owns the data/note split for every array-shaped result, so the
- * rule is stated once rather than restated per command.
+ * Renders a list of documents: JSON when asked for, otherwise a table with an optional footer. Owns
+ * the data/note split for every array-shaped result, so the rule is stated once rather than
+ * restated per command.
  */
 export function printRows(
   ctx: Context,
@@ -237,8 +234,8 @@ export function printDocument(ctx: Context, document: Record<string, unknown>): 
 }
 
 /**
- * Binary output only ever goes to stdout, so a terminal is the one destination it
- * cannot have. Commands assert this *before* fetching — see `printBinary`.
+ * Binary output only ever goes to stdout, so a terminal is the one destination it cannot have.
+ * Commands assert this _before_ fetching — see `printBinary`.
  */
 export function requireRedirectedStdout(): void {
   if (process.stdout.isTTY) {

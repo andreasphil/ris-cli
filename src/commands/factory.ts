@@ -1,5 +1,4 @@
 import { defineCommand } from "citty";
-import type { components } from "../types/api.d.ts";
 import {
   createContext,
   globalArgs,
@@ -10,12 +9,13 @@ import {
   writeNote,
   type Context,
 } from "../shared.ts";
+import type { components } from "../types/api.d.ts";
 
 type ChangelogResponse = components["schemas"]["ChangelogResponse"];
 
 /**
- * Verbs that are identical across all four document kinds: metadata, XML, HTML and
- * changelog. Only the base path and the example document number differ.
+ * Verbs that are identical across all four document kinds: metadata, XML, HTML and changelog. Only
+ * the base path and the example document number differ.
  */
 export interface DocumentKind {
   /** Base path, e.g. `/v1/rechtsprechung`. */
@@ -99,8 +99,8 @@ export function zipCommand(kind: DocumentKind) {
 }
 
 /**
- * The API requires both `from` and `to` as date-times. Defaulting to the last 24
- * hours makes the common "what changed recently?" question a bare command.
+ * The API requires both `from` and `to` as date-times. Defaulting to the last 24 hours makes the
+ * common "what changed recently?" question a bare command.
  */
 export function changelogCommand(kind: DocumentKind) {
   return defineCommand({

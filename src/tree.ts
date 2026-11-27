@@ -1,8 +1,8 @@
 /**
  * Command tree introspection.
  *
- * Walks the citty definitions into a plain description of commands, flags and
- * positionals, so generated documentation cannot drift from the CLI itself.
+ * Walks the citty definitions into a plain description of commands, flags and positionals, so
+ * generated documentation cannot drift from the CLI itself.
  */
 import type { ArgsDef, CommandDef } from "citty";
 
@@ -31,22 +31,22 @@ export interface CommandNode {
   positionals: PositionalSpec[];
 }
 
-/** citty allows `meta`, `args` and `subCommands` to be thunks, including async ones. */
+/** Citty allows `meta`, `args` and `subCommands` to be thunks, including async ones. */
 export async function resolve<T>(
   value: T | (() => T | Promise<T>) | undefined,
 ): Promise<T | undefined> {
   return typeof value === "function" ? (value as () => Promise<T>)() : value;
 }
 
-/** citty's `alias` is a string, an array, or absent. */
+/** Citty's `alias` is a string, an array, or absent. */
 export function toArray(value: string | string[] | undefined): string[] {
   if (value === undefined) return [];
   return Array.isArray(value) ? value : [value];
 }
 
 /**
- * Splits an args definition into flags and positionals. Flags are sorted by name;
- * positionals keep their declaration order, which is the order they are passed in.
+ * Splits an args definition into flags and positionals. Flags are sorted by name; positionals keep
+ * their declaration order, which is the order they are passed in.
  */
 export function describeArgs(args: ArgsDef): {
   flags: FlagSpec[];

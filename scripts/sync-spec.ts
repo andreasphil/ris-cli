@@ -1,10 +1,9 @@
 /**
  * Refreshes the vendored OpenAPI spec and regenerates types.
  *
- * Prefers a locally running backend, whose springdoc-generated spec is the most
- * current, and falls back to the published one. Note that neither source includes
- * the backend's `@Hidden` endpoints — those are typed by hand in
- * src/types/internal.ts.
+ * Prefers a locally running backend, whose springdoc-generated spec is the most current, and falls
+ * back to the published one. Note that neither source includes the backend's `@Hidden` endpoints —
+ * those are typed by hand in src/types/internal.ts.
  */
 import { execFile } from "node:child_process";
 import { writeFile } from "node:fs/promises";

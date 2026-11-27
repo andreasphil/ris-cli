@@ -9,18 +9,17 @@ const execFileAsync = promisify(execFile);
 export const DEFAULT_API_URL = "http://localhost:8080";
 
 /**
- * A secret is never stored in this file. It holds either a 1Password secret
- * reference (`op://vault/item/field`), resolved by shelling out to `op read` at
- * request time, or — for a value that is not actually secret, like a username —
- * a literal.
+ * A secret is never stored in this file. It holds either a 1Password secret reference
+ * (`op://vault/item/field`), resolved by shelling out to `op read` at request time, or — for a
+ * value that is not actually secret, like a username — a literal.
  */
 export type SecretRef = string;
 
 export interface Profile {
   url: string;
   /**
-   * HTTP Basic credentials. Staging sits behind Basic auth at the ingress layer,
-   * so this is orthogonal to `apiKey` and the two compose.
+   * HTTP Basic credentials. Staging sits behind Basic auth at the ingress layer, so this is
+   * orthogonal to `apiKey` and the two compose.
    */
   basic?: { username: SecretRef; password: SecretRef };
   /** `X-Api-Key` header value (`prefix` + secret), required by the production profile. */
@@ -102,12 +101,12 @@ export interface Target {
 }
 
 /**
- * Resolves base URL and auth headers from a profile — the only place either comes
- * from. An explicit name picks one; otherwise the config file's default profile
- * applies, falling back to localhost when none is set.
+ * Resolves base URL and auth headers from a profile — the only place either comes from. An explicit
+ * name picks one; otherwise the config file's default profile applies, falling back to localhost
+ * when none is set.
  *
- * Basic and API key compose, because they are enforced at different layers
- * (ingress vs. application).
+ * Basic and API key compose, because they are enforced at different layers (ingress vs.
+ * application).
  */
 export async function resolveTarget(config: Config, requested?: string): Promise<Target> {
   const name = requested ?? config.defaultProfile;

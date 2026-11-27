@@ -12,8 +12,8 @@ export interface RequestSpec {
   query?: Query;
   accept?: string;
   /**
-   * Internal requests (abbreviation lookups, expression→manifestation resolution)
-   * run even under --dry-run, so that the *final* URL printed is the real one.
+   * Internal requests (abbreviation lookups, expression→manifestation resolution) run even under
+   * --dry-run, so that the _final_ URL printed is the real one.
    */
   internal?: boolean;
 }
@@ -91,9 +91,8 @@ export function buildUrl(baseUrl: string, path: string, query: Query = {}): stri
 }
 
 /**
- * The equivalent curl command. Credentials are emitted as placeholders to be
- * filled in, so no secret is ever written to a terminal, a scrollback buffer or a
- * shell history file.
+ * The equivalent curl command. Credentials are emitted as placeholders to be filled in, so no
+ * secret is ever written to a terminal, a scrollback buffer or a shell history file.
  */
 export function toCurl(url: string, headers: Record<string, string>, accept?: string): string {
   const parts = ["curl", "-sS"];

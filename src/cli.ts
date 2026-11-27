@@ -55,10 +55,9 @@ async function findSubCommand(
 }
 
 /**
- * Walks down to the command the user actually asked about, so `--help` on a
- * subcommand shows that subcommand's usage. citty does this internally for
- * `runMain`, but `runMain` also swallows every error into a raw stack trace, so we
- * drive `runCommand` ourselves and reimplement just this part.
+ * Walks down to the command the user actually asked about, so `--help` on a subcommand shows that
+ * subcommand's usage. citty does this internally for `runMain`, but `runMain` also swallows every
+ * error into a raw stack trace, so we drive `runCommand` ourselves and reimplement just this part.
  */
 async function resolveForUsage(
   command: CommandDef,

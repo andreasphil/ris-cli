@@ -1,9 +1,9 @@
 /**
  * Output formatting.
  *
- * Search endpoints wrap results in a Hydra collection whose documents sit two
- * levels down at `member[].item`. Unwrapping that by default is the single
- * biggest readability win over curling the API by hand.
+ * Search endpoints wrap results in a Hydra collection whose documents sit two levels down at
+ * `member[].item`. Unwrapping that by default is the single biggest readability win over curling
+ * the API by hand.
  */
 
 export type OutputFormat = "json" | "table";
@@ -99,17 +99,25 @@ export function renderTable(
   );
 }
 
+function workOf(row: Record<string, unknown>): Record<string, unknown> | undefined {
+  const work = row.exampleOfWork;
+  return typeof work === "object" && work !== null ? (work as Record<string, unknown>) : undefined;
+}
+
 const CASE_LAW_COLUMNS: Column[] = [
   { header: "document number", get: "documentNumber" },
   { header: "date", get: "decisionDate" },
   { header: "court", get: "courtName", maxWidth: 28 },
+  { header: "body", get: "judicialBody", maxWidth: 12 },
+  { header: "location", get: "location", maxWidth: 14 },
+  { header: "file numbers", get: "fileNumbers", maxWidth: 20 },
   { header: "type", get: "documentType", maxWidth: 16 },
   { header: "title", get: (row) => row.headline ?? row.decisionName ?? row.titleLine },
 ];
 
 /**
- * Per-document-kind columns, keyed by the `@type` discriminator as the API actually
- * emits it. Case law reports `Decision`, not `CaseLaw`.
+ * Per-document-kind columns, keyed by the `@type` discriminator as the API actually emits it. Case
+ * law reports `Decision`, not `CaseLaw`.
  */
 export const COLUMNS: Record<string, Column[]> = {
   Decision: CASE_LAW_COLUMNS,
@@ -122,18 +130,27 @@ export const COLUMNS: Record<string, Column[]> = {
     },
     { header: "in force", get: "legislationLegalForce", maxWidth: 18 },
     { header: "coverage", get: "temporalCoverage", maxWidth: 23 },
+    { header: "published", get: (row) => workOf(row)?.datePublished },
     { header: "name", get: (row) => row.alternateName ?? row.name },
   ],
   Literature: [
     { header: "document number", get: "documentNumber" },
-    { header: "year", get: (row) => row.yearsOfPublication ?? row.firstPublicationDate },
+    { header: "year", get: "yearsOfPublication" },
     { header: "type", get: "documentTypes", maxWidth: 16 },
+    { header: "lit. type", get: "literatureType", maxWidth: 9 },
     { header: "authors", get: "authors", maxWidth: 24 },
-    { header: "title", get: "headline" },
+    { header: "collaborators", get: "collaborators", maxWidth: 20 },
+    {
+      header: "references",
+      get: (row) => [row.dependentReferences, row.independentReferences].flat(),
+      maxWidth: 30,
+    },
+    { header: "title", get: (row) => row.headline || row.alternativeHeadline },
   ],
   AdministrativeDirective: [
     { header: "document number", get: "documentNumber" },
     { header: "type", get: "documentType", maxWidth: 12 },
+    { header: "reference numbers", get: "referenceNumbers", maxWidth: 20 },
     { header: "in force from", get: "entryIntoForceDate" },
     { header: "authority", get: "legislationAuthority", maxWidth: 20 },
     { header: "title", get: "headline" },
@@ -148,10 +165,10 @@ export const COLUMNS: Record<string, Column[]> = {
 /**
  * Columns for the undocumented `/v1/translatedLegislation` list.
  *
- * Kept out of `COLUMNS` deliberately: those are keyed by the `@type`
- * discriminator, and a translation reports `@type: "Legislation"`, which would
- * collide with the legislation columns. The keys here are JSON-LD names because the
- * backend maps its `id` and `filename` fields to `@id` and `ris:filename`.
+ * Kept out of `COLUMNS` deliberately: those are keyed by the `@type` discriminator, and a
+ * translation reports `@type: "Legislation"`, which would collide with the legislation columns. The
+ * keys here are JSON-LD names because the backend maps its `id` and `filename` fields to `@id` and
+ * `ris:filename`.
  */
 export const TRANSLATION_COLUMNS: Column[] = [
   { header: "id", get: "@id", maxWidth: 16 },
@@ -162,8 +179,8 @@ export const TRANSLATION_COLUMNS: Column[] = [
 /**
  * Columns for `legislation article-versions`.
  *
- * Kept out of `COLUMNS` for the same reason as {@link TRANSLATION_COLUMNS}: this
- * reports `@type: "Legislation"` too, which would collide with the full-work columns.
+ * Kept out of `COLUMNS` for the same reason as {@link TRANSLATION_COLUMNS}: this reports `@type:
+ * "Legislation"` too, which would collide with the full-work columns.
  */
 export const ARTICLE_VERSION_COLUMNS: Column[] = [
   { header: "coverage", get: "temporalCoverage", maxWidth: 23 },
@@ -180,7 +197,8 @@ const MIXED_COLUMNS: Column[] = [
   },
   {
     header: "date",
-    get: (row) => row.decisionDate ?? row.temporalCoverage ?? row.entryIntoForceDate,
+    get: (row) =>
+      row.decisionDate ?? row.temporalCoverage ?? row.entryIntoForceDate ?? row.yearsOfPublication,
     maxWidth: 23,
   },
   {
